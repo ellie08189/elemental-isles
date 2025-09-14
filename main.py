@@ -1,21 +1,28 @@
 """Main game loop."""
 
 import pygame
-from constants import WIDTH, HEIGHT, WHITE, FPS
 
-# pygame.init()
-screen = pygame.display.set_mode((WIDTH, HEIGHT))
-pygame.display.set_caption("Elemental Isles")
-clock = pygame.time.Clock()
+# Initialize Pygame
+pygame.init()
 
+# Set up the game window
+screen = pygame.display.set_mode((1000, 800))
+pygame.display.set_caption("Hello Pygame")
+background = (189, 244, 250)
+screen.fill(background)
+pygame.display.flip()
 
-def main():
-    """Run the game."""
-    running = True
-    game_over = False
-    while running:
-        clock.tick(FPS)
-        screen.fill(WHITE)
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                running = False
+# draw shape
+pygame.draw.rect(screen, (72, 201, 32), [0, 700, 1000, 100], 0)
+pygame.draw.circle(screen, (255, 0, 0), [50, 650], 50, 0)
+pygame.display.update()  # draws on screen
+
+# Game loop
+running = True
+while running:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
+
+# Quit Pygame
+pygame.quit()
