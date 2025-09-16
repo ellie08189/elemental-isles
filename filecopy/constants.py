@@ -1,0 +1,24 @@
+# constants.py
+
+# Screen
+SCREEN_WIDTH = 1000
+SCREEN_HEIGHT = 800
+
+# Colors
+BACKGROUND = (189, 244, 250)
+GROUND_COLOR = (72, 201, 32)
+PLAYER_COLOR = (255, 0, 0)
+OBSTACLE_COLOR = (0, 0, 255)
+
+# Player settings
+PLAYER_RADIUS = 50
+PLAYER_SPEED = 5
+JUMP_STRENGTH = -20
+GRAVITY = 1
+
+# Ground
+GROUND_Y = 700
+
+# Obstacle settings
+OBSTACLE_RADIUS = 50
+OBSTACLE_SPEED = -5
