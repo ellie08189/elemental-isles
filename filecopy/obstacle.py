@@ -2,6 +2,7 @@ import pygame
 import constants
 import math
 
+
 class Obstacle:
     def __init__(self, x, y):
         self.x = x
@@ -15,13 +16,16 @@ class Obstacle:
         if self.active:
             self.x += self.speed
             if self.x + self.radius < 0:  # respawn on right
+                self.speed -= 1
+                if self.speed < -20:
+                    self.speed = -20
                 self.x = constants.SCREEN_WIDTH
                 self.active = True
 
     def check_collision(self, player):
         dx = self.x - player.x
         dy = self.y - player.y
-        distance = math.sqrt(dx*dx + dy*dy)
+        distance = math.sqrt(dx * dx + dy * dy)
         if distance <= self.radius + player.radius:
             self.active = False
 
