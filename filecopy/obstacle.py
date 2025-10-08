@@ -26,7 +26,18 @@ class Obstacle:
         dx = self.x - player.x
         dy = self.y - player.y
         distance = math.sqrt(dx * dx + dy * dy)
-        if distance <= self.radius + player.radius:
+        min_distance = self.radius + player.radius
+        if distance < min_distance:
+            # Calculate overlap
+            overlap = min_distance - distance
+            # Determine direction based on player movement
+            if player.x > self.x and player.speed > 0:
+                # Player moving right, push left
+                player.x += overlap
+            elif player.x < self.x and player.speed > 0:
+                # Player moving left, push right
+                player.x -= overlap
+            # Optionally, you can also handle vertical movement if needed
             self.active = False
 
     def draw(self, screen):
