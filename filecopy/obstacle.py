@@ -38,6 +38,10 @@ class Obstacle:
                 # Player moving left, push right
                 player.x -= overlap
             # Optionally, you can also handle vertical movement if needed
+            elif player.y < self.y and player.speed > 0:
+                player.y -= overlap
+            elif player.y > self.y and player.speed > 0:
+                player.y += overlap
             self.active = False
 
     def draw(self, screen):

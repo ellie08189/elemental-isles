@@ -30,3 +30,8 @@ CLOUD_IMAGE = "filecopy/assets/cloud2.png"
 CLOUD_RESET_X = 1000
 CLOUD_OFFSCREEN_X = -200
 CLOUD_ACTIVE = True
+
+# background settings
+BACKGROUND_IMAGE = "filecopy/assets/forest.png"
+BACKGROUND_SPEED = -5
+BACKGROUND_ACTIVE = True
