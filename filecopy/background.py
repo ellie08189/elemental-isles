@@ -4,7 +4,11 @@ import constants
 
 class Background:
     def __init__(self):
-        self.image = pygame.image.load(constants.BACKGROUND_IMAGE)
+        original_image = pygame.image.load(constants.BACKGROUND_IMAGE)
+        # Scale the image to match the screen height
+        self.image = pygame.transform.scale(
+            original_image, (original_image.get_width(), constants.SCREEN_HEIGHT)
+        )
         self.x1 = 0
         self.x2 = self.image.get_width()
         self.y = 0

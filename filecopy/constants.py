@@ -33,5 +33,5 @@ CLOUD_ACTIVE = True
 
 # background settings
 BACKGROUND_IMAGE = "filecopy/assets/forest.png"
-BACKGROUND_SPEED = -5
+BACKGROUND_SPEED = 5
 BACKGROUND_ACTIVE = True
