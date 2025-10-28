@@ -17,7 +17,7 @@ JUMP_STRENGTH = -25
 GRAVITY = 1
 
 # Ground
-GROUND_Y = 700
+GROUND_Y = 750
 
 # Obstacle settings
 OBSTACLE_RADIUS = 50

@@ -2,7 +2,6 @@ import pygame
 import constants
 from player import Player
 from obstacle import Obstacle
-from cloud import Cloud
 
 # CODE CHANGED HERE
 from background import Background
@@ -17,7 +16,6 @@ player = Player(50, constants.GROUND_Y - constants.PLAYER_RADIUS)
 obstacle = Obstacle(
     constants.SCREEN_WIDTH, constants.GROUND_Y - constants.OBSTACLE_RADIUS
 )
-cloud = Cloud()
 
 clock = pygame.time.Clock()
 running = True
@@ -34,7 +32,6 @@ while running:
     obstacle.update()
     obstacle.check_collision(player)
 
-    cloud.update()
     background.update()  # CODE CHANGED HERE
     # --- Drawing ---
     screen.fill(constants.BACKGROUND)
@@ -47,7 +44,6 @@ while running:
     background.draw(screen)
     player.draw(screen)
     obstacle.draw(screen)
-    cloud.draw(screen)
 
     pygame.display.update()
 
