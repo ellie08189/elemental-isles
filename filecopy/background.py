@@ -1,6 +1,5 @@
 import pygame
 import constants
-from player import Player
 
 
 class Background:
@@ -25,8 +24,13 @@ class Background:
         # If an image goes off screen, reset its position to the right of the other image
         if self.x1 + self.image.get_width() < 0:
             self.x1 = self.x2 + self.image.get_width()
+        elif self.x1 > constants.SCREEN_WIDTH:
+            self.x1 = self.x2 - self.image.get_width()
+
         if self.x2 + self.image.get_width() < 0:
             self.x2 = self.x1 + self.image.get_width()
+        elif self.x2 > constants.SCREEN_WIDTH:
+            self.x2 = self.x1 - self.image.get_width()
 
     def scroll_left(self):
         self.x1 += self.speed

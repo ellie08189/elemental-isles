@@ -9,8 +9,8 @@ screen = pygame.display.set_mode((constants.SCREEN_WIDTH, constants.SCREEN_HEIGH
 pygame.display.set_caption("Jumping Circle Game")
 
 # Create objects
-background = Background()  # CODE CHANGED HERE
-player = Player(50, constants.GROUND_Y - constants.PLAYER_RADIUS)
+background = Background()
+player = Player(500, constants.GROUND_Y - constants.PLAYER_RADIUS)
 obstacle = Obstacle(
     constants.SCREEN_WIDTH, constants.GROUND_Y - constants.OBSTACLE_RADIUS
 )
