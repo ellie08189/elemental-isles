@@ -2,8 +2,6 @@ import pygame
 import constants
 from player import Player
 from obstacle import Obstacle
-
-# CODE CHANGED HERE
 from background import Background
 
 pygame.init()
@@ -32,15 +30,8 @@ while running:
     obstacle.update()
     obstacle.check_collision(player)
 
-    background.update()  # CODE CHANGED HERE
-    # --- Drawing ---
-    screen.fill(constants.BACKGROUND)
-    pygame.draw.rect(
-        screen,
-        constants.GROUND_COLOR,
-        [0, constants.GROUND_Y, constants.SCREEN_WIDTH, 100],
-    )
-    # CODE CHANGED HERE
+    background.update()
+
     background.draw(screen)
     player.draw(screen)
     obstacle.draw(screen)
