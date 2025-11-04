@@ -30,7 +30,7 @@ while running:
     obstacle.update()
     obstacle.check_collision(player)
 
-    background.update()
+    background.update(keys)
 
     background.draw(screen)
     player.draw(screen)

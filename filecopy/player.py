@@ -13,9 +13,13 @@ class Player:
         self.on_ground = True
 
     def handle_input(self, keys):
-        if keys[pygame.K_LEFT] and self.x - self.radius > 0:
+        if keys[pygame.K_LEFT] and self.x - self.radius > 0 and self.x != 500:
             self.x -= self.speed
-        if keys[pygame.K_RIGHT] and self.x + self.radius < constants.SCREEN_WIDTH:
+        if (
+            keys[pygame.K_RIGHT]
+            and self.x + self.radius < constants.SCREEN_WIDTH
+            and self.x != 500
+        ):
             self.x += self.speed
         if keys[pygame.K_UP] and self.on_ground:
             self.vy = constants.JUMP_STRENGTH

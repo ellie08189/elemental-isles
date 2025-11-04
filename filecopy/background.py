@@ -1,5 +1,6 @@
 import pygame
 import constants
+from player import Player
 
 
 class Background:
@@ -14,15 +15,26 @@ class Background:
         self.y = 0
         self.speed = constants.BACKGROUND_SPEED
 
-    def update(self):
-        self.x1 -= self.speed
-        self.x2 -= self.speed
-
+    def update(self, keys):
+        # self.x1 -= self.speed
+        # self.x2 -= self.speed
+        if keys[pygame.K_LEFT]:
+            self.scroll_left()
+        if keys[pygame.K_RIGHT]:
+            self.scroll_right()
         # If an image goes off screen, reset its position to the right of the other image
         if self.x1 + self.image.get_width() < 0:
             self.x1 = self.x2 + self.image.get_width()
         if self.x2 + self.image.get_width() < 0:
             self.x2 = self.x1 + self.image.get_width()
+
+    def scroll_left(self):
+        self.x1 += self.speed
+        self.x2 += self.speed
+
+    def scroll_right(self):
+        self.x1 -= self.speed
+        self.x2 -= self.speed
 
     def draw(self, screen):
         screen.blit(self.image, (self.x1, self.y))
