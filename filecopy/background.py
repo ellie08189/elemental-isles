@@ -15,12 +15,14 @@ class Background:
         self.speed = constants.BACKGROUND_SPEED
 
     def update(self, keys):
-        # self.x1 -= self.speed
-        # self.x2 -= self.speed
-        if keys[pygame.K_LEFT]:
+        from main import player
+
+        if keys[pygame.K_LEFT] and player.x == constants.SCREEN_WIDTH // 2:
             self.scroll_left()
-        if keys[pygame.K_RIGHT]:
+
+        if keys[pygame.K_RIGHT] and player.x == constants.SCREEN_WIDTH // 2:
             self.scroll_right()
+
         # If an image goes off screen, reset its position to the right of the other image
         if self.x1 + self.image.get_width() < 0:
             self.x1 = self.x2 + self.image.get_width()

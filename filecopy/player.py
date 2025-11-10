@@ -13,14 +13,12 @@ class Player:
         self.on_ground = True
 
     def handle_input(self, keys):
-        # if keys[pygame.K_LEFT] and self.x - self.radius > 0 and self.x != 500:
-        # self.x -= self.speed
-        # if (
-        # keys[pygame.K_RIGHT]
-        # and self.x + self.radius < constants.SCREEN_WIDTH
-        # and self.x != 500
-        # ):
-        # self.x += self.speed
+        # Allow the player to move until they reach the center of the screen
+        if keys[pygame.K_LEFT] and self.x != constants.SCREEN_WIDTH // 2:
+            self.x -= self.speed
+        elif keys[pygame.K_RIGHT] and self.x != constants.SCREEN_WIDTH // 2:
+            self.x += self.speed
+
         if keys[pygame.K_UP] and self.on_ground:
             self.vy = constants.JUMP_STRENGTH
             self.on_ground = False

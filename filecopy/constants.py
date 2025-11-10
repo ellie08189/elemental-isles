@@ -23,15 +23,12 @@ GROUND_Y = 750
 OBSTACLE_RADIUS = 50
 OBSTACLE_SPEED = -5
 
-# Cloud settings
-CLOUD_SPEED = -5
-CLOUD_Y = 100
-CLOUD_IMAGE = "filecopy/assets/cloud2.png"
-CLOUD_RESET_X = 1000
-CLOUD_OFFSCREEN_X = -200
-CLOUD_ACTIVE = True
-
 # background settings
-BACKGROUND_IMAGE = "filecopy/assets/forest.png"
+BACKGROUND_IMAGE = "filecopy/assets/forest2.png"
 BACKGROUND_SPEED = 5
 BACKGROUND_ACTIVE = True
+
+# title settings
+TITLE_IMAGE = "filecopy/assets/title_background.png"
+TITLE_POSITION = (SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2)
+TITLE_ACTIVE = True
