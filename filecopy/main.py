@@ -4,6 +4,7 @@ from player import Player
 from obstacle import Obstacle
 from background import Background
 from title_screen import TitleScreen
+from game_over import GameOver
 
 pygame.init()
 screen = pygame.display.set_mode((constants.SCREEN_WIDTH, constants.SCREEN_HEIGHT))
@@ -16,6 +17,7 @@ obstacle = Obstacle(
     constants.SCREEN_WIDTH, constants.GROUND_Y - constants.OBSTACLE_RADIUS
 )
 title_screen = TitleScreen()
+game_over = GameOver()
 
 game_state = "title"
 
@@ -31,6 +33,9 @@ while running:
         if game_state == "title":
             if event.type == pygame.MOUSEBUTTONDOWN:
                 game_state = "game"
+        if game_state == "game":
+            if obstacle.active == False:
+                game_state = "game_over"
 
     if game_state == "title":
         title_screen.draw(screen)
@@ -47,6 +52,17 @@ while running:
         background.draw(screen)
         player.draw(screen)
         obstacle.draw(screen)
+
+    elif game_state == "game_over":
+        game_over.draw(screen)
+        mouse = pygame.mouse.get_pos()
+        # Check if the mouse is within the specified range
+
+        # FIX THIS GIRL :)
+        if 260 <= mouse[0] <= 300 and 460 <= mouse[1] <= 500:
+            for event in pygame.event.get():
+                if event.type == pygame.MOUSEBUTTONUP:
+                    game_state = "game"
 
     pygame.display.update()
     clock.tick(60)

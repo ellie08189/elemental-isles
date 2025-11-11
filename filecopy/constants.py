@@ -32,3 +32,8 @@ BACKGROUND_ACTIVE = True
 TITLE_IMAGE = "filecopy/assets/title_background.png"
 TITLE_POSITION = (SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2)
 TITLE_ACTIVE = True
+
+# game over settings
+GAME_OVER_IMAGE = "filecopy/assets/game_over.png"
+GAME_OVER_POSITION = (SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2)
+GAME_OVER_ACTIVE = True
