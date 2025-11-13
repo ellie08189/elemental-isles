@@ -2,48 +2,63 @@ import pygame
 import constants
 from player import Player
 from obstacle import Obstacle
-from cloud import Cloud
+from background import Background
+from title_screen import TitleScreen
+from game_over import GameOver
 
 pygame.init()
 screen = pygame.display.set_mode((constants.SCREEN_WIDTH, constants.SCREEN_HEIGHT))
-pygame.display.set_caption("Jumping Circle Game")
-
+pygame.display.set_caption("Legends of The Elemental Isles")
 # Create objects
+background = Background()
 player = Player(50, constants.GROUND_Y - constants.PLAYER_RADIUS)
 obstacle = Obstacle(
     constants.SCREEN_WIDTH, constants.GROUND_Y - constants.OBSTACLE_RADIUS
 )
-cloud = Cloud()
+title_screen = TitleScreen()
+game_over = GameOver()
+
+game_state = "title"
 
 clock = pygame.time.Clock()
 running = True
-
 while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
+            break  # Exit the event loop immediately to prevent further processing
+        if game_state == "title":
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                game_state = "game"
+        if game_state == "game":
+            if obstacle.active == False:
+                game_state = "game_over"
 
-    keys = pygame.key.get_pressed()
-    player.handle_input(keys)
-    player.apply_gravity()
+    if game_state == "title":
+        title_screen.draw(screen)
+    elif game_state == "game":
+        keys = pygame.key.get_pressed()
+        player.handle_input(keys)
+        player.apply_gravity()
+        obstacle.update()
+        obstacle.check_collision(player)
+        background.update(keys)
+        background.draw(screen)
+        player.draw(screen)
+        obstacle.draw(screen)
 
-    obstacle.update()
-    obstacle.check_collision(player)
+    elif game_state == "game_over":
+        game_over.draw(screen)
+        mouse = pygame.mouse.get_pos()
+        # Check if the mouse is within the specified range
 
-    cloud.update()
+        # FIX THIS GIRL :)
+        if 260 <= mouse[0] <= 300 and 460 <= mouse[1] <= 500:
+            for event in pygame.event.get():
+                if event.type == pygame.MOUSEBUTTONUP:
+                    game_state = "game"
 
-    # --- Drawing ---
-    screen.fill(constants.BACKGROUND)
-    pygame.draw.rect(
-        screen,
-        constants.GROUND_COLOR,
-        [0, constants.GROUND_Y, constants.SCREEN_WIDTH, 100],
-    )
-    player.draw(screen)
-    obstacle.draw(screen)
-    cloud.draw(screen)
     pygame.display.update()
-
     clock.tick(60)
 
 pygame.quit()
