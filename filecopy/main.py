@@ -1,14 +1,20 @@
+"""game"""
+
 import pygame
-import constants
 from player import Player
 from obstacle import Obstacle
 from background import Background
 from title_screen import TitleScreen
 from game_over import GameOver
+import constants
 
 pygame.init()
 screen = pygame.display.set_mode((constants.SCREEN_WIDTH, constants.SCREEN_HEIGHT))
 pygame.display.set_caption("Legends of The Elemental Isles")
+
+# Give the window time to initialize and gain focus
+pygame.time.wait(100)
+pygame.event.clear()  # Clear any events that happened during initialization
 
 # Create objects
 background = Background()
@@ -31,9 +37,10 @@ while running:
             break  # Exit the event loop immediately to prevent further processing
 
         if game_state == "title":
-            if event.type == pygame.MOUSEBUTTONDOWN:
+            if event.type == pygame.MOUSEBUTTONUP:
                 game_state = "game"
-        if game_state == "game":
+
+        elif game_state == "game":
             if obstacle.active == False:
                 game_state = "game_over"
 
@@ -47,7 +54,7 @@ while running:
         obstacle.update()
         obstacle.check_collision(player)
 
-        background.update(keys)
+        background.update(keys, player)
 
         background.draw(screen)
         player.draw(screen)

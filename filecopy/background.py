@@ -14,9 +14,7 @@ class Background:
         self.y = 0
         self.speed = constants.BACKGROUND_SPEED
 
-    def update(self, keys):
-        from main import player
-
+    def update(self, keys, player):
         if keys[pygame.K_LEFT] and player.x == constants.SCREEN_WIDTH // 2:
             self.scroll_left()
 
