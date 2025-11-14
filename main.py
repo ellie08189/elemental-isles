@@ -61,25 +61,23 @@ while running:
 
         # Check if the mouse is within the specified range
         if 225 <= mouse[0] <= 335 and 460 <= mouse[1] <= 505:
-            for event in pygame.event.get():
-                if event.type == pygame.MOUSEBUTTONUP:
-                    # Reset player and obstacle to restart the game
-                    player = Player(
-                        constants.PLAYER_RADIUS,
-                        constants.GROUND_Y - constants.PLAYER_RADIUS,
-                    )
-                    obstacle = Obstacle(
-                        constants.SCREEN_WIDTH,
-                        constants.GROUND_Y - constants.OBSTACLE_RADIUS,
-                    )
-                    obstacle.active = True  # Ensure the obstacle is active
-                    game_state = "game"
+            if event.type == pygame.MOUSEBUTTONUP:
+                # Reset player and obstacle to restart the game
+                player = Player(
+                    constants.PLAYER_RADIUS,
+                    constants.GROUND_Y - constants.PLAYER_RADIUS,
+                )
+                obstacle = Obstacle(
+                    constants.SCREEN_WIDTH,
+                    constants.GROUND_Y - constants.OBSTACLE_RADIUS,
+                )
+                obstacle.active = True  # Ensure the obstacle is active
+                game_state = "game"
 
-        elif 600 <= mouse[0] <= 680 and 460 <= mouse[1] <= 505:
-            for event in pygame.event.get():
-                if event.type == pygame.MOUSEBUTTONUP:
-                    running = False
-                    break
+        if 600 <= mouse[0] <= 680 and 460 <= mouse[1] <= 505:
+            if event.type == pygame.MOUSEBUTTONUP:
+                running = False
+                break
 
     pygame.display.update()
     clock.tick(60)
