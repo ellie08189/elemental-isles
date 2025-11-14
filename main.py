@@ -11,8 +11,8 @@ screen = pygame.display.set_mode((constants.SCREEN_WIDTH, constants.SCREEN_HEIGH
 pygame.display.set_caption("Legends of The Elemental Isles")
 
 # Give the window time to initialize and gain focus
-# pygame.time.wait(100)
-# pygame.event.clear()  # Clear any events that happened during initialization
+pygame.time.wait(100)
+pygame.event.clear()  # Clear any events that happened during initialization
 
 # Create objects
 background = Background()
