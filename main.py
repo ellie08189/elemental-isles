@@ -49,7 +49,7 @@ while running:
         elif game_state == "map":
             if keys[pygame.K_m]:
                 game_state = "game"
-        # error that any key pressed goes from map screen to game screen
+        # error that any key pressed goes from map screen to game screen and map size is not right
 
     if game_state == "title":
         title_screen.draw(screen)
