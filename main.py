@@ -1,3 +1,5 @@
+"""Main game loop for Legends of The Elemental Isles."""
+
 import pygame
 import constants
 from player import Player
@@ -5,6 +7,7 @@ from obstacle import Obstacle
 from background import Background
 from title_screen import TitleScreen
 from game_over import GameOver
+from map_screen import MapScreen
 
 pygame.init()
 screen = pygame.display.set_mode((constants.SCREEN_WIDTH, constants.SCREEN_HEIGHT))
@@ -38,9 +41,15 @@ while running:
         elif game_state == "game":
             if obstacle.active == False:
                 game_state = "game_over"
+            if keys[pygame.K_m]:
+                game_state = "map"
         elif game_state == "game_over":
             game_over.draw(screen)
             mouse = pygame.mouse.get_pos()
+        elif game_state == "map":
+            if keys[pygame.K_m]:
+                game_state = "game"
+        # error that any key pressed goes from map screen to game screen
 
     if game_state == "title":
         title_screen.draw(screen)
@@ -54,6 +63,10 @@ while running:
         background.draw(screen)
         player.draw(screen)
         obstacle.draw(screen)
+
+    elif game_state == "map":
+        map_screen = MapScreen()
+        map_screen.draw(screen)
 
     elif game_state == "game_over":
         game_over.draw(screen)

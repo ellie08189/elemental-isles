@@ -31,3 +31,7 @@ TITLE_ACTIVE = True
 GAME_OVER_IMAGE = "assets/game_over.png"
 GAME_OVER_POSITION = (SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2)
 GAME_OVER_ACTIVE = True
+
+# map settings
+MAP_IMAGE = "assets/treasure_map.jpg"
+MAP_POSITION = (SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2)
