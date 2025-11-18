@@ -8,7 +8,7 @@ class MapScreen:
     def __init__(self):
         original_image = pygame.image.load(constants.MAP_IMAGE)
         self.image = pygame.transform.scale(
-            original_image, (original_image.get_width(), constants.SCREEN_HEIGHT)
+            original_image, (constants.SCREEN_WIDTH, constants.SCREEN_HEIGHT)
         )
 
     def draw(self, screen):
