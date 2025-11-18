@@ -32,11 +32,11 @@ class Background:
         elif self.x2 > constants.SCREEN_WIDTH:
             self.x2 = self.x1 - self.image.get_width()
 
-    def scroll_left(self):
+    def scroll_left(self):  # makes background move right
         self.x1 += self.speed
         self.x2 += self.speed
 
-    def scroll_right(self):
+    def scroll_right(self):  # makes background move left
         self.x1 -= self.speed
         self.x2 -= self.speed
 

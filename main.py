@@ -1,5 +1,6 @@
 """Main game loop for Legends of The Elemental Isles."""
 
+# import necessary modules
 import pygame
 import constants
 from player import Player
@@ -35,6 +36,7 @@ while running:
         if event.type == pygame.QUIT:
             running = False
             break  # Exit the event loop immediately to prevent further processing
+        # switch between game states
         if game_state == "title":
             if event.type == pygame.MOUSEBUTTONDOWN:
                 game_state = "game"
@@ -51,6 +53,7 @@ while running:
                 game_state = "game"
         # error that any key pressed goes from map screen to game screen and map size is not right
 
+    # calls appropriate methods based on game state
     if game_state == "title":
         title_screen.draw(screen)
     elif game_state == "game":
@@ -87,6 +90,7 @@ while running:
                 obstacle.active = True  # Ensure the obstacle is active
                 game_state = "game"
 
+        # exits the game when no is clicked
         if 600 <= mouse[0] <= 680 and 460 <= mouse[1] <= 505:
             if event.type == pygame.MOUSEBUTTONUP:
                 running = False

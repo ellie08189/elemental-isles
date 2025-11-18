@@ -1,4 +1,7 @@
 # Screen
+import pygame
+
+
 SCREEN_WIDTH = 1000
 SCREEN_HEIGHT = 800
 # Colors
@@ -35,3 +38,6 @@ GAME_OVER_ACTIVE = True
 # map settings
 MAP_IMAGE = "assets/treasure_map.jpg"
 MAP_POSITION = (SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2)
+
+# sprite settings
+WALK = [pygame.image.load(f"assets/walk{i}.png") for i in range(1, 9)]
