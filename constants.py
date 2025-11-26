@@ -1,5 +1,7 @@
 """Constant values for the game."""
 
+import pygame
+
 # screen
 SCREEN_WIDTH = 1000
 SCREEN_HEIGHT = 800
@@ -41,3 +43,14 @@ GAME_OVER_ACTIVE = True
 # map settings
 MAP_IMAGE = "assets/treasure_map.jpg"
 MAP_POSITION = (SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2)
+
+# Character settings
+WALKING = [
+    pygame.image.load(f"assets/walk{i}.png") for i in range(1, 9) for _ in range(5)
+]
+WALKBACK = [
+    pygame.transform.flip(pygame.image.load(f"assets/walk{i}.png"), True, False)
+    for i in range(1, 9)
+    for _ in range(5)
+]
+IDLE = pygame.image.load("assets/idle1.png")

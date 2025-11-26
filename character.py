@@ -1,6 +1,7 @@
 """trying to represent a character in the game."""
 
 import pygame
+import constants
 
 
 class Character:
@@ -11,18 +12,9 @@ class Character:
         self.speed = 5
         self.vy = 0
         self.on_ground = True
-        self.idle_sprite = pygame.image.load("assets/idle1.png")
-        self.walking_sprites = [
-            pygame.image.load(f"assets/walk{i}.png")
-            for i in range(1, 9)
-            for _ in range(5)
-        ]
-
-        self.walkback_sprites = [
-            pygame.transform.flip(pygame.image.load(f"assets/walk{i}.png"), True, False)
-            for i in range(1, 9)
-            for _ in range(5)
-        ]
+        self.idle_sprite = constants.IDLE
+        self.walking_sprites = constants.WALKING
+        self.walkback_sprites = constants.WALKBACK
         self.sprites = [self.idle_sprite]
         self.max_index = 0
         self.current_index = 0
@@ -31,47 +23,38 @@ class Character:
 
     def walk(self, keys):
         """Switch between walking, jumping, and idle sprites based on key press."""
-        if self.on_ground:
-            if keys[pygame.K_UP]:  # frames need to be fixed - dont use jump sprites -
-                # instead make whatever spirite they are in jump
-                self.vy = -10
-                self.on_ground = False
-                self.max_index = len(self.sprites) - 1
-                self.current_index = 0
-                self.is_jumping = True
-                self.is_walking = False
 
-            elif keys[pygame.K_RIGHT]:
-                if not self.is_walking:
-                    self.sprites = self.walking_sprites
-                    self.max_index = len(self.sprites) - 1
-                    self.current_index = 0
-                    self.is_walking = True
-                self.is_jumping = False
+        if keys[pygame.K_UP] and self.on_ground:
+            self.vy = -10
+            self.on_ground = False
+            self.max_index = len(self.sprites) - 1
+            self.current_index = 0
+            self.is_jumping = True
+            self.is_walking = False
 
-            elif keys[pygame.K_LEFT]:
-                if not self.is_walking:
-                    self.sprites = self.walkback_sprites
-                    self.max_index = len(self.sprites) - 1
-                    self.current_index = 0
-                    self.is_walking = True
-                self.is_jumping = False
-
-            else:
-                if self.is_walking or self.is_jumping:
-                    self.sprites = [self.idle_sprite]
-                    self.max_index = 0
-                    self.current_index = 0
-                    self.is_walking = False
-                    self.is_jumping = False
-
-        else:
-            # In air: keep jump animation
-            if not self.is_jumping:
+        elif keys[pygame.K_RIGHT]:
+            if not self.is_walking:
                 self.sprites = self.walking_sprites
                 self.max_index = len(self.sprites) - 1
                 self.current_index = 0
-                self.is_jumping = True
+                self.is_walking = True
+            self.is_jumping = False
+
+        elif keys[pygame.K_LEFT]:
+            if not self.is_walking:
+                self.sprites = self.walkback_sprites
+                self.max_index = len(self.sprites) - 1
+                self.current_index = 0
+                self.is_walking = True
+            self.is_jumping = False
+
+        else:
+            if self.is_walking or self.is_jumping:
+                self.sprites = [self.idle_sprite]
+                self.max_index = 0
+                self.current_index = 0
+                self.is_walking = False
+                self.is_jumping = False
 
     def apply_gravity(self):
         self.vy += 1
