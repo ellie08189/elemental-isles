@@ -23,15 +23,15 @@ class Pillar:
         if keys[pygame.K_RIGHT] and character.x == constants.SCREEN_WIDTH // 2:
             if self.active:
                 self.x += self.speed
-                if self.x + self.width < 0:  # respawn on right
-                    self.x = constants.SCREEN_WIDTH
-                    self.active = True
+                # if self.x + self.width < 0:  # respawn on right
+                #     self.x = constants.SCREEN_WIDTH
+                #     self.active = True
         if keys[pygame.K_LEFT] and character.x == constants.SCREEN_WIDTH // 2:
             if self.active:
                 self.x -= self.speed
-                if self.x > constants.SCREEN_WIDTH:  # respawn on left
-                    self.x = -self.width
-                    self.active = True
+                # if self.x > constants.SCREEN_WIDTH:  # respawn on left
+                #     self.x = -self.width
+                #     self.active = True
 
     def collision(self, character):
         # Get character and pillar rectangles

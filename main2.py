@@ -23,7 +23,7 @@ pygame.event.clear()  # Clear any events that happened during initialization
 background = Background()
 character = Character(100, constants.GROUND_Y - constants.CHARACTER_HEIGHT)
 pillar = Pillar(
-    constants.SCREEN_WIDTH - constants.PILLAR_WIDTH,
+    constants.SCREEN_WIDTH,
     constants.GROUND_Y - constants.PILLAR_HEIGHT,
 )
 pillar.active = True  # Ensure the pillar is active at the start
@@ -88,7 +88,7 @@ while running:
                     100, constants.GROUND_Y - constants.CHARACTER_HEIGHT
                 )
                 pillar = Pillar(
-                    constants.SCREEN_WIDTH - constants.PILLAR_WIDTH,
+                    constants.SCREEN_WIDTH,
                     constants.GROUND_Y - constants.PILLAR_HEIGHT,
                 )
                 pillar.active = True  # Ensure the pillar is active
