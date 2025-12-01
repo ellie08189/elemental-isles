@@ -54,3 +54,5 @@ WALKBACK = [
     for _ in range(5)
 ]
 IDLE = pygame.image.load("assets/idle1.png")
+CHARACTER_HEIGHT = 105
+CHARACTER_WIDTH = 72
