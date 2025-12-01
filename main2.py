@@ -9,6 +9,7 @@ from background import Background
 from title_screen import TitleScreen
 from game_over import GameOver
 from map_screen import MapScreen
+from pillar import Pillar
 
 pygame.init()
 screen = pygame.display.set_mode((constants.SCREEN_WIDTH, constants.SCREEN_HEIGHT))
@@ -21,11 +22,14 @@ pygame.event.clear()  # Clear any events that happened during initialization
 # Create objects
 background = Background()
 character = Character(100, constants.GROUND_Y - constants.CHARACTER_HEIGHT)
-# obstacle = Obstacle(
-#    constants.SCREEN_WIDTH, constants.GROUND_Y - constants.OBSTACLE_RADIUS
-# )
+pillar = Pillar(
+    constants.SCREEN_WIDTH - constants.PILLAR_WIDTH,
+    constants.GROUND_Y - constants.PILLAR_HEIGHT,
+)
+pillar.active = True  # Ensure the pillar is active at the start
 title_screen = TitleScreen()
 game_over = GameOver()
+map_screen = MapScreen()
 
 game_state = "title"
 
@@ -41,8 +45,8 @@ while running:
             if event.type == pygame.MOUSEBUTTONDOWN:
                 game_state = "game"
         elif game_state == "game":
-            # if obstacle.active == False:
-            #     game_state = "game_over"
+            if pillar.active == False:
+                game_state = "game_over"
             if keys[pygame.K_a]:
                 game_state = "map"
         elif game_state == "game_over":
@@ -61,12 +65,12 @@ while running:
         character.handle_input(keys)
         character.apply_gravity()
         character.update()
-        # obstacle.update()
-        # obstacle.check_collision(player)
+        pillar.update(keys, character)
+        pillar.collision(character)
         background.update(keys, character)
         background.draw(screen)
         character.draw(screen)
-        # obstacle.draw(screen)
+        pillar.draw(screen)
 
     elif game_state == "map":
         map_screen = MapScreen()
@@ -79,13 +83,15 @@ while running:
         # Check if the mouse is within the specified range
         if 225 <= mouse[0] <= 335 and 460 <= mouse[1] <= 505:
             if event.type == pygame.MOUSEBUTTONUP:
-                # Reset player and obstacle to restart the game
-                character = Character(100, 50)
-                obstacle = Obstacle(
-                    constants.SCREEN_WIDTH,
-                    constants.GROUND_Y - constants.OBSTACLE_RADIUS,
+                # Reset player and pillar to restart the game
+                character = Character(
+                    100, constants.GROUND_Y - constants.CHARACTER_HEIGHT
                 )
-                obstacle.active = True  # Ensure the obstacle is active
+                pillar = Pillar(
+                    constants.SCREEN_WIDTH - constants.PILLAR_WIDTH,
+                    constants.GROUND_Y - constants.PILLAR_HEIGHT,
+                )
+                pillar.active = True  # Ensure the pillar is active
                 game_state = "game"
 
         # exits the game when no is clicked

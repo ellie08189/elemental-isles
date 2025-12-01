@@ -17,6 +17,8 @@ class Character:
         self.sprites = [self.idle_sprite]
         self.max_index = 0
         self.current_index = 0
+        self.width = constants.CHARACTER_WIDTH
+        self.height = constants.CHARACTER_HEIGHT
         # self.is_walking = False
         # self.is_jumping = False
 
@@ -62,27 +64,3 @@ class Character:
 
     def draw(self, screen):
         screen.blit(self.sprites[self.current_index], (self.x, self.y))
-
-
-# pygame.init()
-# pygame.display.set_caption("Character Animation Test")
-# character = Character(100, constants.GROUND_Y - constants.CHARACTER_HEIGHT)
-# background = pygame.display.set_mode((1000, 800))
-# background.fill((255, 255, 255))
-# clock = pygame.time.Clock()
-# running = True
-# while running:
-#     for event in pygame.event.get():
-#         if event.type == pygame.QUIT:
-#             running = False
-#             break  # Exit the event loop immediately to prevent further processing
-#     keys = pygame.key.get_pressed()
-#     character.handle_input(keys)
-#     character.apply_gravity()
-#     character.update()
-#     background.fill((255, 255, 255))
-#     character.draw(background)
-#     clock.tick(60)
-#     pygame.display.update()
-
-# pygame.quit()

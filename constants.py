@@ -56,3 +56,9 @@ WALKBACK = [
 IDLE = pygame.image.load("assets/idle1.png")
 CHARACTER_HEIGHT = 105
 CHARACTER_WIDTH = 72
+
+# pillar settings
+PILLAR_IMAGE = "assets/pillar4.png"
+PILLAR_WIDTH = 80
+PILLAR_HEIGHT = 150
+PILLAR_SPEED = -5
