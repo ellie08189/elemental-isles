@@ -53,7 +53,6 @@ while running:
         # switch between game states
         if game_state == "title":  # play button clicked changes screen to game screen
             mouse = pygame.mouse.get_pos()
-            print(mouse)
             if 350 <= mouse[0] <= 650 and 250 <= mouse[1] <= 550:
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     game_state = "game"
