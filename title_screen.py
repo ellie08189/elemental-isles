@@ -21,3 +21,18 @@ class TitleScreen:
     def mouse_click(self):
         # Placeholder for handling mouse click events on the title screen
         pass
+
+
+class PlayButton:
+    def __init__(self):
+        original_image = pygame.image.load(constants.PLAY_BUTTON)
+        self.image = pygame.transform.scale(original_image, (300, 300))
+
+    def draw(self, screen):
+        screen.blit(
+            self.image,
+            (
+                constants.SCREEN_WIDTH // 2 - self.image.get_width() // 2,
+                constants.SCREEN_HEIGHT // 2 - self.image.get_height() // 2,
+            ),
+        )

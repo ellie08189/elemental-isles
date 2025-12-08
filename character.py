@@ -29,12 +29,22 @@ class Character:
             self.max_index = len(self.sprites) - 1
             if self.x != constants.SCREEN_WIDTH // 2:
                 self.x += self.speed
+            if self.x > constants.SCREEN_WIDTH - self.width:
+                self.x = constants.SCREEN_WIDTH - self.width
 
         elif keys[pygame.K_LEFT]:
             self.sprites = self.walkback_sprites
             self.max_index = len(self.sprites) - 1
             if self.x != constants.SCREEN_WIDTH // 2:
                 self.x -= self.speed
+            if self.x < 0:
+                self.x = 0
+
+        elif keys[pygame.K_DOWN]:
+            self.sprites = [self.idle_sprite]
+            self.max_index = 0
+            self.current_index = 0  # NEED TO FIND A CROUCH SPRITE
+
         else:
             self.sprites = [self.idle_sprite]
             self.max_index = 0

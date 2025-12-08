@@ -4,12 +4,14 @@
 import pygame
 import constants
 from character import Character
-from obstacle import Obstacle
 from background import Background
 from title_screen import TitleScreen
+from title_screen import PlayButton
 from game_over import GameOver
 from map_screen import MapScreen
-from pillar import Pillar
+from stationary_obstacles import Pillar
+from stationary_obstacles import Bush1
+from moving_obstacles import Fireball
 
 pygame.init()
 screen = pygame.display.set_mode((constants.SCREEN_WIDTH, constants.SCREEN_HEIGHT))
@@ -20,6 +22,7 @@ pygame.time.wait(100)
 pygame.event.clear()  # Clear any events that happened during initialization
 
 # Create objects
+play = PlayButton()
 background = Background()
 character = Character(100, constants.GROUND_Y - constants.CHARACTER_HEIGHT)
 pillar = Pillar(
@@ -27,6 +30,13 @@ pillar = Pillar(
     constants.GROUND_Y - constants.PILLAR_HEIGHT,
 )
 pillar.active = True  # Ensure the pillar is active at the start
+bush1 = Bush1(
+    constants.SCREEN_WIDTH + 500,
+    constants.GROUND_Y - constants.BUSH1_HEIGHT,
+)
+bush1.active = True
+fireball = Fireball(constants.SCREEN_WIDTH + 800, constants.GROUND_Y - 60)
+fireball.active = True
 title_screen = TitleScreen()
 game_over = GameOver()
 map_screen = MapScreen()
@@ -41,11 +51,18 @@ while running:
             running = False
             break  # Exit the event loop immediately to prevent further processing
         # switch between game states
-        if game_state == "title":
-            if event.type == pygame.MOUSEBUTTONDOWN:
-                game_state = "game"
+        if game_state == "title":  # play button clicked changes screen to game screen
+            mouse = pygame.mouse.get_pos()
+            print(mouse)
+            if 350 <= mouse[0] <= 650 and 250 <= mouse[1] <= 550:
+                if event.type == pygame.MOUSEBUTTONDOWN:
+                    game_state = "game"
         elif game_state == "game":
             if pillar.active == False:
+                game_state = "game_over"
+            if bush1.collision_detected == True:
+                game_state = "game_over"
+            if fireball.collision_detected == True:
                 game_state = "game_over"
             if keys[pygame.K_a]:
                 game_state = "map"
@@ -60,6 +77,7 @@ while running:
     # calls appropriate methods based on game state
     if game_state == "title":
         title_screen.draw(screen)
+        play.draw(screen)
     elif game_state == "game":
         keys = pygame.key.get_pressed()
         character.handle_input(keys)
@@ -67,10 +85,16 @@ while running:
         character.update()
         pillar.update(keys, character)
         pillar.collision(character)
+        bush1.update(keys, character)
+        bush1.collision(character)
+        fireball.update()
+        fireball.collision(character)
         background.update(keys, character)
         background.draw(screen)
         character.draw(screen)
         pillar.draw(screen)
+        bush1.draw(screen)
+        fireball.draw(screen)
 
     elif game_state == "map":
         map_screen = MapScreen()
@@ -92,6 +116,11 @@ while running:
                     constants.GROUND_Y - constants.PILLAR_HEIGHT,
                 )
                 pillar.active = True  # Ensure the pillar is active
+                bush1 = Bush1(
+                    constants.SCREEN_WIDTH + 500,
+                    constants.GROUND_Y - constants.BUSH1_HEIGHT,
+                )
+                bush1.active = True
                 game_state = "game"
 
         # exits the game when no is clicked

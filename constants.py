@@ -34,6 +34,7 @@ BACKGROUND_ACTIVE = True
 TITLE_IMAGE = "assets/title_screen.png"
 TITLE_POSITION = (SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2)
 TITLE_ACTIVE = True
+PLAY_BUTTON = "assets/play_button.png"
 
 # game over settings
 GAME_OVER_IMAGE = "assets/game_over.png"
@@ -62,3 +63,17 @@ PILLAR_IMAGE = "assets/pillar.png"
 PILLAR_WIDTH = 80
 PILLAR_HEIGHT = 150
 PILLAR_SPEED = -5
+
+# bush settings
+BUSH1_IMAGE = "assets/bush1.png"
+BUSH1_WIDTH = 80
+BUSH1_HEIGHT = 80
+BUSH1_SPEED = -5
+
+# fireball settings
+FIREBALL_IMAGE = [
+    pygame.image.load(f"assets/fireball{i}.png") for i in range(1, 4) for _ in range(5)
+]
+FIREBALL_SPEED = 10
+FIREBALL_WIDTH = 40
+FIREBALL_HEIGHT = 40
