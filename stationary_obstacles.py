@@ -17,19 +17,15 @@ class Pillar:
         self.active = True
         self.speed = constants.PILLAR_SPEED
 
-    def update(self, keys, character):
+    def update(self, keys, character, bush1):
         if keys[pygame.K_RIGHT] and character.x == constants.SCREEN_WIDTH // 2:
             if self.active:
                 self.x += self.speed
-                # if self.x + self.width < 0:  # respawn on right
-                #     self.x = constants.SCREEN_WIDTH
-                #     self.active = True
         if keys[pygame.K_LEFT] and character.x == constants.SCREEN_WIDTH // 2:
             if self.active:
                 self.x -= self.speed
-                # if self.x > constants.SCREEN_WIDTH:  # respawn on left
-                #     self.x = -self.width
-                #     self.active = True
+        if bush1.active == False:
+            self.active = False
 
     def collision(self, character):
         # Get character and pillar rectangles
@@ -116,11 +112,11 @@ class Bush1:
             elif character.x + character.width - character.speed <= self.x:
                 # Hitting left side
                 character.x = self.x - character.width
-                # self.active = False
+                self.active = False
             elif character.x >= self.x + self.width - character.speed:
                 # Hitting right side
                 character.x = self.x + self.width
-                # self.active = False
+                self.active = False
             self.collision_detected = True
 
     def draw(self, screen):

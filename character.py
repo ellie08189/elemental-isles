@@ -14,6 +14,7 @@ class Character:
         self.idle_sprite = constants.IDLE
         self.walking_sprites = constants.WALKING
         self.walkback_sprites = constants.WALKBACK
+        # self.crouch_sprites = constants.CROUCH
         self.sprites = [self.idle_sprite]
         self.max_index = 0
         self.current_index = 0
@@ -40,10 +41,10 @@ class Character:
             if self.x < 0:
                 self.x = 0
 
-        elif keys[pygame.K_DOWN]:
-            self.sprites = [self.idle_sprite]
-            self.max_index = 0
-            self.current_index = 0  # NEED TO FIND A CROUCH SPRITE
+        # elif keys[pygame.K_DOWN]:
+        #     self.sprites = self.crouch_sprites
+        #     self.max_index = len(self.sprites) - 1
+        #     self.current_index = 0  # NEED TO FIND A CROUCH SPRITE
 
         else:
             self.sprites = [self.idle_sprite]

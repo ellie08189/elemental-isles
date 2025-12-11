@@ -12,6 +12,7 @@ from map_screen import MapScreen
 from stationary_obstacles import Pillar
 from stationary_obstacles import Bush1
 from moving_obstacles import Fireball
+from key import Key
 
 pygame.init()
 screen = pygame.display.set_mode((constants.SCREEN_WIDTH, constants.SCREEN_HEIGHT))
@@ -35,8 +36,10 @@ bush1 = Bush1(
     constants.GROUND_Y - constants.BUSH1_HEIGHT,
 )
 bush1.active = True
-fireball = Fireball(constants.SCREEN_WIDTH + 800, constants.GROUND_Y - 60)
+fireball = Fireball(constants.SCREEN_WIDTH + 800, 500)
 fireball.active = True
+key = Key(constants.SCREEN_WIDTH + 150, 250)
+key.active = True
 title_screen = TitleScreen()
 game_over = GameOver()
 map_screen = MapScreen()
@@ -82,18 +85,21 @@ while running:
         character.handle_input(keys)
         character.apply_gravity()
         character.update()
-        pillar.update(keys, character)
+        pillar.update(keys, character, bush1)
         pillar.collision(character)
         bush1.update(keys, character)
         bush1.collision(character)
         fireball.update()
         fireball.collision(character)
+        key.update(keys, character)
+        key.collision(character)
         background.update(keys, character)
         background.draw(screen)
         character.draw(screen)
         pillar.draw(screen)
         bush1.draw(screen)
         fireball.draw(screen)
+        key.draw(screen)
 
     elif game_state == "map":
         map_screen = MapScreen()
@@ -120,6 +126,9 @@ while running:
                     constants.GROUND_Y - constants.BUSH1_HEIGHT,
                 )
                 bush1.active = True
+                key = Key(constants.SCREEN_WIDTH + 150, 250)
+                key.active = True
+                key.amount = 0
                 game_state = "game"
 
         # exits the game when no is clicked

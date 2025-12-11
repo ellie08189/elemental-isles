@@ -22,14 +22,15 @@ class Fireball:
     def update(self):
         """move the fireball across the screen"""
         if self.active:
-            self.x += self.speed
+            self.x -= self.speed
             self.max_index = len(self.image) - 1
             if self.current_index < self.max_index:
                 self.current_index += 1
             else:
                 self.current_index = 0
-            # if self.x > constants.SCREEN_WIDTH:
-            #     self.active = False
+            self.active = True
+            if self.x > constants.SCREEN_WIDTH:
+                self.active = False
 
     def collision(self, character):
         """check for collision with the character"""
