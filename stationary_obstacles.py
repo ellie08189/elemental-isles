@@ -16,6 +16,7 @@ class Pillar:
         self.height = constants.PILLAR_HEIGHT
         self.active = True
         self.speed = constants.PILLAR_SPEED
+        self.collision_detected = False
 
     def update(self, keys, character, bush1):
         if keys[pygame.K_RIGHT] and character.x == constants.SCREEN_WIDTH // 2:
@@ -52,10 +53,12 @@ class Pillar:
                 # Hitting left side
                 character.x = self.x - character.width
                 self.active = False
+                self.collision_detected = True
             elif character.x >= self.x + self.width - character.speed:
                 # Hitting right side
                 character.x = self.x + self.width
                 self.active = False
+                self.collision_detected = True
 
     def draw(self, screen):
         screen.blit(self.image, (self.x, self.y))

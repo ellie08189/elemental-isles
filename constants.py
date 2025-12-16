@@ -83,3 +83,8 @@ KEY_IMAGE = "assets/key.png"
 KEY_SPEED = -5
 KEY_WIDTH = 40
 KEY_HEIGHT = 40
+
+# platforms settings
+PLATFORM_IMAGE = "assets/tree1.png"
+PLATFORM_WIDTH = 155
+PLATFORM_HEIGHT = 55
