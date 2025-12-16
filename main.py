@@ -37,7 +37,7 @@ bush1 = Bush1(
     constants.GROUND_Y - constants.BUSH1_HEIGHT,
 )
 bush1.active = True
-platform = Platform(1100, 350)
+platform = Platform(1800, 550)
 platform.active = True
 # want platforms to spawn at random heights and intervals across screen
 fireball = Fireball(constants.SCREEN_WIDTH + 800, 500)
@@ -142,7 +142,7 @@ while running:
                     constants.GROUND_Y - constants.BUSH1_HEIGHT,
                 )
                 bush1.active = True
-                platform = Platform(1100, 300)
+                platform = Platform(1800, 550)
                 platform.active = True
                 key = Key(constants.SCREEN_WIDTH + 150, 250)
                 key.active = True
