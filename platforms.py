@@ -8,27 +8,18 @@ import random
 class Platform:
     """A platform that the player can stand on."""
 
-    def __init__(self, x, y):
+    def __init__(self, x, y, width=None, height=None):
         original_image = pygame.image.load(constants.PLATFORM_IMAGE)
-        self.image = pygame.transform.scale(
-            original_image, (constants.PLATFORM_WIDTH, constants.PLATFORM_HEIGHT)
-        )
+        self.width = width if width is not None else constants.PLATFORM_WIDTH
+        self.height = height if height is not None else constants.PLATFORM_HEIGHT
+        self.image = pygame.transform.scale(original_image, (self.width, self.height))
         self.x = x
         self.y = y
-        self.width = constants.PLATFORM_WIDTH
-        self.height = constants.PLATFORM_HEIGHT
-        # to randomly generate - pick number between e.g. 1-10 and time the width by 31 and height by 11 for that number
         self.active = True
         self.speed = constants.PILLAR_SPEED
-        self.collison_detected = False
-
-    def spawn_platform(self):
-        num = random.randint(1, 10)
-        self.width = num * 31
-        self.height = num * 11
+        self.collision_detected = False
 
     def update(self, keys, character):
-
         if keys[pygame.K_RIGHT] and character.x == constants.SCREEN_WIDTH // 2:
             if self.active:
                 self.x += self.speed
@@ -37,38 +28,76 @@ class Platform:
                 self.x -= self.speed
 
     def collision(self, character):
-        # Get character and platform rectangles
         char_rect = pygame.Rect(
             character.x, character.y, character.width, character.height
         )
         platform_rect = pygame.Rect(self.x, self.y, self.width, self.height)
 
         if char_rect.colliderect(platform_rect):
-            # Determine collision side
             if (
                 character.vy > 0
                 and character.y + character.height - character.vy <= self.y
             ):
-                # Landing on top
                 character.y = self.y - character.height
                 character.vy = 0
                 character.on_ground = True
             elif character.y <= self.y + self.height:
-                # Hitting bottom of platform
                 character.y = self.y + self.height
                 character.vy += constants.GRAVITY
                 character.on_ground = False
-                self.collison_detected = True
+                self.collision_detected = True
             elif character.x + character.width - character.speed <= self.x:
-                # Hitting left side
                 character.x = self.x - character.width
                 self.active = False
-                self.collison_detected = True
+                self.collision_detected = True
             elif character.x >= self.x + self.width - character.speed:
-                # Hitting right side
                 character.x = self.x + self.width
                 self.active = False
-                self.collison_detected = True
+                self.collision_detected = True
 
     def draw(self, screen):
         screen.blit(self.image, (self.x, self.y))
+
+
+class PlatformManager:
+    """Manages all platforms and handles spawning, updating, and drawing."""
+
+    def __init__(self):
+        self.platforms = []
+        self.furthest_platform_x = 1800
+        # Spawn the initial platform
+        initial_platform = Platform(self.furthest_platform_x, 550)
+        self.platforms.append(initial_platform)
+        self.furthest_platform_x = initial_platform.x + initial_platform.width
+
+    def spawn_platform(self):
+        # Only spawn if the furthest platform is within the screen
+        if self.furthest_platform_x < constants.SCREEN_WIDTH + 400:
+            num = random.randint(3, 6)
+            gap = random.randint(150, 300)
+            width = num * 31
+            height = num * 11
+            y = random.randint(300, 600)
+            new_x = self.furthest_platform_x + gap
+            new_platform = Platform(new_x, y, width, height)
+            self.platforms.append(new_platform)
+            self.furthest_platform_x = new_x + width
+
+    def update(self, keys, character):
+        for platform in self.platforms:
+            platform.update(keys, character)
+        # Do NOT remove platforms that have moved off screen, so the player can walk back
+        # Update furthest_platform_x
+        if self.platforms:
+            self.furthest_platform_x = max(p.x + p.width for p in self.platforms)
+        else:
+            self.furthest_platform_x = 0
+        self.spawn_platform()
+
+    def collision(self, character):
+        for platform in self.platforms:
+            platform.collision(character)
+
+    def draw(self, screen):
+        for platform in self.platforms:
+            platform.draw(screen)

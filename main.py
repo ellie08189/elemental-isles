@@ -10,7 +10,7 @@ from screens import PlayButton
 from screens import GameOver
 from screens import MapScreen
 from stationary_obstacles import Pillar
-from platforms import Platform
+from platforms import PlatformManager
 from stationary_obstacles import Bush1
 from moving_obstacles import Fireball
 from key import Key
@@ -37,9 +37,7 @@ bush1 = Bush1(
     constants.GROUND_Y - constants.BUSH1_HEIGHT,
 )
 bush1.active = True
-platform = Platform(1800, 550)
-platform.active = True
-# want platforms to spawn at random heights and intervals across screen
+platform_manager = PlatformManager()
 fireball = Fireball(constants.SCREEN_WIDTH + 800, 500)
 fireball.active = True
 key = Key(constants.SCREEN_WIDTH + 150, 250)
@@ -54,9 +52,14 @@ clock = pygame.time.Clock()
 running = True
 while running:
     for event in pygame.event.get():
-        if event.type == pygame.QUIT:
+        if (
+            event.type == pygame.QUIT
+            or event.type == pygame.KEYDOWN
+            and event.key == pygame.K_ESCAPE
+        ):
             running = False
             break  # Exit the event loop immediately to prevent further processing
+
         # switch between game states
         if game_state == "title":  # play button clicked changes screen to game screen
             mouse = pygame.mouse.get_pos()
@@ -98,8 +101,8 @@ while running:
         bush1.update(keys, character)
         bush1.collision(character)
 
-        platform.update(keys, character)
-        platform.collision(character)
+        platform_manager.update(keys, character)
+        platform_manager.collision(character)
 
         fireball.update()
         fireball.collision(character)
@@ -113,7 +116,7 @@ while running:
         character.draw(screen)
         pillar.draw(screen)
         bush1.draw(screen)
-        platform.draw(screen)
+        platform_manager.draw(screen)
         fireball.draw(screen)
         key.draw(screen)
 
@@ -142,8 +145,7 @@ while running:
                     constants.GROUND_Y - constants.BUSH1_HEIGHT,
                 )
                 bush1.active = True
-                platform = Platform(1800, 550)
-                platform.active = True
+                platform_manager = PlatformManager()
                 key = Key(constants.SCREEN_WIDTH + 150, 250)
                 key.active = True
                 key.amount = 0

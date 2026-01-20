@@ -88,3 +88,6 @@ KEY_HEIGHT = 40
 PLATFORM_IMAGE = "assets/tree1.png"
 PLATFORM_WIDTH = 155
 PLATFORM_HEIGHT = 55
+
+# sound settings
+COLLECT_KEY_SOUND = "assets/sounds/coincollector.wav"
