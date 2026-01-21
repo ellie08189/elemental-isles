@@ -43,6 +43,7 @@ class Background:
 
     def sound_play(self):
         # add sound, currently playing too slow
+        self.sound.set_volume(0.5)
         self.sound.play()
 
     def draw(self, screen):
