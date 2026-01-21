@@ -41,11 +41,6 @@ class Character:
             if self.x < 0:
                 self.x = 0
 
-        # elif keys[pygame.K_DOWN]:
-        #     self.sprites = self.crouch_sprites
-        #     self.max_index = len(self.sprites) - 1
-        #     self.current_index = 0  # NEED TO FIND A CROUCH SPRITE
-
         else:
             self.sprites = [self.idle_sprite]
             self.max_index = 0
@@ -57,6 +52,9 @@ class Character:
             self.max_index = len(self.sprites) - 1
             self.current_index = 0
             # make the sprite stop jumping if screen top is reached
+
+        # if keys[pygame.K_DOWN]:
+        # want sprite to move down by about 10 pixels
 
     def apply_gravity(self):
         self.vy += constants.GRAVITY

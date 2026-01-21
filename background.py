@@ -13,6 +13,7 @@ class Background:
         self.x2 = self.image.get_width()
         self.y = 0
         self.speed = constants.BACKGROUND_SPEED
+        self.sound = pygame.mixer.Sound(constants.MAIN_THEME_MUSIC)
 
     def update(self, keys, character):
 
@@ -39,6 +40,10 @@ class Background:
     def scroll_right(self):  # makes background move left
         self.x1 -= self.speed
         self.x2 -= self.speed
+
+    def sound_play(self):
+        # add sound, currently playing too slow
+        self.sound.play()
 
     def draw(self, screen):
         screen.blit(self.image, (self.x1, self.y))

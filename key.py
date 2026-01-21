@@ -17,6 +17,7 @@ class Key:
         )
         self.speed = constants.KEY_SPEED
         self.active = True
+        self.sound = pygame.mixer.Sound(constants.COLLECT_KEY_SOUND)
 
     def update(self, keys, character):
         # Update position based on character movement
@@ -29,6 +30,8 @@ class Key:
         self.rect.topleft = (self.x, self.y)
 
     def collision(self, character):
+        if not self.active:
+            return
         char_rect = pygame.Rect(
             character.x, character.y, character.width, character.height
         )
@@ -36,6 +39,7 @@ class Key:
             self.collision_detected = True
             self.active = False
             self.amount = 1
+            self.sound.play()
 
     def draw(self, screen):
         if self.active:

@@ -6,10 +6,11 @@ import random
 
 
 class Platform:
-    """A platform that the player can stand on."""
+    """platform for the character to jump on"""
 
     def __init__(self, x, y, width=None, height=None):
-        original_image = pygame.image.load(constants.PLATFORM_IMAGE)
+        image_path = random.choice(constants.PLATFORM_IMAGES)
+        original_image = pygame.image.load(image_path)
         self.width = width if width is not None else constants.PLATFORM_WIDTH
         self.height = height if height is not None else constants.PLATFORM_HEIGHT
         self.image = pygame.transform.scale(original_image, (self.width, self.height))

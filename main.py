@@ -26,6 +26,7 @@ pygame.event.clear()  # Clear any events that happened during initialization
 # Create objects
 play = PlayButton()
 background = Background()
+background.sound_play()  # Play background music once at the start
 character = Character(100, constants.GROUND_Y - constants.CHARACTER_HEIGHT)
 pillar = Pillar(
     constants.SCREEN_WIDTH,
@@ -90,7 +91,6 @@ while running:
     elif game_state == "game":
 
         keys = pygame.key.get_pressed()
-
         character.handle_input(keys)
         character.apply_gravity()
         character.update()
@@ -159,6 +159,5 @@ while running:
 
     clock.tick(60)
     pygame.display.update()
-
 
 pygame.quit()
