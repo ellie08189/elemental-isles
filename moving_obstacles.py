@@ -20,16 +20,17 @@ class Fireball:
         self.max_index = 0
 
     def update(self):
+        # could make it so always aims for character by using character.x for location when spawning - spawn certain amount of times?
         """move the fireball across the screen"""
         if self.active:
-            self.x -= self.speed
+            self.x += self.speed
             self.max_index = len(self.image) - 1
             if self.current_index < self.max_index:
                 self.current_index += 1
             else:
                 self.current_index = 0
             self.active = True
-            if self.x > constants.SCREEN_WIDTH:
+            if self.x < -100:
                 self.active = False
 
     def collision(self, character):

@@ -44,7 +44,7 @@ class Background:
     def sound_play(self):
         # add sound, currently playing too slow
         self.sound.set_volume(0.5)
-        self.sound.play()
+        self.sound.play(loops=-1)
 
     def draw(self, screen):
         screen.blit(self.image, (self.x1, self.y))

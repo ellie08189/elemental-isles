@@ -65,18 +65,26 @@ PILLAR_HEIGHT = 150
 PILLAR_SPEED = -5
 
 # bush settings
-BUSH1_IMAGE = "assets/bush1.png"
 BUSH1_WIDTH = 80
 BUSH1_HEIGHT = 80
+BUSH1_IMAGE = pygame.image.load("assets/bush1.png")
+BUSH1_IMAGE = pygame.transform.scale(BUSH1_IMAGE, (BUSH1_WIDTH, BUSH1_HEIGHT))
 BUSH1_SPEED = -5
 
 # fireball settings
+FIREBALL_SPEED = -7
+FIREBALL_WIDTH = 100
+FIREBALL_HEIGHT = 55
 FIREBALL_IMAGE = [
-    pygame.image.load(f"assets/fireball{i}.png") for i in range(1, 4) for _ in range(5)
+    pygame.image.load(f"assets/Fire Arrow/PNG/fireball{i}.png")
+    for i in range(1, 8)
+    for _ in range(5)
+]  # 600x320
+FIREBALL_IMAGE = [
+    pygame.transform.scale(img, (FIREBALL_WIDTH, FIREBALL_HEIGHT))
+    for img in FIREBALL_IMAGE
 ]
-FIREBALL_SPEED = 10
-FIREBALL_WIDTH = 40
-FIREBALL_HEIGHT = 40
+
 
 # log settings
 LOG_WIDTH = 80

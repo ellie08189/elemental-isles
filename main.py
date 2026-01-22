@@ -27,7 +27,7 @@ pygame.event.clear()  # Clear any events that happened during initialization
 # Create objects
 play = PlayButton()
 background = Background()
-# background.sound_play()  # Play background music once at the start
+background.sound_play()  # Play background music once at the start
 character = Character(100, constants.GROUND_Y - constants.CHARACTER_HEIGHT)
 pillar = Pillar(
     constants.SCREEN_WIDTH,
@@ -40,7 +40,7 @@ bush1 = Bush1(
 )
 bush1.active = True
 platform_manager = PlatformManager()
-fireball = Fireball(constants.SCREEN_WIDTH + 800, 500)
+fireball = Fireball(constants.SCREEN_WIDTH + 800, 650)
 fireball.active = True
 log = Log(constants.SCREEN_WIDTH, constants.GROUND_Y - constants.LOG_HEIGHT)
 log.active = True
@@ -152,6 +152,12 @@ while running:
                     constants.GROUND_Y - constants.BUSH1_HEIGHT,
                 )
                 bush1.active = True
+                fireball = Fireball(constants.SCREEN_WIDTH + 800, 650)
+                fireball.active = True
+                log = Log(
+                    constants.SCREEN_WIDTH, constants.GROUND_Y - constants.LOG_HEIGHT
+                )
+                log.active = True
                 platform_manager = PlatformManager()
                 key = Key(constants.SCREEN_WIDTH + 150, 250)
                 key.active = True

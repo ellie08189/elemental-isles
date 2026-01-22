@@ -49,8 +49,8 @@ class Character:
             self.on_ground = False
             self.max_index = len(self.sprites) - 1
             self.current_index = 0
-            if self.y < 0:
-                self.y = 0
+            if self.y + self.height < 0:
+                self.apply_gravity()
             # make the sprite stop jumping if screen top is reached
 
         # if keys[pygame.K_DOWN]:

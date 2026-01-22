@@ -66,10 +66,7 @@ class Pillar:
 
 class Bush1:
     def __init__(self, x, y):
-        original_image = pygame.image.load(constants.BUSH1_IMAGE)
-        self.image = pygame.transform.scale(
-            original_image, (constants.BUSH1_WIDTH, constants.BUSH1_HEIGHT)
-        )
+        self.image = constants.BUSH1_IMAGE
         self.x = x
         self.y = y
         self.width = constants.BUSH1_WIDTH
