@@ -38,20 +38,24 @@ class Platform:
             if (
                 character.vy > 0
                 and character.y + character.height - character.vy <= self.y
-            ):
+            ):  # landing on top
                 character.y = self.y - character.height
                 character.vy = 0
                 character.on_ground = True
-            elif character.y <= self.y + self.height:
+            elif character.y <= self.y + self.height:  # hitting from below
                 character.y = self.y + self.height
                 character.vy += constants.GRAVITY
                 character.on_ground = False
                 self.collision_detected = True
-            elif character.x + character.width - character.speed <= self.x:
+            elif (
+                character.x + character.width - character.speed <= self.x
+            ):  # hitting from left
                 character.x = self.x - character.width
                 self.active = False
                 self.collision_detected = True
-            elif character.x >= self.x + self.width - character.speed:
+            elif (
+                character.x >= self.x + self.width - character.speed
+            ):  # hitting from right
                 character.x = self.x + self.width
                 self.active = False
                 self.collision_detected = True
@@ -78,7 +82,7 @@ class PlatformManager:
             gap = random.randint(150, 300)
             width = num * 31
             height = num * 11
-            y = random.randint(300, 600)
+            y = random.randint(300, 575)
             new_x = self.furthest_platform_x + gap
             new_platform = Platform(new_x, y, width, height)
             self.platforms.append(new_platform)

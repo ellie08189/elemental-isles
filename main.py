@@ -13,6 +13,7 @@ from stationary_obstacles import Pillar
 from platforms import PlatformManager
 from stationary_obstacles import Bush1
 from moving_obstacles import Fireball
+from moving_obstacles import Log
 from key import Key
 
 pygame.init()
@@ -26,7 +27,7 @@ pygame.event.clear()  # Clear any events that happened during initialization
 # Create objects
 play = PlayButton()
 background = Background()
-background.sound_play()  # Play background music once at the start
+# background.sound_play()  # Play background music once at the start
 character = Character(100, constants.GROUND_Y - constants.CHARACTER_HEIGHT)
 pillar = Pillar(
     constants.SCREEN_WIDTH,
@@ -41,6 +42,8 @@ bush1.active = True
 platform_manager = PlatformManager()
 fireball = Fireball(constants.SCREEN_WIDTH + 800, 500)
 fireball.active = True
+log = Log(constants.SCREEN_WIDTH, constants.GROUND_Y - constants.LOG_HEIGHT)
+log.active = True
 key = Key(constants.SCREEN_WIDTH + 150, 250)
 key.active = True
 title_screen = TitleScreen()
@@ -107,6 +110,9 @@ while running:
         fireball.update()
         fireball.collision(character)
 
+        log.update()
+        log.move()
+
         key.update(keys, character)
         key.collision(character)
 
@@ -118,6 +124,7 @@ while running:
         bush1.draw(screen)
         platform_manager.draw(screen)
         fireball.draw(screen)
+        log.draw(screen)
         key.draw(screen)
 
     elif game_state == "map":

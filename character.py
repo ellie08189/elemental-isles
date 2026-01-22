@@ -20,8 +20,6 @@ class Character:
         self.current_index = 0
         self.width = constants.CHARACTER_WIDTH
         self.height = constants.CHARACTER_HEIGHT
-        # self.is_walking = False
-        # self.is_jumping = False
 
     def handle_input(self, keys):
         """Switch between walking, jumping, and idle sprites based on key press."""
@@ -51,6 +49,8 @@ class Character:
             self.on_ground = False
             self.max_index = len(self.sprites) - 1
             self.current_index = 0
+            if self.y < 0:
+                self.y = 0
             # make the sprite stop jumping if screen top is reached
 
         # if keys[pygame.K_DOWN]:
@@ -59,9 +59,7 @@ class Character:
     def apply_gravity(self):
         self.vy += constants.GRAVITY
         self.y += self.vy
-        if (
-            self.y >= constants.GROUND_Y - constants.CHARACTER_HEIGHT
-        ):  # Assuming ground level is at y = 100 for this example
+        if self.y >= constants.GROUND_Y - constants.CHARACTER_HEIGHT:
             self.y = constants.GROUND_Y - constants.CHARACTER_HEIGHT
             self.vy = 0
             self.on_ground = True

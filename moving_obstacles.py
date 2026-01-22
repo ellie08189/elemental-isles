@@ -65,3 +65,30 @@ class Fireball:
 
     def draw(self, screen):
         screen.blit(self.image[self.current_index], (self.x, self.y))
+
+
+class Log:
+    def __init__(self, x, y):
+        self.image = constants.LOG_IMAGE
+        self.x = x
+        self.y = y
+        self.current_index = 0
+        self.max_index = 0
+        self.width = constants.LOG_WIDTH
+        self.height = constants.LOG_HEIGHT
+        self.speed = constants.LOG_SPEED
+        self.active = True
+
+    def move(self):
+        if self.active:
+            self.max_index = len(self.image) - 1
+            self.x += self.speed
+
+    def update(self):
+        if self.current_index < self.max_index:
+            self.current_index += 1
+        else:
+            self.current_index = 0
+
+    def draw(self, screen):
+        screen.blit(self.image[self.current_index], (self.x, self.y))

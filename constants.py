@@ -78,6 +78,15 @@ FIREBALL_SPEED = 10
 FIREBALL_WIDTH = 40
 FIREBALL_HEIGHT = 40
 
+# log settings
+LOG_WIDTH = 80
+LOG_HEIGHT = 80
+LOG_IMAGE = [
+    pygame.image.load(f"assets/log{i}.png") for i in range(1, 4) for _ in range(5)
+]
+LOG_IMAGE = [pygame.transform.scale(img, (LOG_WIDTH, LOG_HEIGHT)) for img in LOG_IMAGE]
+LOG_SPEED = -5
+
 # key settings
 KEY_IMAGE = "assets/key.png"
 KEY_SPEED = -5
