@@ -14,6 +14,7 @@ class Background:
         self.y = 0
         self.speed = constants.BACKGROUND_SPEED
         self.sound = pygame.mixer.Sound(constants.MAIN_THEME_MUSIC)
+        self.scroll = None
 
     def update(self, keys, character):
 
@@ -22,6 +23,9 @@ class Background:
 
         if keys[pygame.K_RIGHT] and character.x == constants.SCREEN_WIDTH // 2:
             self.scroll_right()
+
+        if not (keys[pygame.K_LEFT] or keys[pygame.K_RIGHT]):
+            self.scroll_stop()
 
         # If an image goes off screen, reset its position to the right of the other image
         if self.x1 + self.image.get_width() < 0:
@@ -36,10 +40,17 @@ class Background:
     def scroll_left(self):  # makes background move right
         self.x1 += self.speed
         self.x2 += self.speed
+        self.scroll = "left"
 
     def scroll_right(self):  # makes background move left
         self.x1 -= self.speed
         self.x2 -= self.speed
+        self.scroll = "right"
+
+    def scroll_stop(self):
+        self.x1 = self.x1
+        self.x2 = self.x2
+        self.scroll = None
 
     def sound_play(self):
         # add sound, currently playing too slow

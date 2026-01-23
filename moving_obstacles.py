@@ -24,12 +24,16 @@ class Fireball:
         # need fireball to move faster when background movingleft and slower when moving right
         """move the fireball across the screen"""
         if self.active:
-            if background.speed < 0:
+            print(background.scroll)
+            if background.scroll == "left":
                 self.x += self.speed + background.speed
-            elif background.speed > 0:
+            elif background.scroll == "right":
                 self.x += self.speed - background.speed
+            elif background.scroll is None:
+                self.x += self.speed
             else:
                 self.x += self.speed
+
             self.max_index = len(self.image) - 1
             if self.current_index < self.max_index:
                 self.current_index += 1
@@ -37,7 +41,7 @@ class Fireball:
                 self.current_index = 0
             self.active = True
             if self.x < -100:
-                self.active = False
+                self.x = constants.SCREEN_WIDTH + 100
 
     def collision(self, character):
         """check for collision with the character"""
