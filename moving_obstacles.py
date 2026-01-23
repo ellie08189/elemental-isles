@@ -24,7 +24,6 @@ class Fireball:
         # need fireball to move faster when background movingleft and slower when moving right
         """move the fireball across the screen"""
         if self.active:
-            print(background.scroll)
             if background.scroll == "left":
                 self.x += self.speed + background.speed
             elif background.scroll == "right":
