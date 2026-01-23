@@ -4,6 +4,7 @@
 import pygame
 import constants
 from character import Character
+from character import Powers
 from background import Background
 from screens import TitleScreen
 from screens import PlayButton
@@ -27,8 +28,9 @@ pygame.event.clear()  # Clear any events that happened during initialization
 # Create objects
 play = PlayButton()
 background = Background()
-background.sound_play()  # Play background music once at the start
+# background.sound_play()  # Play background music once at the start
 character = Character(100, constants.GROUND_Y - constants.CHARACTER_HEIGHT)
+power = Powers(character.x, character.y)
 pillar = Pillar(
     constants.SCREEN_WIDTH,
     constants.GROUND_Y - constants.PILLAR_HEIGHT,
@@ -40,7 +42,7 @@ bush1 = Bush1(
 )
 bush1.active = True
 platform_manager = PlatformManager()
-fireball = Fireball(constants.SCREEN_WIDTH + 800, 650)
+fireball = Fireball(constants.SCREEN_WIDTH + 1000, 650)
 fireball.active = True
 log = Log(constants.SCREEN_WIDTH, constants.GROUND_Y - constants.LOG_HEIGHT)
 log.active = True
@@ -97,6 +99,8 @@ while running:
         character.handle_input(keys)
         character.apply_gravity()
         character.update()
+        power.power(keys)
+        power.update()
 
         pillar.update(keys, character, bush1)
         pillar.collision(character)
@@ -107,7 +111,7 @@ while running:
         platform_manager.update(keys, character)
         platform_manager.collision(character)
 
-        fireball.update()
+        fireball.update(background)
         fireball.collision(character)
 
         log.update()
@@ -120,6 +124,7 @@ while running:
 
         background.draw(screen)
         character.draw(screen)
+        power.draw(screen)
         pillar.draw(screen)
         bush1.draw(screen)
         platform_manager.draw(screen)

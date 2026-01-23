@@ -57,6 +57,23 @@ WALKBACK = [
 IDLE = pygame.image.load("assets/idle1.png")
 CHARACTER_HEIGHT = 105
 CHARACTER_WIDTH = 72
+POWERSPRITE = [
+    pygame.image.load(f"assets/power{i}.png") for i in range(1, 3) for _ in range(5)
+]
+POWERSPRITE = [
+    pygame.transform.scale(img, (CHARACTER_WIDTH, CHARACTER_HEIGHT))
+    for img in POWERSPRITE
+]
+
+POWER_WIDTH = 100
+POWER_HEIGHT = 55
+POWER = [
+    pygame.image.load(f"assets/water/water{i}.png")
+    for i in range(1, 8)
+    for _ in range(5)
+]  # 600x320
+POWER = [pygame.transform.scale(img, (POWER_WIDTH, POWER_HEIGHT)) for img in POWER]
+POWER = [pygame.transform.flip(img, True, False) for img in POWER]
 
 # pillar settings
 PILLAR_IMAGE = "assets/pillar.png"
@@ -72,7 +89,7 @@ BUSH1_IMAGE = pygame.transform.scale(BUSH1_IMAGE, (BUSH1_WIDTH, BUSH1_HEIGHT))
 BUSH1_SPEED = -5
 
 # fireball settings
-FIREBALL_SPEED = -7
+FIREBALL_SPEED = -1
 FIREBALL_WIDTH = 100
 FIREBALL_HEIGHT = 55
 FIREBALL_IMAGE = [

@@ -19,11 +19,17 @@ class Fireball:
         self.current_index = 0
         self.max_index = 0
 
-    def update(self):
+    def update(self, background):
         # could make it so always aims for character by using character.x for location when spawning - spawn certain amount of times?
+        # need fireball to move faster when background movingleft and slower when moving right
         """move the fireball across the screen"""
         if self.active:
-            self.x += self.speed
+            if background.speed < 0:
+                self.x += self.speed + background.speed
+            elif background.speed > 0:
+                self.x += self.speed - background.speed
+            else:
+                self.x += self.speed
             self.max_index = len(self.image) - 1
             if self.current_index < self.max_index:
                 self.current_index += 1

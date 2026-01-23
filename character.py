@@ -14,6 +14,7 @@ class Character:
         self.idle_sprite = constants.IDLE
         self.walking_sprites = constants.WALKING
         self.walkback_sprites = constants.WALKBACK
+        self.power_sprites = constants.POWERSPRITE
         # self.crouch_sprites = constants.CROUCH
         self.sprites = [self.idle_sprite]
         self.max_index = 0
@@ -51,6 +52,12 @@ class Character:
             self.current_index = 0
             if self.y + self.height < 0:
                 self.apply_gravity()
+
+        if keys[pygame.K_s]:
+            self.sprites = self.power_sprites
+            self.max_index = len(self.sprites) - 1
+            self.current_index = 0
+
             # make the sprite stop jumping if screen top is reached
 
         # if keys[pygame.K_DOWN]:
@@ -72,3 +79,33 @@ class Character:
 
     def draw(self, screen):
         screen.blit(self.sprites[self.current_index], (self.x, self.y))
+
+
+class Powers:
+    # use water arrow
+    def __init__(self, x, y):
+        self.sprites = constants.POWER
+        self.x = x
+        self.y = y
+        self.current_index = 0
+        self.max_index = len(self.sprites) - 1
+        self.width = constants.POWER_WIDTH
+        self.height = constants.POWER_HEIGHT
+        self.active = False
+
+    def update(self):
+        if self.current_index < self.max_index:
+            self.current_index += 1
+        else:
+            self.current_index = 0
+
+    def power(self, keys):
+        if keys[pygame.K_s]:  # Move the power projectile to the right
+            self.active = True
+        self.x += 10
+        if self.x > constants.SCREEN_WIDTH:
+            self.active = False  # Deactivate if it goes off screen
+
+    def draw(self, screen):
+        if self.active:
+            screen.blit(self.sprites[self.current_index], (self.x, self.y))
