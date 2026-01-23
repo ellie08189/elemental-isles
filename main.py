@@ -99,7 +99,7 @@ while running:
         character.handle_input(keys)
         character.apply_gravity()
         character.update()
-        power.power(keys)
+        power.power(character, keys)
         power.update()
 
         pillar.update(keys, character, bush1)

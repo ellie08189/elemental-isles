@@ -1,0 +1,35 @@
+To Do
+
+Obstacles
+    make a better log and make it roll
+    add more obstacles in in other places
+    add more fireballs
+    work out how to have moving obstacles move in a way that makes sense
+        currently move slow when player moving forwards
+
+Collisions
+    when players powers collide with fire, fire is destroyed
+    log collide with player
+
+Player
+    player crouch to avoid Collisions
+    player double jump
+
+Music
+    music for when player uses powers
+    find better background music
+
+Powers
+    players powers - make it work the opposite way as well
+    make more accurate shooting
+
+Ending
+    create an end point - add a final door that when touched goes elsewhere
+        door either victory or minigame
+
+Gameplay
+    add another key in
+    add lives - not fussed about checkpoints
+
+Extra
+    let player have a certain amount of shoots per second then recharge

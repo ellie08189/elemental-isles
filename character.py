@@ -87,6 +87,7 @@ class Powers:
         self.sprites = constants.POWER
         self.x = x
         self.y = y
+        self.speed = constants.POWER_SPEED
         self.current_index = 0
         self.max_index = len(self.sprites) - 1
         self.width = constants.POWER_WIDTH
@@ -99,11 +100,13 @@ class Powers:
         else:
             self.current_index = 0
 
-    def power(self, keys):
+    def power(self, character, keys):
         if keys[pygame.K_s]:  # Move the power projectile to the right
             self.active = True
-        self.x += 10
+        self.x += self.speed
         if self.x > constants.SCREEN_WIDTH:
+            self.x = character.x
+            self.y = character.y + 20
             self.active = False  # Deactivate if it goes off screen
 
     def draw(self, screen):

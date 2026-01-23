@@ -74,6 +74,7 @@ POWER = [
 ]  # 600x320
 POWER = [pygame.transform.scale(img, (POWER_WIDTH, POWER_HEIGHT)) for img in POWER]
 POWER = [pygame.transform.flip(img, True, False) for img in POWER]
+POWER_SPEED = 8
 
 # pillar settings
 PILLAR_IMAGE = "assets/pillar.png"
