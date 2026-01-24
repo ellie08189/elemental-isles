@@ -111,7 +111,7 @@ while running:
         platform_manager.update(keys, character)
         platform_manager.collision(character)
 
-        fireball.update(background)
+        fireball.update(background, character)
         fireball.collision(character)
 
         log.update()

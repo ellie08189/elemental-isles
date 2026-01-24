@@ -21,6 +21,8 @@ class Character:
         self.current_index = 0
         self.width = constants.CHARACTER_WIDTH
         self.height = constants.CHARACTER_HEIGHT
+        self.jump = 2
+        self.jump_key_pressed = False
 
     def handle_input(self, keys):
         """Switch between walking, jumping, and idle sprites based on key press."""
@@ -45,13 +47,24 @@ class Character:
             self.max_index = 0
             self.current_index = 0
 
-        if keys[pygame.K_UP] and self.on_ground:
-            self.vy = constants.JUMP_STRENGTH
-            self.on_ground = False
+        if keys[pygame.K_UP]:
+            if not self.jump_key_pressed and self.jump > 0:
+                self.vy = constants.JUMP_STRENGTH
+                self.on_ground = False
+                self.max_index = len(self.sprites) - 1
+                self.current_index = 0
+                self.jump -= 1
+                self.jump_key_pressed = True
+                if self.y + self.height < 0:
+                    self.apply_gravity()
+        else:
+            self.jump_key_pressed = False
+
+        if keys[pygame.K_DOWN] and self.on_ground == False:
+            self.vy += constants.GRAVITY
+            self.y += self.vy
             self.max_index = len(self.sprites) - 1
             self.current_index = 0
-            if self.y + self.height < 0:
-                self.apply_gravity()
 
         if keys[pygame.K_s]:
             self.sprites = self.power_sprites
@@ -60,16 +73,20 @@ class Character:
 
             # make the sprite stop jumping if screen top is reached
 
-        # if keys[pygame.K_DOWN]:
-        # want sprite to move down by about 10 pixels
-
     def apply_gravity(self):
         self.vy += constants.GRAVITY
         self.y += self.vy
+
+        # Prevent character from going above the screen
+        if self.y < 0:
+            self.y = 0
+            self.vy = 0
+
         if self.y >= constants.GROUND_Y - constants.CHARACTER_HEIGHT:
             self.y = constants.GROUND_Y - constants.CHARACTER_HEIGHT
             self.vy = 0
             self.on_ground = True
+            self.jump = 2
 
     def update(self):
         if self.current_index < self.max_index:

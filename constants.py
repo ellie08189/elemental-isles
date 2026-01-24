@@ -83,8 +83,14 @@ PILLAR_HEIGHT = 150
 PILLAR_SPEED = -5
 
 # bush settings
-BUSH1_WIDTH = 80
+BUSH1_WIDTH = 120
 BUSH1_HEIGHT = 80
+BUSH_IMAGES = [
+    "assets/bush1.png",
+    "assets/bush2.png",
+    "assets/bush3.png",
+    "assets/bush4.png",
+]
 BUSH1_IMAGE = pygame.image.load("assets/bush1.png")
 BUSH1_IMAGE = pygame.transform.scale(BUSH1_IMAGE, (BUSH1_WIDTH, BUSH1_HEIGHT))
 BUSH1_SPEED = -5

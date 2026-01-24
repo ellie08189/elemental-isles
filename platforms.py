@@ -1,8 +1,8 @@
 """platforms"""
 
+import random
 import pygame
 import constants
-import random
 
 
 class Platform:
@@ -42,6 +42,7 @@ class Platform:
                 character.y = self.y - character.height
                 character.vy = 0
                 character.on_ground = True
+                character.jump = 2
             elif character.y <= self.y + self.height:  # hitting from below
                 character.y = self.y + self.height
                 character.vy += constants.GRAVITY
@@ -69,7 +70,7 @@ class PlatformManager:
 
     def __init__(self):
         self.platforms = []
-        self.furthest_platform_x = 1800
+        self.furthest_platform_x = 2000
         # Spawn the initial platform
         initial_platform = Platform(self.furthest_platform_x, 550)
         self.platforms.append(initial_platform)

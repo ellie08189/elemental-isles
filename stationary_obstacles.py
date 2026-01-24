@@ -1,5 +1,6 @@
 """pillar obstacle"""
 
+import random
 import pygame
 import constants
 
@@ -45,6 +46,7 @@ class Pillar:
                 character.y = self.y - character.height
                 character.vy = 0
                 character.on_ground = True
+                character.jump = 2
             elif character.vy < 0 and character.y >= self.y + self.height:
                 # Hitting bottom of pillar
                 character.y = self.y + self.height
@@ -66,7 +68,11 @@ class Pillar:
 
 class Bush1:
     def __init__(self, x, y):
-        self.image = constants.BUSH1_IMAGE
+        image_path = random.choice(constants.BUSH_IMAGES)
+        original_image = pygame.image.load(image_path)
+        self.image = pygame.transform.scale(
+            original_image, (constants.BUSH1_WIDTH, constants.BUSH1_HEIGHT)
+        )
         self.x = x
         self.y = y
         self.width = constants.BUSH1_WIDTH
@@ -104,6 +110,8 @@ class Bush1:
                 # Landing on top
                 character.y = self.y - character.height
                 character.vy = 0
+                character.on_ground = True
+                character.jump = 2
 
             elif character.vy < 0 and character.y >= self.y + self.height:
                 # Hitting bottom of bush

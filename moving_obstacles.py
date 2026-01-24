@@ -1,5 +1,6 @@
 """for obstacles that move independently to the character"""
 
+import random
 import pygame
 import constants
 
@@ -19,8 +20,8 @@ class Fireball:
         self.current_index = 0
         self.max_index = 0
 
-    def update(self, background):
-        # could make it so always aims for character by using character.x for location when spawning - spawn certain amount of times?
+    def update(self, background, character):
+        # could make it so always aims for character by using character.y
         # need fireball to move faster when background movingleft and slower when moving right
         """move the fireball across the screen"""
         if self.active:
@@ -40,7 +41,8 @@ class Fireball:
                 self.current_index = 0
             self.active = True
             if self.x < -100:
-                self.x = constants.SCREEN_WIDTH + 100
+                self.x = constants.SCREEN_WIDTH + random.randint(100, 1000)
+                self.y = character.y
 
     def collision(self, character):
         """check for collision with the character"""
@@ -60,17 +62,15 @@ class Fireball:
                 character.vy = 0
 
             elif character.vy < 0 and character.y >= self.y + self.height:
-                # Hitting bottom of bush
+                # Hitting bottom
                 character.y = self.y + self.height
                 character.vy = 0
             elif character.x + character.width - character.speed <= self.x:
                 # Hitting left side
                 character.x = self.x - character.width
-                # self.active = False
             elif character.x >= self.x + self.width - character.speed:
                 # Hitting right side
                 character.x = self.x + self.width
-                # self.active = False
             self.collision_detected = True
 
     def draw(self, screen):
