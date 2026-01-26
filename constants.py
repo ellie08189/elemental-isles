@@ -15,7 +15,7 @@ OBSTACLE_COLOR = (0, 0, 255)
 # Player settings
 PLAYER_RADIUS = 50
 PLAYER_SPEED = 5
-JUMP_STRENGTH = -25
+JUMP_STRENGTH = -22
 GRAVITY = 1
 
 # Ground
@@ -44,6 +44,10 @@ GAME_OVER_ACTIVE = True
 # map settings
 MAP_IMAGE = "assets/treasure_map.jpg"
 MAP_POSITION = (SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2)
+
+# pause settings
+PAUSE_IMAGE = "assets/pause.png"
+PAUSE_POSITION = (SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2)
 
 # Character settings
 WALKING = [

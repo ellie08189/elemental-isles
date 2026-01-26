@@ -70,3 +70,20 @@ class MapScreen:
                 constants.MAP_POSITION[1] - self.image.get_height() // 2,
             ),
         )
+
+
+class PauseScreen:
+    def __init__(self):
+        original_image = pygame.image.load(constants.PAUSE_IMAGE)
+        self.image = pygame.transform.scale(
+            original_image, (constants.SCREEN_WIDTH, constants.SCREEN_HEIGHT)
+        )
+
+    def draw(self, screen):
+        screen.blit(
+            self.image,
+            (
+                constants.PAUSE_POSITION[0] - self.image.get_width() // 2,
+                constants.PAUSE_POSITION[1] - self.image.get_height() // 2,
+            ),
+        )

@@ -41,7 +41,7 @@ class Fireball:
                 self.current_index = 0
             self.active = True
             if self.x < -100:
-                self.x = constants.SCREEN_WIDTH + random.randint(100, 1000)
+                self.x = constants.SCREEN_WIDTH + random.randint(500, 2000)
                 self.y = character.y
 
     def collision(self, character):

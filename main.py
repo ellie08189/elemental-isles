@@ -6,6 +6,7 @@ import constants
 from character import Character
 from character import Powers
 from background import Background
+from screens import PauseScreen
 from screens import TitleScreen
 from screens import PlayButton
 from screens import GameOver
@@ -51,6 +52,7 @@ key.active = True
 title_screen = TitleScreen()
 game_over = GameOver()
 map_screen = MapScreen()
+pause_screen = PauseScreen()
 
 game_state = "title"
 
@@ -81,9 +83,16 @@ while running:
                 game_state = "game_over"
             if keys[pygame.K_a]:
                 game_state = "map"
+            if keys[pygame.K_SPACE]:
+                game_state = "pause"
         elif game_state == "game_over":
             game_over.draw(screen)
             mouse = pygame.mouse.get_pos()
+        elif game_state == "pause":
+            mouse = pygame.mouse.get_pos()
+            if 350 <= mouse[0] <= 650 and 250 <= mouse[1] <= 550:
+                if event.type == pygame.MOUSEBUTTONDOWN or keys[pygame.K_SPACE]:
+                    game_state = "game"
         elif game_state == "map":
             if keys[pygame.K_a]:
                 game_state = "game"
@@ -112,7 +121,7 @@ while running:
         platform_manager.collision(character)
 
         fireball.update(background, character)
-        fireball.collision(character)
+        # fireball.collision(character)
 
         log.update()
         log.move()
@@ -135,6 +144,10 @@ while running:
     elif game_state == "map":
         map_screen = MapScreen()
         map_screen.draw(screen)
+
+    elif game_state == "pause":
+        pause_screen = PauseScreen()
+        pause_screen.draw(screen)
 
     elif game_state == "game_over":
         game_over.draw(screen)

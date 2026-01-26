@@ -20,6 +20,9 @@ class Platform:
         self.speed = constants.PILLAR_SPEED
         self.collision_detected = False
 
+    def __repr__(self):
+        return f"Platform(x={self.x}, y={self.y}, width={self.width}, height={self.height}, active={self.active})"
+
     def update(self, keys, character):
         if keys[pygame.K_RIGHT] and character.x == constants.SCREEN_WIDTH // 2:
             if self.active:
@@ -92,7 +95,7 @@ class PlatformManager:
     def update(self, keys, character):
         for platform in self.platforms:
             platform.update(keys, character)
-        # Do NOT remove platforms that have moved off screen, so the player can walk back
+        # Do not remove platforms that have moved off screen, so the player can walk back
         # Update furthest_platform_x
         if self.platforms:
             self.furthest_platform_x = max(p.x + p.width for p in self.platforms)

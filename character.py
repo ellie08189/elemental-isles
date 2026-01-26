@@ -118,7 +118,7 @@ class Powers:
             self.current_index = 0
 
     def power(self, character, keys):
-        if keys[pygame.K_s]:  # Move the power projectile to the right
+        if keys[pygame.K_s]:  # Move the power to the right
             self.active = True
         self.x += self.speed
         if self.x > constants.SCREEN_WIDTH:
