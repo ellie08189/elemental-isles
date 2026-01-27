@@ -38,7 +38,7 @@ pillar = Pillar(
 )
 pillar.active = True  # Ensure the pillar is active at the start
 bush1 = Bush1(
-    constants.SCREEN_WIDTH + 500,
+    constants.SCREEN_WIDTH + 600,
     constants.GROUND_Y - constants.BUSH1_HEIGHT,
 )
 bush1.active = True
@@ -172,11 +172,11 @@ while running:
                 )
                 pillar.active = True  # Ensure the pillar is active
                 bush1 = Bush1(
-                    constants.SCREEN_WIDTH + 500,
+                    constants.SCREEN_WIDTH + 600,
                     constants.GROUND_Y - constants.BUSH1_HEIGHT,
                 )
                 bush1.active = True
-                fireball = Fireball(constants.SCREEN_WIDTH + 800, 650)
+                fireball = Fireball(constants.SCREEN_WIDTH + 1000, 650)
                 fireball.active = True
                 # log = Log(
                 #     constants.SCREEN_WIDTH, constants.GROUND_Y - constants.LOG_HEIGHT

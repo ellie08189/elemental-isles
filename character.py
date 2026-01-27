@@ -141,8 +141,6 @@ class Powers:
         )
 
         if power_rect.colliderect(fireball_rect):
-            # Collision detected
-            # self.x = -100  # Move power off-screen
             self.active = False
             fireball.x = constants.SCREEN_WIDTH + random.randint(
                 500, 2000

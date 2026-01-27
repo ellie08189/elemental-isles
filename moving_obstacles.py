@@ -19,6 +19,7 @@ class Fireball:
         self.collision_detected = False
         self.current_index = 0
         self.max_index = 0
+        self.needs_y_update = False  # Track if y position needs to be set
 
     def update(self, background, character):
         # could make it so always aims for character by using character.y
@@ -42,7 +43,14 @@ class Fireball:
             self.active = True
             if self.x < -100:
                 self.x = constants.SCREEN_WIDTH + random.randint(500, 2000)
+                self.needs_y_update = (
+                    True  # Flag that y needs to be updated when entering screen
+                )
+
+            # Update y position when fireball enters the screen
+            if self.needs_y_update and self.x <= constants.SCREEN_WIDTH:
                 self.y = character.y
+                self.needs_y_update = False
 
     def collision(self, character):
         """check for collision with the character"""
