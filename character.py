@@ -1,5 +1,6 @@
 """trying to represent a character in the game."""
 
+import random
 import pygame
 import constants
 
@@ -110,6 +111,7 @@ class Powers:
         self.width = constants.POWER_WIDTH
         self.height = constants.POWER_HEIGHT
         self.active = False
+        self.collision_detected = False
 
     def update(self):
         if self.current_index < self.max_index:
@@ -118,13 +120,34 @@ class Powers:
             self.current_index = 0
 
     def power(self, character, keys):
-        if keys[pygame.K_s]:  # Move the power to the right
+        if keys[pygame.K_s]:  # Activate and position the power
+            if not self.active:  # Reset position when first activating
+                self.x = character.x
+                self.y = character.y + 20
             self.active = True
-        self.x += self.speed
-        if self.x > constants.SCREEN_WIDTH:
-            self.x = character.x
-            self.y = character.y + 20
-            self.active = False  # Deactivate if it goes off screen
+
+        if self.active:
+            self.x += self.speed
+            if self.x > constants.SCREEN_WIDTH:
+                self.active = False  # Deactivate if it goes off screen
+
+    def collision(self, fireball):
+        if not self.active:
+            return
+
+        power_rect = pygame.Rect(self.x, self.y, self.width, self.height)
+        fireball_rect = pygame.Rect(
+            fireball.x, fireball.y, fireball.width, fireball.height
+        )
+
+        if power_rect.colliderect(fireball_rect):
+            # Collision detected
+            # self.x = -100  # Move power off-screen
+            self.active = False
+            fireball.x = constants.SCREEN_WIDTH + random.randint(
+                500, 2000
+            )  # Move fireball off-screen
+            self.collision_detected = True
 
     def draw(self, screen):
         if self.active:

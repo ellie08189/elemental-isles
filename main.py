@@ -45,8 +45,8 @@ bush1.active = True
 platform_manager = PlatformManager()
 fireball = Fireball(constants.SCREEN_WIDTH + 1000, 650)
 fireball.active = True
-log = Log(constants.SCREEN_WIDTH, constants.GROUND_Y - constants.LOG_HEIGHT)
-log.active = True
+# log = Log(constants.SCREEN_WIDTH, constants.GROUND_Y - constants.LOG_HEIGHT)
+# log.active = True
 key = Key(constants.SCREEN_WIDTH + 150, 250)
 key.active = True
 title_screen = TitleScreen()
@@ -81,6 +81,8 @@ while running:
                 game_state = "game_over"
             if fireball.collision_detected == True:
                 game_state = "game_over"
+            # if log.collision_detected == True:
+            #     game_state = "game_over"
             if keys[pygame.K_a]:
                 game_state = "map"
             if keys[pygame.K_SPACE]:
@@ -108,8 +110,10 @@ while running:
         character.handle_input(keys)
         character.apply_gravity()
         character.update()
+
         power.power(character, keys)
         power.update()
+        power.collision(fireball)
 
         pillar.update(keys, character, bush1)
         pillar.collision(character)
@@ -121,10 +125,11 @@ while running:
         platform_manager.collision(character)
 
         fireball.update(background, character)
-        # fireball.collision(character)
+        fireball.collision(character)
 
-        log.update()
-        log.move()
+        # log.update()
+        # log.move()
+        # log.collision(character)
 
         key.update(keys, character)
         key.collision(character)
@@ -138,7 +143,7 @@ while running:
         bush1.draw(screen)
         platform_manager.draw(screen)
         fireball.draw(screen)
-        log.draw(screen)
+        # log.draw(screen)
         key.draw(screen)
 
     elif game_state == "map":
@@ -160,6 +165,7 @@ while running:
                 character = Character(
                     100, constants.GROUND_Y - constants.CHARACTER_HEIGHT
                 )
+                power = Powers(character.x, character.y)
                 pillar = Pillar(
                     constants.SCREEN_WIDTH,
                     constants.GROUND_Y - constants.PILLAR_HEIGHT,
@@ -172,10 +178,10 @@ while running:
                 bush1.active = True
                 fireball = Fireball(constants.SCREEN_WIDTH + 800, 650)
                 fireball.active = True
-                log = Log(
-                    constants.SCREEN_WIDTH, constants.GROUND_Y - constants.LOG_HEIGHT
-                )
-                log.active = True
+                # log = Log(
+                #     constants.SCREEN_WIDTH, constants.GROUND_Y - constants.LOG_HEIGHT
+                # )
+                # log.active = True
                 platform_manager = PlatformManager()
                 key = Key(constants.SCREEN_WIDTH + 150, 250)
                 key.active = True

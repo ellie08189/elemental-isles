@@ -10,6 +10,7 @@ Obstacles
 Collisions
     when players powers collide with fire, fire is destroyed
     log collide with player
+    fix fireball collision
 
 Player
     player crouch to avoid Collisions
@@ -30,6 +31,7 @@ Ending
 Gameplay
     add another key in
     add lives - not fussed about checkpoints
+    for lives - make player flash to clarify life lost
 
 Extra
     let player have a certain amount of shoots per second then recharge

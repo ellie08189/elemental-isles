@@ -68,9 +68,13 @@ class Fireball:
             elif character.x + character.width - character.speed <= self.x:
                 # Hitting left side
                 character.x = self.x - character.width
+                self.x = character.x - self.width - 1  # Push fireball away
+                self.speed = 0
             elif character.x >= self.x + self.width - character.speed:
                 # Hitting right side
                 character.x = self.x + self.width
+                self.x = character.x + character.width + 1  # Push fireball away
+                self.speed = 0
             self.collision_detected = True
 
     def draw(self, screen):
@@ -88,6 +92,7 @@ class Log:
         self.height = constants.LOG_HEIGHT
         self.speed = constants.LOG_SPEED
         self.active = True
+        self.collision_detected = False
 
     def move(self):
         if self.active:
@@ -99,6 +104,40 @@ class Log:
             self.current_index += 1
         else:
             self.current_index = 0
+
+    def collision(self, character):
+        """check for collision with the character"""
+        # Get character and obstacle rectangles
+        char_rect = pygame.Rect(
+            character.x, character.y, character.width, character.height
+        )
+        log_rect = pygame.Rect(self.x, self.y, self.width, self.height)
+        if char_rect.colliderect(log_rect):
+            # Determine collision side
+            if (
+                character.vy > 0
+                and character.y + character.height - character.vy <= self.y
+            ):
+                # Landing on top
+                character.y = self.y - character.height
+                character.vy = 0
+                self.collision_detected = True
+            elif character.vy < 0 and character.y >= self.y + self.height:
+                # Hitting bottom
+                character.y = self.y + self.height
+                character.vy = 0
+                self.speed = 0
+                self.collision_detected = True
+            elif character.x + character.width - character.speed <= self.x:
+                # Hitting left side
+                character.x = self.x - character.width
+                self.speed = 0
+                self.collision_detected = True
+            elif character.x >= self.x + self.width - character.speed:
+                # Hitting right side
+                character.x = self.x + self.width
+                self.speed = 0
+                self.collision_detected = True
 
     def draw(self, screen):
         screen.blit(self.image[self.current_index], (self.x, self.y))
