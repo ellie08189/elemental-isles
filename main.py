@@ -79,6 +79,7 @@ pause_screen = PauseScreen()
 key_score = TotalKeys()
 
 game_state = "title"
+score_printed = False
 
 clock = pygame.time.Clock()
 running = True
@@ -167,7 +168,7 @@ while running:
         platform_manager.collision(character)
 
         fireball.update(background, character)
-        #        fireball.collision(character)
+        fireball.collision(character)
 
         log.update(background, character)
         log.collision(character)
@@ -207,8 +208,16 @@ while running:
         pause_screen.draw(screen)
 
     elif game_state == "game_over":
-        game_over.draw(screen)
         mouse = pygame.mouse.get_pos()
+        if not score_printed:
+            print("Fireballs destroyed " + str(power.collision_amount))
+            print("Total keys collected: " + str(key_score.total))
+            print(
+                "Score = "
+                + str(((key_score.total) * 100) + (power.collision_amount * 50))
+            )
+            score_printed = True
+        game_over.draw(screen)
 
         # Check if the mouse is within the specified range
         if 225 <= mouse[0] <= 335 and 460 <= mouse[1] <= 505:
@@ -256,18 +265,14 @@ while running:
                 key3 = Key(5750, 250)
                 key3.active = True
                 key3.amount = 0
+                key_score.total = 0
+                score_printed = False
                 game_state = "game"
 
         # exits the game when no is clicked
         if 600 <= mouse[0] <= 680 and 460 <= mouse[1] <= 505:
             if event.type == pygame.MOUSEBUTTONUP:
                 running = False
-                print("Fireballs destroyed " + str(power.collision_amount))
-                print("Total keys collected: " + str(key_score.total))
-                print(
-                    "Score = "
-                    + str(((key_score.total) * 100) + (power.collision_amount * 50))
-                )
                 break
 
     clock.tick(60)

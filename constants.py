@@ -141,3 +141,9 @@ PLATFORM_HEIGHT = 55
 # sound settings
 COLLECT_KEY_SOUND = "assets/sounds/coincollector1.wav"
 MAIN_THEME_MUSIC = "assets/sounds/maingamemusic.wav"
+
+# lives settings
+MAX_LIVES = 3
+HEART_IMAGE = "assets/heart.png"
+HEART_WIDTH = 40
+HEART_HEIGHT = 40
