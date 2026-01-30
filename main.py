@@ -173,11 +173,11 @@ while running:
         log.collision(character)
 
         key.update(keys, character)
-        key.collision(character)
+        key.collision(character, key_score)
         key2.update(keys, character)
-        key2.collision(character)
+        key2.collision(character, key_score)
         key3.update(keys, character)
-        key3.collision(character)
+        key3.collision(character, key_score)
 
         background.update(keys, character)
 
@@ -263,9 +263,10 @@ while running:
             if event.type == pygame.MOUSEBUTTONUP:
                 running = False
                 print("Fireballs destroyed " + str(power.collision_amount))
-                print("Keys collected " + str(key_score))
+                print("Total keys collected: " + str(key_score.total))
                 print(
-                    "Score = " + str((key_score * 100) + (power.collision_amount * 50))
+                    "Score = "
+                    + str(((key_score.total) * 100) + (power.collision_amount * 50))
                 )
                 break
 

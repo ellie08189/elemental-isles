@@ -29,7 +29,7 @@ class Key:
                 self.x += self.speed
         self.rect.topleft = (self.x, self.y)
 
-    def collision(self, character):
+    def collision(self, character, key_score):
         if not self.active:
             return
         char_rect = pygame.Rect(
@@ -39,6 +39,7 @@ class Key:
             self.collision_detected = True
             self.active = False
             self.amount = 1
+            key_score.add_key(self)
             self.sound.play()
 
     def draw(self, screen):
@@ -53,3 +54,4 @@ class TotalKeys:
     def add_key(self, key):
         self.total += key.amount
         print(f"Total keys collected: {self.total}")
+        return self.total
