@@ -46,6 +46,12 @@ pillar2 = Pillar(
 pillar2.active = True
 pillar3 = Pillar(5750, constants.GROUND_Y - constants.PILLAR_HEIGHT)
 pillar3.active = True
+pillar4 = Pillar(7000, constants.GROUND_Y - constants.PILLAR_HEIGHT)
+pillar4.active = True
+pillar5 = Pillar(8500, constants.GROUND_Y - constants.PILLAR_HEIGHT)
+pillar5.active = True
+pillar6 = Pillar(9500, constants.GROUND_Y - constants.PILLAR_HEIGHT)
+pillar6.active = True
 
 bush1 = Bush1(
     constants.SCREEN_WIDTH + 600,
@@ -56,6 +62,12 @@ bush2 = Bush1(8000, constants.GROUND_Y - constants.BUSH1_HEIGHT)
 bush2.active = True
 bush3 = Bush1(4500, constants.GROUND_Y - constants.BUSH1_HEIGHT)
 bush3.active = True
+bush4 = Bush1(5250, constants.GROUND_Y - constants.BUSH1_HEIGHT)
+bush4.active = True
+bush5 = Bush1(6500, constants.GROUND_Y - constants.BUSH1_HEIGHT)
+bush5.active = True
+bush6 = Bush1(7500, constants.GROUND_Y - constants.BUSH1_HEIGHT)
+bush6.active = True
 
 platform_manager = PlatformManager()
 
@@ -70,6 +82,12 @@ key.active = True
 key2.active = True
 key3 = Key(5750, 250)
 key3.active = True
+key4 = Key(7000, 250)
+key4.active = True
+key5 = Key(8500, 250)
+key5.active = True
+key6 = Key(9500, 250)
+key6.active = True
 
 title_screen = TitleScreen()
 game_over = GameOver()
@@ -101,20 +119,26 @@ while running:
                     game_state = "game"
         elif game_state == "game":
             if (
-                pillar.collision_detected == True
-                or pillar2.collision_detected == True
-                or pillar3.collision_detected == True
+                pillar.collision_detected is True
+                or pillar2.collision_detected is True
+                or pillar3.collision_detected is True
+                or pillar4.collision_detected is True
+                or pillar5.collision_detected is True
+                or pillar6.collision_detected is True
             ):
                 game_state = "game_over"
             if (
-                bush1.collision_detected == True
-                or bush2.collision_detected == True
-                or bush3.collision_detected == True
+                bush1.collision_detected is True
+                or bush2.collision_detected is True
+                or bush3.collision_detected is True
+                or bush4.collision_detected is True
+                or bush5.collision_detected is True
+                or bush6.collision_detected is True
             ):
                 game_state = "game_over"
-            if fireball.collision_detected == True:
+            if fireball.collision_detected is True:
                 game_state = "game_over"
-            if log.collision_detected == True:
+            if log.collision_detected is True:
                 game_state = "game_over"
             if keys[pygame.K_a]:
                 game_state = "map"
@@ -156,6 +180,12 @@ while running:
         pillar2.collision(character)
         pillar3.update(keys, character, bush1)
         pillar3.collision(character)
+        pillar4.update(keys, character, bush1)
+        pillar4.collision(character)
+        pillar5.update(keys, character, bush1)
+        pillar5.collision(character)
+        pillar6.update(keys, character, bush1)
+        pillar6.collision(character)
 
         bush1.update(keys, character)
         bush1.collision(character)
@@ -163,15 +193,21 @@ while running:
         bush2.collision(character)
         bush3.update(keys, character)
         bush3.collision(character)
+        bush4.update(keys, character)
+        bush4.collision(character)
+        bush5.update(keys, character)
+        bush5.collision(character)
+        bush6.update(keys, character)
+        bush6.collision(character)
 
         platform_manager.update(keys, character)
         platform_manager.collision(character)
 
         fireball.update(background, character)
-        fireball.collision(character)
+        # fireball.collision(character)
 
         log.update(background, character)
-        log.collision(character)
+        # log.collision(character)
 
         key.update(keys, character)
         key.collision(character, key_score)
@@ -179,6 +215,12 @@ while running:
         key2.collision(character, key_score)
         key3.update(keys, character)
         key3.collision(character, key_score)
+        key4.update(keys, character)
+        key4.collision(character, key_score)
+        key5.update(keys, character)
+        key5.collision(character, key_score)
+        key6.update(keys, character)
+        key6.collision(character, key_score)
 
         background.update(keys, character)
 
@@ -188,16 +230,27 @@ while running:
         pillar.draw(screen)
         pillar2.draw(screen)
         pillar3.draw(screen)
+        pillar4.draw(screen)
+        pillar5.draw(screen)
+        pillar6.draw(screen)
 
         bush1.draw(screen)
         bush2.draw(screen)
         bush3.draw(screen)
+        bush4.draw(screen)
+        bush5.draw(screen)
+        bush6.draw(screen)
+
         platform_manager.draw(screen)
         fireball.draw(screen)
         log.draw(screen)
+
         key.draw(screen)
         key2.draw(screen)
         key3.draw(screen)
+        key4.draw(screen)
+        key5.draw(screen)
+        key6.draw(screen)
 
     elif game_state == "map":
         map_screen = MapScreen()
@@ -240,6 +293,12 @@ while running:
                 pillar2.active = True
                 pillar3 = Pillar(5750, constants.GROUND_Y - constants.PILLAR_HEIGHT)
                 pillar3.active = True
+                pillar4 = Pillar(7000, constants.GROUND_Y - constants.PILLAR_HEIGHT)
+                pillar4.active = True
+                pillar5 = Pillar(8500, constants.GROUND_Y - constants.PILLAR_HEIGHT)
+                pillar5.active = True
+                pillar6 = Pillar(9500, constants.GROUND_Y - constants.PILLAR_HEIGHT)
+                pillar6.active = True
 
                 bush1 = Bush1(
                     constants.SCREEN_WIDTH + 600,
@@ -250,6 +309,12 @@ while running:
                 bush2.active = True
                 bush3 = Bush1(4500, constants.GROUND_Y - constants.BUSH1_HEIGHT)
                 bush3.active = True
+                bush4 = Bush1(5250, constants.GROUND_Y - constants.BUSH1_HEIGHT)
+                bush4.active = True
+                bush5 = Bush1(6500, constants.GROUND_Y - constants.BUSH1_HEIGHT)
+                bush5.active = True
+                bush6 = Bush1(7500, constants.GROUND_Y - constants.BUSH1_HEIGHT)
+                bush6.active = True
 
                 fireball = Fireball(constants.SCREEN_WIDTH + 1000, 650)
                 fireball.active = True
@@ -265,6 +330,15 @@ while running:
                 key3 = Key(5750, 250)
                 key3.active = True
                 key3.amount = 0
+                key4 = Key(7000, 250)
+                key4.active = True
+                key4.amount = 0
+                key5 = Key(8500, 250)
+                key5.active = True
+                key5.amount = 0
+                key6 = Key(9500, 250)
+                key6.active = True
+                key6.amount = 0
                 key_score.total = 0
                 score_printed = False
                 game_state = "game"
