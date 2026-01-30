@@ -102,16 +102,28 @@ class Log:
         self.active = True
         self.collision_detected = False
 
-    def move(self):
+    def update(self, background, character):
+        # could make it so always aims for character by using character.y
+        # need fireball to move faster when background movingleft and slower when moving right
+        """move the fireball across the screen"""
         if self.active:
-            self.max_index = len(self.image) - 1
-            self.x += self.speed
+            if background.scroll == "left":
+                self.x += self.speed + background.speed
+            elif background.scroll == "right":
+                self.x += self.speed - background.speed
+            elif background.scroll is None:
+                self.x += self.speed
+            else:
+                self.x += self.speed
 
-    def update(self):
-        if self.current_index < self.max_index:
-            self.current_index += 1
-        else:
-            self.current_index = 0
+            self.max_index = len(self.image) - 1
+            if self.current_index < self.max_index:
+                self.current_index += 1
+            else:
+                self.current_index = 0
+            self.active = True
+            if self.x < -100:
+                self.x = constants.SCREEN_WIDTH + random.randint(1000, 3000)
 
     def collision(self, character):
         """check for collision with the character"""

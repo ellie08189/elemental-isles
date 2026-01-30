@@ -44,3 +44,12 @@ class Key:
     def draw(self, screen):
         if self.active:
             screen.blit(self.image, (self.x, self.y))
+
+
+class TotalKeys:
+    def __init__(self):
+        self.total = 0
+
+    def add_key(self, key):
+        self.total += key.amount
+        print(f"Total keys collected: {self.total}")

@@ -112,6 +112,7 @@ class Powers:
         self.height = constants.POWER_HEIGHT
         self.active = False
         self.collision_detected = False
+        self.collision_amount = 0
 
     def update(self):
         if self.current_index < self.max_index:
@@ -146,6 +147,7 @@ class Powers:
                 500, 2000
             )  # Move fireball off-screen
             self.collision_detected = True
+            self.collision_amount = self.collision_amount + 1
 
     def draw(self, screen):
         if self.active:

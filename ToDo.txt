@@ -3,6 +3,7 @@ To Do
 Obstacles
     make a better log and make it roll
     add more obstacles in in other places
+        bush can be added repeatedly
     add more fireballs
     work out how to have moving obstacles move in a way that makes sense
         currently move slow when player moving forwards
