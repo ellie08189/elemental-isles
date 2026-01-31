@@ -77,12 +77,12 @@ class Fireball:
                 # Hitting left side
                 character.x = self.x - character.width
                 self.x = character.x - self.width - 1  # Push fireball away
-                self.speed = 0
+                # self.speed = 0
             elif character.x >= self.x + self.width - character.speed:
                 # Hitting right side
                 character.x = self.x + self.width
                 self.x = character.x + character.width + 1  # Push fireball away
-                self.speed = 0
+                # self.speed = 0
             self.collision_detected = True
 
     def draw(self, screen):

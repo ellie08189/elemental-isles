@@ -18,6 +18,7 @@ from moving_obstacles import Fireball
 from moving_obstacles import Log
 from key import Key
 from key import TotalKeys
+from lives import Lives
 
 pygame.init()
 screen = pygame.display.set_mode((constants.SCREEN_WIDTH, constants.SCREEN_HEIGHT))
@@ -34,6 +35,7 @@ background = Background()
 character = Character(100, constants.GROUND_Y - constants.CHARACTER_HEIGHT)
 power = Powers(character.x, character.y)
 
+lives = Lives()
 pillar = Pillar(
     constants.SCREEN_WIDTH,
     constants.GROUND_Y - constants.PILLAR_HEIGHT,
@@ -66,7 +68,7 @@ bush4 = Bush1(5250, constants.GROUND_Y - constants.BUSH1_HEIGHT)
 bush4.active = True
 bush5 = Bush1(6500, constants.GROUND_Y - constants.BUSH1_HEIGHT)
 bush5.active = True
-bush6 = Bush1(7500, constants.GROUND_Y - constants.BUSH1_HEIGHT)
+bush6 = Bush1(11000, constants.GROUND_Y - constants.BUSH1_HEIGHT)
 bush6.active = True
 
 platform_manager = PlatformManager()
@@ -126,7 +128,16 @@ while running:
                 or pillar5.collision_detected is True
                 or pillar6.collision_detected is True
             ):
-                game_state = "game_over"
+                lives.lose_life()
+                if lives.lives > 0:
+                    pillar.collision_detected = False
+                    pillar2.collision_detected = False
+                    pillar3.collision_detected = False
+                    pillar4.collision_detected = False
+                    pillar5.collision_detected = False
+                    pillar6.collision_detected = False
+                else:
+                    game_state = "game_over"
             if (
                 bush1.collision_detected is True
                 or bush2.collision_detected is True
@@ -135,11 +146,28 @@ while running:
                 or bush5.collision_detected is True
                 or bush6.collision_detected is True
             ):
-                game_state = "game_over"
+                lives.lose_life()
+                if lives.lives > 0:
+                    bush1.collision_detected = False
+                    bush2.collision_detected = False
+                    bush3.collision_detected = False
+                    bush4.collision_detected = False
+                    bush5.collision_detected = False
+                    bush6.collision_detected = False
+                else:
+                    game_state = "game_over"
             if fireball.collision_detected is True:
-                game_state = "game_over"
+                lives.lose_life()
+                if lives.lives > 0:
+                    fireball.collision_detected = False
+                else:
+                    game_state = "game_over"
             if log.collision_detected is True:
-                game_state = "game_over"
+                lives.lose_life()
+                if lives.lives > 0:
+                    log.collision_detected = False
+                else:
+                    game_state = "game_over"
             if keys[pygame.K_a]:
                 game_state = "map"
             if keys[pygame.K_SPACE]:
@@ -204,10 +232,10 @@ while running:
         platform_manager.collision(character)
 
         fireball.update(background, character)
-        # fireball.collision(character)
+        fireball.collision(character)
 
         log.update(background, character)
-        # log.collision(character)
+        log.collision(character)
 
         key.update(keys, character)
         key.collision(character, key_score)
@@ -251,6 +279,8 @@ while running:
         key4.draw(screen)
         key5.draw(screen)
         key6.draw(screen)
+
+        lives.draw(screen)
 
     elif game_state == "map":
         map_screen = MapScreen()
@@ -313,7 +343,7 @@ while running:
                 bush4.active = True
                 bush5 = Bush1(6500, constants.GROUND_Y - constants.BUSH1_HEIGHT)
                 bush5.active = True
-                bush6 = Bush1(7500, constants.GROUND_Y - constants.BUSH1_HEIGHT)
+                bush6 = Bush1(11000, constants.GROUND_Y - constants.BUSH1_HEIGHT)
                 bush6.active = True
 
                 fireball = Fireball(constants.SCREEN_WIDTH + 1000, 650)
@@ -341,6 +371,8 @@ while running:
                 key6.amount = 0
                 key_score.total = 0
                 score_printed = False
+                lives = Lives()
+                lives.lives = 3
                 game_state = "game"
 
         # exits the game when no is clicked

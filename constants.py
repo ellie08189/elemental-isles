@@ -146,4 +146,5 @@ MAIN_THEME_MUSIC = "assets/sounds/maingamemusic.wav"
 MAX_LIVES = 3
 HEART_IMAGE = "assets/heart.png"
 HEART_WIDTH = 40
-HEART_HEIGHT = 40
+HEART_HEIGHT = 35
+LOST_LIFE_SOUND = "assets/sounds/lostlife.wav"
