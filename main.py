@@ -42,17 +42,17 @@ pillar = Pillar(
 )
 pillar.active = True  # Ensure the pillar is active at the start
 pillar2 = Pillar(
-    constants.SCREEN_WIDTH + 2500,
+    4500,
     constants.GROUND_Y - constants.PILLAR_HEIGHT,
 )
 pillar2.active = True
-pillar3 = Pillar(5750, constants.GROUND_Y - constants.PILLAR_HEIGHT)
+pillar3 = Pillar(6000, constants.GROUND_Y - constants.PILLAR_HEIGHT)
 pillar3.active = True
-pillar4 = Pillar(7500, constants.GROUND_Y - constants.PILLAR_HEIGHT)
+pillar4 = Pillar(8500, constants.GROUND_Y - constants.PILLAR_HEIGHT)
 pillar4.active = True
-pillar5 = Pillar(9000, constants.GROUND_Y - constants.PILLAR_HEIGHT)
+pillar5 = Pillar(11500, constants.GROUND_Y - constants.PILLAR_HEIGHT)
 pillar5.active = True
-pillar6 = Pillar(10500, constants.GROUND_Y - constants.PILLAR_HEIGHT)
+pillar6 = Pillar(14000, constants.GROUND_Y - constants.PILLAR_HEIGHT)
 pillar6.active = True
 
 bush1 = Bush1(
@@ -60,15 +60,15 @@ bush1 = Bush1(
     constants.GROUND_Y - constants.BUSH1_HEIGHT,
 )
 bush1.active = True
-bush2 = Bush1(8000, constants.GROUND_Y - constants.BUSH1_HEIGHT)
+bush2 = Bush1(5250, constants.GROUND_Y - constants.BUSH1_HEIGHT)
 bush2.active = True
-bush3 = Bush1(4500, constants.GROUND_Y - constants.BUSH1_HEIGHT)
+bush3 = Bush1(9750, constants.GROUND_Y - constants.BUSH1_HEIGHT)
 bush3.active = True
-bush4 = Bush1(5250, constants.GROUND_Y - constants.BUSH1_HEIGHT)
+bush4 = Bush1(10750, constants.GROUND_Y - constants.BUSH1_HEIGHT)
 bush4.active = True
-bush5 = Bush1(6500, constants.GROUND_Y - constants.BUSH1_HEIGHT)
+bush5 = Bush1(13000, constants.GROUND_Y - constants.BUSH1_HEIGHT)
 bush5.active = True
-bush6 = Bush1(11000, constants.GROUND_Y - constants.BUSH1_HEIGHT)
+bush6 = Bush1(15000, constants.GROUND_Y - constants.BUSH1_HEIGHT)
 bush6.active = True
 
 platform_manager = PlatformManager()
@@ -79,16 +79,16 @@ log = Log(3250, constants.GROUND_Y - constants.LOG_HEIGHT)
 log.active = True
 
 key = Key(constants.SCREEN_WIDTH + 150, 250)
-key2 = Key(constants.SCREEN_WIDTH + 2500, 250)
+key2 = Key(4500, 250)
 key.active = True
 key2.active = True
-key3 = Key(5750, 250)
+key3 = Key(6000, 250)
 key3.active = True
-key4 = Key(7500, 250)
+key4 = Key(8500, 250)
 key4.active = True
-key5 = Key(9000, 250)
+key5 = Key(11500, 250)
 key5.active = True
-key6 = Key(10500, 250)
+key6 = Key(14000, 250)
 key6.active = True
 
 title_screen = TitleScreen()
@@ -317,17 +317,17 @@ while running:
                 )
                 pillar.active = True  # Ensure the pillar is active
                 pillar2 = Pillar(
-                    constants.SCREEN_WIDTH + 2500,
+                    4500,
                     constants.GROUND_Y - constants.PILLAR_HEIGHT,
                 )
                 pillar2.active = True
-                pillar3 = Pillar(5750, constants.GROUND_Y - constants.PILLAR_HEIGHT)
+                pillar3 = Pillar(6000, constants.GROUND_Y - constants.PILLAR_HEIGHT)
                 pillar3.active = True
-                pillar4 = Pillar(7500, constants.GROUND_Y - constants.PILLAR_HEIGHT)
+                pillar4 = Pillar(8500, constants.GROUND_Y - constants.PILLAR_HEIGHT)
                 pillar4.active = True
-                pillar5 = Pillar(9000, constants.GROUND_Y - constants.PILLAR_HEIGHT)
+                pillar5 = Pillar(11500, constants.GROUND_Y - constants.PILLAR_HEIGHT)
                 pillar5.active = True
-                pillar6 = Pillar(10500, constants.GROUND_Y - constants.PILLAR_HEIGHT)
+                pillar6 = Pillar(14000, constants.GROUND_Y - constants.PILLAR_HEIGHT)
                 pillar6.active = True
 
                 bush1 = Bush1(
@@ -335,15 +335,15 @@ while running:
                     constants.GROUND_Y - constants.BUSH1_HEIGHT,
                 )
                 bush1.active = True
-                bush2 = Bush1(8000, constants.GROUND_Y - constants.BUSH1_HEIGHT)
+                bush2 = Bush1(5250, constants.GROUND_Y - constants.BUSH1_HEIGHT)
                 bush2.active = True
-                bush3 = Bush1(4500, constants.GROUND_Y - constants.BUSH1_HEIGHT)
+                bush3 = Bush1(9750, constants.GROUND_Y - constants.BUSH1_HEIGHT)
                 bush3.active = True
-                bush4 = Bush1(5250, constants.GROUND_Y - constants.BUSH1_HEIGHT)
+                bush4 = Bush1(10750, constants.GROUND_Y - constants.BUSH1_HEIGHT)
                 bush4.active = True
-                bush5 = Bush1(6500, constants.GROUND_Y - constants.BUSH1_HEIGHT)
+                bush5 = Bush1(13000, constants.GROUND_Y - constants.BUSH1_HEIGHT)
                 bush5.active = True
-                bush6 = Bush1(11000, constants.GROUND_Y - constants.BUSH1_HEIGHT)
+                bush6 = Bush1(15000, constants.GROUND_Y - constants.BUSH1_HEIGHT)
                 bush6.active = True
 
                 fireball = Fireball(constants.SCREEN_WIDTH + 1000, 650)
@@ -354,19 +354,19 @@ while running:
                 key = Key(constants.SCREEN_WIDTH + 150, 250)
                 key.active = True
                 key.amount = 0
-                key2 = Key(constants.SCREEN_WIDTH + 2500, 250)
+                key2 = Key(4500, 250)
                 key2.active = True
                 key2.amount = 0
-                key3 = Key(5750, 250)
+                key3 = Key(6000, 250)
                 key3.active = True
                 key3.amount = 0
-                key4 = Key(7500, 250)
+                key4 = Key(8500, 250)
                 key4.active = True
                 key4.amount = 0
-                key5 = Key(9000, 250)
+                key5 = Key(11500, 250)
                 key5.active = True
                 key5.amount = 0
-                key6 = Key(10500, 250)
+                key6 = Key(14000, 250)
                 key6.active = True
                 key6.amount = 0
                 key_score.total = 0

@@ -12,7 +12,7 @@ class Lives:
             self.heart, (constants.HEART_WIDTH, constants.HEART_HEIGHT)
         )
         self.lost_life_sound = pygame.mixer.Sound(constants.LOST_LIFE_SOUND)
-        self.lost_life_sound.set_volume(0.5)
+        self.lost_life_sound.set_volume(0.1)
 
     def lose_life(self):
         self.lives -= 1
