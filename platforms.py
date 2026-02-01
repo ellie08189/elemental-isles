@@ -20,10 +20,8 @@ class Platform:
         self.speed = constants.PILLAR_SPEED
         self.collision_detected = False
 
-    def __repr__(self):
-        return f"Platform(x={self.x}, y={self.y}, width={self.width}, height={self.height}, active={self.active})"
-
     def update(self, keys, character):
+        """updates platform position"""
         if keys[pygame.K_RIGHT] and character.x == constants.SCREEN_WIDTH // 2:
             if self.active:
                 self.x += self.speed
@@ -32,6 +30,7 @@ class Platform:
                 self.x -= self.speed
 
     def collision(self, character):
+        """detects collision with character"""
         char_rect = pygame.Rect(
             character.x, character.y, character.width, character.height
         )
@@ -65,6 +64,7 @@ class Platform:
                 self.collision_detected = True
 
     def draw(self, screen):
+        """draws platform on the screen"""
         screen.blit(self.image, (self.x, self.y))
 
 
@@ -80,6 +80,7 @@ class PlatformManager:
         self.furthest_platform_x = initial_platform.x + initial_platform.width
 
     def spawn_platform(self):
+        """spawns new platforms at random intervals"""
         # Only spawn if the furthest platform is within the screen
         if self.furthest_platform_x < constants.SCREEN_WIDTH + 400:
             num = random.randint(3, 6)
@@ -93,6 +94,7 @@ class PlatformManager:
             self.furthest_platform_x = new_x + width
 
     def update(self, keys, character):
+        """updates all platforms"""
         for platform in self.platforms:
             platform.update(keys, character)
         # Do not remove platforms that have moved off screen, so the player can walk back
@@ -104,9 +106,11 @@ class PlatformManager:
         self.spawn_platform()
 
     def collision(self, character):
+        """checks for collisions between character and platforms"""
         for platform in self.platforms:
             platform.collision(character)
 
     def draw(self, screen):
+        """draws all platforms on the screen"""
         for platform in self.platforms:
             platform.draw(screen)

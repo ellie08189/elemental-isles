@@ -1,8 +1,12 @@
+"""background of the game"""
+
 import pygame
 import constants
 
 
 class Background:
+    """manages background"""
+
     def __init__(self):
         original_image = pygame.image.load(constants.BACKGROUND_IMAGE)
         # Scale the image to match the screen height
@@ -17,7 +21,7 @@ class Background:
         self.scroll = None
 
     def update(self, keys, character):
-
+        """updates background position based on character movement"""
         if keys[pygame.K_LEFT] and character.x == constants.SCREEN_WIDTH // 2:
             self.scroll_left()
 
@@ -37,26 +41,30 @@ class Background:
         elif self.x2 > constants.SCREEN_WIDTH:
             self.x2 = self.x1 - self.image.get_width()
 
-    def scroll_left(self):  # makes background move right
+    def scroll_left(self):
+        """makes background move right"""
         self.x1 += self.speed
         self.x2 += self.speed
         self.scroll = "left"
 
-    def scroll_right(self):  # makes background move left
+    def scroll_right(self):
+        """makes background move left"""
         self.x1 -= self.speed
         self.x2 -= self.speed
         self.scroll = "right"
 
     def scroll_stop(self):
+        """stops background movement"""
         self.x1 = self.x1
         self.x2 = self.x2
         self.scroll = None
 
     def sound_play(self):
-        # add sound, currently playing too slow
+        """plays background music"""
         self.sound.set_volume(0.5)
         self.sound.play(loops=-1)
 
     def draw(self, screen):
+        """draws background to screen"""
         screen.blit(self.image, (self.x1, self.y))
         screen.blit(self.image, (self.x2, self.y))

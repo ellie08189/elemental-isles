@@ -1,4 +1,4 @@
-"""pillar obstacle"""
+"""stationary obstacles"""
 
 import random
 import pygame
@@ -6,6 +6,8 @@ import constants
 
 
 class Pillar:
+    """manages pillar obstacle"""
+
     def __init__(self, x, y):
         original_image = pygame.image.load(constants.PILLAR_IMAGE)
         self.image = pygame.transform.scale(
@@ -19,7 +21,8 @@ class Pillar:
         self.speed = constants.PILLAR_SPEED
         self.collision_detected = False
 
-    def update(self, keys, character, bush1):
+    def update(self, keys, character):
+        """updates pillar position based on character movement"""
         if keys[pygame.K_RIGHT] and character.x == constants.SCREEN_WIDTH // 2:
             if self.active:
                 self.x += self.speed
@@ -28,6 +31,7 @@ class Pillar:
                 self.x -= self.speed
 
     def collision(self, character):
+        """checks for collision between pillar and character"""
         # Get character and pillar rectangles
         char_rect = pygame.Rect(
             character.x, character.y, character.width, character.height
@@ -60,10 +64,13 @@ class Pillar:
                 self.collision_detected = True
 
     def draw(self, screen):
+        """draws pillar on screen"""
         screen.blit(self.image, (self.x, self.y))
 
 
 class Bush1:
+    """manages bush obstacle"""
+
     def __init__(self, x, y):
         image_path = random.choice(constants.BUSH_IMAGES)
         original_image = pygame.image.load(image_path)
@@ -79,6 +86,7 @@ class Bush1:
         self.collision_detected = False
 
     def update(self, keys, character):
+        """updates bush position based on character movement"""
         if keys[pygame.K_RIGHT] and character.x == constants.SCREEN_WIDTH // 2:
             if self.active:
                 self.x += self.speed
@@ -90,6 +98,7 @@ class Bush1:
                 self.x -= self.speed
 
     def collision(self, character):
+        """checks for collision between bush and character"""
         # Get character and obstacle rectangles
         char_rect = pygame.Rect(
             character.x, character.y, character.width, character.height
@@ -122,4 +131,5 @@ class Bush1:
             self.collision_detected = True
 
     def draw(self, screen):
+        """draws bush on screen"""
         screen.blit(self.image, (self.x, self.y))

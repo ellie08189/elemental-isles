@@ -1,8 +1,12 @@
+"""all screen classes for different game states"""
+
 import pygame
 import constants
 
 
 class TitleScreen:
+    """manages title screen"""
+
     def __init__(self):
         original_image = pygame.image.load(constants.TITLE_IMAGE)
         self.image = pygame.transform.scale(
@@ -10,6 +14,7 @@ class TitleScreen:
         )
 
     def draw(self, screen):
+        """draws title screen image"""
         screen.blit(
             self.image,
             (
@@ -18,17 +23,16 @@ class TitleScreen:
             ),
         )
 
-    def mouse_click(self):
-        # Placeholder for handling mouse click events on the title screen
-        pass
-
 
 class PlayButton:
+    """manages play button"""
+
     def __init__(self):
         original_image = pygame.image.load(constants.PLAY_BUTTON)
         self.image = pygame.transform.scale(original_image, (300, 300))
 
     def draw(self, screen):
+        """draws play button on the screen"""
         screen.blit(
             self.image,
             (
@@ -39,6 +43,8 @@ class PlayButton:
 
 
 class GameOver:
+    """manages game over screen"""
+
     def __init__(self):
         original_image = pygame.image.load(constants.GAME_OVER_IMAGE)
         self.image = pygame.transform.scale(
@@ -46,6 +52,7 @@ class GameOver:
         )
 
     def draw(self, screen):
+        """draws game over screen image"""
         screen.blit(
             self.image,
             (
@@ -56,6 +63,8 @@ class GameOver:
 
 
 class MapScreen:
+    """manages map screen"""
+
     def __init__(self):
         original_image = pygame.image.load(constants.MAP_IMAGE)
         self.image = pygame.transform.scale(
@@ -63,6 +72,7 @@ class MapScreen:
         )
 
     def draw(self, screen):
+        """draws map screen image"""
         screen.blit(
             self.image,
             (
@@ -73,6 +83,8 @@ class MapScreen:
 
 
 class PauseScreen:
+    """manages pause screen"""
+
     def __init__(self):
         original_image = pygame.image.load(constants.PAUSE_IMAGE)
         self.image = pygame.transform.scale(
@@ -80,6 +92,7 @@ class PauseScreen:
         )
 
     def draw(self, screen):
+        """draws pause screen image"""
         screen.blit(
             self.image,
             (

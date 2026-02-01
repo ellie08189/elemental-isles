@@ -6,6 +6,8 @@ import constants
 
 
 class Character:
+    """character movement and sprite"""
+
     def __init__(self, x, y):
         self.x = x
         self.y = y
@@ -64,7 +66,7 @@ class Character:
         else:
             self.jump_key_pressed = False
 
-        if keys[pygame.K_DOWN] and self.on_ground == False:
+        if keys[pygame.K_DOWN] and self.on_ground is False:
             self.vy += constants.GRAVITY
             self.y += self.vy
             self.max_index = len(self.sprites) - 1
@@ -78,6 +80,7 @@ class Character:
             # make the sprite stop jumping if screen top is reached
 
     def apply_gravity(self):
+        """applies gravity when jumping"""
         self.vy += constants.GRAVITY
         self.y += self.vy
 
@@ -93,6 +96,7 @@ class Character:
             self.jump = 2
 
     def update(self):
+        """updates character"""
         if self.current_index < self.max_index:
             self.current_index += 1
         else:
@@ -107,6 +111,7 @@ class Character:
             self.immune = False
 
     def draw(self, screen):
+        """draws character to screen"""
         # Flash during invincibility - only draw every 5 frames
         if self.invincible_timer > 0:
             if (self.flash_counter // 5) % 2 == 0:  # Flash on/off
@@ -121,7 +126,8 @@ class Character:
 
 
 class Powers:
-    # use water arrow
+    """use water powers"""
+
     def __init__(self, x, y):
         self.sprites = constants.POWER
         self.x = x
@@ -136,12 +142,14 @@ class Powers:
         self.collision_amount = 0
 
     def update(self):
+        """updates power sprite animation"""
         if self.current_index < self.max_index:
             self.current_index += 1
         else:
             self.current_index = 0
 
     def power(self, character, keys):
+        """activates power when s is pressed"""
         if keys[pygame.K_s]:  # Activate and position the power
             if not self.active:  # Reset position when first activating
                 self.x = character.x
@@ -154,6 +162,7 @@ class Powers:
                 self.active = False  # Deactivate if it goes off screen
 
     def collision(self, fireball):
+        """checks collision between power and fireball"""
         if not self.active:
             return
 
@@ -171,5 +180,6 @@ class Powers:
             self.collision_amount = self.collision_amount + 1
 
     def draw(self, screen):
+        """draws power to screen"""
         if self.active:
             screen.blit(self.sprites[self.current_index], (self.x, self.y))

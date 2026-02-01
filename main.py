@@ -12,8 +12,8 @@ from screens import PlayButton
 from screens import GameOver
 from screens import MapScreen
 from stationary_obstacles import Pillar
-from platforms import PlatformManager
 from stationary_obstacles import Bush1
+from platforms import PlatformManager
 from moving_obstacles import Fireball
 from moving_obstacles import Log
 from key import Key
@@ -98,28 +98,28 @@ pause_screen = PauseScreen()
 
 key_score = TotalKeys()
 
-game_state = "title"
-score_printed = False
+GAME_STATE = "title"
+SCORE_PRINTED = False
 
 clock = pygame.time.Clock()
-running = True
-while running:
+RUNNING = True
+while RUNNING:
     for event in pygame.event.get():
         if (
             event.type == pygame.QUIT
             or event.type == pygame.KEYDOWN
             and event.key == pygame.K_ESCAPE
         ):
-            running = False
+            RUNNING = False
             break  # Exit the event loop immediately to prevent further processing
 
         # switch between game states
-        if game_state == "title":  # play button clicked changes screen to game screen
+        if GAME_STATE == "title":  # play button clicked changes screen to game screen
             mouse = pygame.mouse.get_pos()
             if 350 <= mouse[0] <= 650 and 250 <= mouse[1] <= 550:
                 if event.type == pygame.MOUSEBUTTONDOWN:
-                    game_state = "game"
-        elif game_state == "game":
+                    GAME_STATE = "game"
+        elif GAME_STATE == "game":
             if (
                 pillar.collision_detected is True
                 or pillar2.collision_detected is True
@@ -137,7 +137,7 @@ while running:
                     pillar5.collision_detected = False
                     pillar6.collision_detected = False
                 else:
-                    game_state = "game_over"
+                    GAME_STATE = "game_over"
             if (
                 bush1.collision_detected is True
                 or bush2.collision_detected is True
@@ -155,43 +155,43 @@ while running:
                     bush5.collision_detected = False
                     bush6.collision_detected = False
                 else:
-                    game_state = "game_over"
+                    GAME_STATE = "game_over"
             if fireball.collision_detected is True:
                 lives.lose_life(character)
                 if lives.lives > 0:
                     fireball.collision_detected = False
                 else:
-                    game_state = "game_over"
+                    GAME_STATE = "game_over"
             if log.collision_detected is True:
                 lives.lose_life(character)
                 if lives.lives > 0:
                     log.collision_detected = False
                 else:
-                    game_state = "game_over"
+                    GAME_STATE = "game_over"
             if keys[pygame.K_a]:
-                game_state = "map"
+                GAME_STATE = "map"
             if keys[pygame.K_SPACE]:
-                game_state = "pause"
-        elif game_state == "game_over":
+                GAME_STATE = "pause"
+        elif GAME_STATE == "game_over":
             game_over.draw(screen)
             mouse = pygame.mouse.get_pos()
-        elif game_state == "pause":
+        elif GAME_STATE == "pause":
             mouse = pygame.mouse.get_pos()
             if 350 <= mouse[0] <= 650 and 250 <= mouse[1] <= 550:
                 if event.type == pygame.MOUSEBUTTONUP or keys[pygame.K_SPACE]:
-                    game_state = "game"
+                    GAME_STATE = "game"
             else:
-                game_state = "pause"
-        elif game_state == "map":
+                GAME_STATE = "pause"
+        elif GAME_STATE == "map":
             if keys[pygame.K_a]:
-                game_state = "game"
+                GAME_STATE = "game"
         # error that any key pressed goes from map screen to game screen
 
     # calls appropriate methods based on game state
-    if game_state == "title":
+    if GAME_STATE == "title":
         title_screen.draw(screen)
         play.draw(screen)
-    elif game_state == "game":
+    elif GAME_STATE == "game":
 
         keys = pygame.key.get_pressed()
         character.handle_input(keys)
@@ -202,17 +202,17 @@ while running:
         power.update()
         power.collision(fireball)
 
-        pillar.update(keys, character, bush1)
+        pillar.update(keys, character)
         pillar.collision(character)
-        pillar2.update(keys, character, bush1)
+        pillar2.update(keys, character)
         pillar2.collision(character)
-        pillar3.update(keys, character, bush1)
+        pillar3.update(keys, character)
         pillar3.collision(character)
-        pillar4.update(keys, character, bush1)
+        pillar4.update(keys, character)
         pillar4.collision(character)
-        pillar5.update(keys, character, bush1)
+        pillar5.update(keys, character)
         pillar5.collision(character)
-        pillar6.update(keys, character, bush1)
+        pillar6.update(keys, character)
         pillar6.collision(character)
 
         bush1.update(keys, character)
@@ -234,7 +234,7 @@ while running:
         fireball.update(background, character)
         fireball.collision(character)
 
-        log.update(background, character)
+        log.update(background)
         log.collision(character)
 
         key.update(keys, character)
@@ -282,24 +282,24 @@ while running:
 
         lives.draw(screen)
 
-    elif game_state == "map":
+    elif GAME_STATE == "map":
         map_screen = MapScreen()
         map_screen.draw(screen)
 
-    elif game_state == "pause":
+    elif GAME_STATE == "pause":
         pause_screen = PauseScreen()
         pause_screen.draw(screen)
 
-    elif game_state == "game_over":
+    elif GAME_STATE == "game_over":
         mouse = pygame.mouse.get_pos()
-        if not score_printed:
+        if not SCORE_PRINTED:
             print("Fireballs destroyed " + str(power.collision_amount))
             print("Total keys collected: " + str(key_score.total))
             print(
                 "Score = "
                 + str(((key_score.total) * 100) + (power.collision_amount * 50))
             )
-            score_printed = True
+            SCORE_PRINTED = True
         game_over.draw(screen)
 
         # Check if the mouse is within the specified range
@@ -370,15 +370,15 @@ while running:
                 key6.active = True
                 key6.amount = 0
                 key_score.total = 0
-                score_printed = False
+                SCORE_PRINTED = False
                 lives = Lives()
                 lives.lives = 3
-                game_state = "game"
+                GAME_STATE = "game"
 
         # exits the game when no is clicked
         if 600 <= mouse[0] <= 680 and 460 <= mouse[1] <= 505:
             if event.type == pygame.MOUSEBUTTONUP:
-                running = False
+                RUNNING = False
                 break
 
     clock.tick(60)

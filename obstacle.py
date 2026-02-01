@@ -1,3 +1,5 @@
+"""extra code"""
+
 import pygame
 import constants
 import math
@@ -42,3 +44,6 @@ class Obstacle:
 
     def draw(self, screen):
         pygame.draw.circle(screen, self.color, (self.x, self.y), self.radius)
+
+    def __repr__(self):
+        return f"Platform(x={self.x}, y={self.y}, width={self.width}, height={self.height}, active={self.active})"

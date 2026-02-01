@@ -82,9 +82,7 @@ class Log:
         self.active = True
         self.collision_detected = False
 
-    def update(self, background, character):
-        # could make it so always aims for character by using character.y
-        # need fireball to move faster when background movingleft and slower when moving right
+    def update(self, background):
         """move the fireball across the screen"""
         if self.active:
             if background.scroll == "left":
