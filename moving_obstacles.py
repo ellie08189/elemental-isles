@@ -59,30 +59,10 @@ class Fireball:
             character.x, character.y, character.width, character.height
         )
         fireball_rect = pygame.Rect(self.x, self.y, self.width, self.height)
+        if character.immune is True:
+            return
         if char_rect.colliderect(fireball_rect):
-            # Determine collision side
-            if (
-                character.vy > 0
-                and character.y + character.height - character.vy <= self.y
-            ):
-                # Landing on top
-                character.y = self.y - character.height
-                character.vy = 0
-
-            elif character.vy < 0 and character.y >= self.y + self.height:
-                # Hitting bottom
-                character.y = self.y + self.height
-                character.vy = 0
-            elif character.x + character.width - character.speed <= self.x:
-                # Hitting left side
-                character.x = self.x - character.width
-                self.x = character.x - self.width - 1  # Push fireball away
-                # self.speed = 0
-            elif character.x >= self.x + self.width - character.speed:
-                # Hitting right side
-                character.x = self.x + self.width
-                self.x = character.x + character.width + 1  # Push fireball away
-                # self.speed = 0
+            # Fireball passes through character
             self.collision_detected = True
 
     def draw(self, screen):
@@ -132,6 +112,8 @@ class Log:
             character.x, character.y, character.width, character.height
         )
         log_rect = pygame.Rect(self.x, self.y, self.width, self.height)
+        if character.immune is True:
+            return
         if char_rect.colliderect(log_rect):
             # Determine collision side
             if (

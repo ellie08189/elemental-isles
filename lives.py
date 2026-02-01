@@ -14,9 +14,11 @@ class Lives:
         self.lost_life_sound = pygame.mixer.Sound(constants.LOST_LIFE_SOUND)
         self.lost_life_sound.set_volume(0.1)
 
-    def lose_life(self):
+    def lose_life(self, character=None):
         self.lives -= 1
         self.lost_life_sound.play()
+        if character:
+            character.start_invincibility(120)  # 2 seconds of invincibility
 
     def draw(self, screen):
         for i in range(self.lives):

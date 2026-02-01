@@ -26,8 +26,6 @@ class Pillar:
         if keys[pygame.K_LEFT] and character.x == constants.SCREEN_WIDTH // 2:
             if self.active:
                 self.x -= self.speed
-        if bush1.active == False:
-            self.active = False
 
     def collision(self, character):
         # Get character and pillar rectangles
@@ -35,7 +33,8 @@ class Pillar:
             character.x, character.y, character.width, character.height
         )
         pillar_rect = pygame.Rect(self.x, self.y, self.width, self.height)
-
+        if character.immune is True:
+            return
         if char_rect.colliderect(pillar_rect):
             # Determine collision side
             if (
@@ -54,12 +53,10 @@ class Pillar:
             elif character.x + character.width - character.speed <= self.x:
                 # Hitting left side
                 character.x = self.x - character.width
-                self.active = False
                 self.collision_detected = True
             elif character.x >= self.x + self.width - character.speed:
                 # Hitting right side
                 character.x = self.x + self.width
-                self.active = False
                 self.collision_detected = True
 
     def draw(self, screen):
@@ -98,6 +95,8 @@ class Bush1:
             character.x, character.y, character.width, character.height
         )
         bush1_rect = pygame.Rect(self.x, self.y, self.width, self.height)
+        if character.immune is True:
+            return
         if char_rect.colliderect(bush1_rect):
             # Determine collision side
             if (
@@ -117,11 +116,9 @@ class Bush1:
             elif character.x + character.width - character.speed <= self.x:
                 # Hitting left side
                 character.x = self.x - character.width
-                self.active = False
             elif character.x >= self.x + self.width - character.speed:
                 # Hitting right side
                 character.x = self.x + self.width
-                self.active = False
             self.collision_detected = True
 
     def draw(self, screen):

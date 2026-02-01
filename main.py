@@ -128,7 +128,7 @@ while running:
                 or pillar5.collision_detected is True
                 or pillar6.collision_detected is True
             ):
-                lives.lose_life()
+                lives.lose_life(character)
                 if lives.lives > 0:
                     pillar.collision_detected = False
                     pillar2.collision_detected = False
@@ -146,7 +146,7 @@ while running:
                 or bush5.collision_detected is True
                 or bush6.collision_detected is True
             ):
-                lives.lose_life()
+                lives.lose_life(character)
                 if lives.lives > 0:
                     bush1.collision_detected = False
                     bush2.collision_detected = False
@@ -157,13 +157,13 @@ while running:
                 else:
                     game_state = "game_over"
             if fireball.collision_detected is True:
-                lives.lose_life()
+                lives.lose_life(character)
                 if lives.lives > 0:
                     fireball.collision_detected = False
                 else:
                     game_state = "game_over"
             if log.collision_detected is True:
-                lives.lose_life()
+                lives.lose_life(character)
                 if lives.lives > 0:
                     log.collision_detected = False
                 else:

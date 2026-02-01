@@ -24,6 +24,9 @@ class Character:
         self.height = constants.CHARACTER_HEIGHT
         self.jump = 2
         self.jump_key_pressed = False
+        self.invincible_timer = 0  # Frames of invincibility remaining
+        self.flash_counter = 0  # Counter for flash effect
+        self.immune = False
 
     def handle_input(self, keys):
         """Switch between walking, jumping, and idle sprites based on key press."""
@@ -95,8 +98,26 @@ class Character:
         else:
             self.current_index = 0
 
+        # Update invincibility timer
+        if self.invincible_timer > 0:
+            self.invincible_timer -= 1
+            self.flash_counter += 1
+            self.immune = True
+        else:
+            self.immune = False
+
     def draw(self, screen):
-        screen.blit(self.sprites[self.current_index], (self.x, self.y))
+        # Flash during invincibility - only draw every 5 frames
+        if self.invincible_timer > 0:
+            if (self.flash_counter // 5) % 2 == 0:  # Flash on/off
+                screen.blit(self.sprites[self.current_index], (self.x, self.y))
+        else:
+            screen.blit(self.sprites[self.current_index], (self.x, self.y))
+
+    def start_invincibility(self, duration=120):
+        """Start invincibility period (default 2 seconds at 60 fps)"""
+        self.invincible_timer = duration
+        self.flash_counter = 0
 
 
 class Powers:
