@@ -1,21 +1,12 @@
 To Do
 
 Obstacles
-    make a better log and make it roll
-    add more obstacles in in other places
-        bush can be added repeatedly
-    add more fireballs
-    work out how to have moving obstacles move in a way that makes sense
-        currently move slow when player moving forwards
+    make a better log
 
 Collisions
-    when players powers collide with fire, fire is destroyed
     log collide with player
-    fix fireball collision
-
-Player
-    player crouch to avoid Collisions
-    player double jump
+    animation for when powers collide?
+    sound for collision
 
 Music
     music for when player uses powers
@@ -28,11 +19,6 @@ Powers
 Ending
     create an end point - add a final door that when touched goes elsewhere
         door either victory or minigame
-
-Gameplay
-    add another key in
-    add lives - not fussed about checkpoints
-    for lives - make player flash to clarify life lost
 
 Extra
     let player have a certain amount of shoots per second then recharge

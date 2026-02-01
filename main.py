@@ -20,7 +20,7 @@ from key import Key
 from key import TotalKeys
 from lives import Lives
 
-pygame.init()
+pygame.init()  # pylint: disable=no-member
 screen = pygame.display.set_mode((constants.SCREEN_WIDTH, constants.SCREEN_HEIGHT))
 pygame.display.set_caption("Legends of The Elemental Isles")
 
@@ -100,15 +100,17 @@ key_score = TotalKeys()
 
 GAME_STATE = "title"
 SCORE_PRINTED = False
+keys = pygame.key.get_pressed()
+EVENT = None
 
 clock = pygame.time.Clock()
 RUNNING = True
 while RUNNING:
-    for event in pygame.event.get():
+    for EVENT in pygame.event.get():
         if (
-            event.type == pygame.QUIT
-            or event.type == pygame.KEYDOWN
-            and event.key == pygame.K_ESCAPE
+            EVENT.type == pygame.QUIT  # pylint: disable=no-member
+            or EVENT.type == pygame.KEYDOWN  # pylint: disable=no-member
+            and EVENT.key == pygame.K_ESCAPE  # pylint: disable=no-member
         ):
             RUNNING = False
             break  # Exit the event loop immediately to prevent further processing
@@ -117,7 +119,7 @@ while RUNNING:
         if GAME_STATE == "title":  # play button clicked changes screen to game screen
             mouse = pygame.mouse.get_pos()
             if 350 <= mouse[0] <= 650 and 250 <= mouse[1] <= 550:
-                if event.type == pygame.MOUSEBUTTONDOWN:
+                if EVENT.type == pygame.MOUSEBUTTONDOWN:  # pylint: disable=no-member
                     GAME_STATE = "game"
         elif GAME_STATE == "game":
             if (
@@ -178,7 +180,7 @@ while RUNNING:
         elif GAME_STATE == "pause":
             mouse = pygame.mouse.get_pos()
             if 350 <= mouse[0] <= 650 and 250 <= mouse[1] <= 550:
-                if event.type == pygame.MOUSEBUTTONUP or keys[pygame.K_SPACE]:
+                if EVENT.type == pygame.MOUSEBUTTONUP or keys[pygame.K_SPACE]:
                     GAME_STATE = "game"
             else:
                 GAME_STATE = "pause"
@@ -304,7 +306,7 @@ while RUNNING:
 
         # Check if the mouse is within the specified range
         if 225 <= mouse[0] <= 335 and 460 <= mouse[1] <= 505:
-            if event.type == pygame.MOUSEBUTTONUP:
+            if EVENT.type == pygame.MOUSEBUTTONUP:  # pylint: disable=no-member
                 # Reset player and pillar to restart the game
                 character = Character(
                     100, constants.GROUND_Y - constants.CHARACTER_HEIGHT
@@ -377,11 +379,11 @@ while RUNNING:
 
         # exits the game when no is clicked
         if 600 <= mouse[0] <= 680 and 460 <= mouse[1] <= 505:
-            if event.type == pygame.MOUSEBUTTONUP:
+            if EVENT.type == pygame.MOUSEBUTTONUP:  # pylint: disable=no-member
                 RUNNING = False
                 break
 
     clock.tick(60)
     pygame.display.update()
 
-pygame.quit()
+pygame.quit()  # pylint: disable=no-member
