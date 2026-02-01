@@ -32,7 +32,7 @@ class Character:
 
     def handle_input(self, keys):
         """Switch between walking, jumping, and idle sprites based on key press."""
-        if keys[pygame.K_RIGHT]:
+        if keys[pygame.K_RIGHT]:  # pylint: disable=no-member
             self.sprites = self.walking_sprites
             self.max_index = len(self.sprites) - 1
             if self.x != constants.SCREEN_WIDTH // 2:
@@ -40,7 +40,7 @@ class Character:
             if self.x > constants.SCREEN_WIDTH - self.width:
                 self.x = constants.SCREEN_WIDTH - self.width
 
-        elif keys[pygame.K_LEFT]:
+        elif keys[pygame.K_LEFT]:  # pylint: disable=no-member
             self.sprites = self.walkback_sprites
             self.max_index = len(self.sprites) - 1
             if self.x != constants.SCREEN_WIDTH // 2:
@@ -53,7 +53,7 @@ class Character:
             self.max_index = 0
             self.current_index = 0
 
-        if keys[pygame.K_UP]:
+        if keys[pygame.K_UP]:  # pylint: disable=no-member
             if not self.jump_key_pressed and self.jump > 0:
                 self.vy = constants.JUMP_STRENGTH
                 self.on_ground = False
@@ -66,13 +66,13 @@ class Character:
         else:
             self.jump_key_pressed = False
 
-        if keys[pygame.K_DOWN] and self.on_ground is False:
+        if keys[pygame.K_DOWN] and self.on_ground is False:  # pylint: disable=no-member
             self.vy += constants.GRAVITY
             self.y += self.vy
             self.max_index = len(self.sprites) - 1
             self.current_index = 0
 
-        if keys[pygame.K_s]:
+        if keys[pygame.K_s]:  # pylint: disable=no-member
             self.sprites = self.power_sprites
             self.max_index = len(self.sprites) - 1
             self.current_index = 0
@@ -150,7 +150,8 @@ class Powers:
 
     def power(self, character, keys):
         """activates power when s is pressed"""
-        if keys[pygame.K_s]:  # Activate and position the power
+        if keys[pygame.K_s]:  # pylint: disable=no-member
+            # Activate and position the power
             if not self.active:  # Reset position when first activating
                 self.x = character.x
                 self.y = character.y + 20

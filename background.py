@@ -22,13 +22,21 @@ class Background:
 
     def update(self, keys, character):
         """updates background position based on character movement"""
-        if keys[pygame.K_LEFT] and character.x == constants.SCREEN_WIDTH // 2:
+        if (
+            keys[pygame.K_LEFT]  # pylint: disable=no-member
+            and character.x == constants.SCREEN_WIDTH // 2
+        ):
             self.scroll_left()
 
-        if keys[pygame.K_RIGHT] and character.x == constants.SCREEN_WIDTH // 2:
+        if (
+            keys[pygame.K_RIGHT]  # pylint: disable=no-member
+            and character.x == constants.SCREEN_WIDTH // 2
+        ):
             self.scroll_right()
 
-        if not (keys[pygame.K_LEFT] or keys[pygame.K_RIGHT]):
+        if not (
+            keys[pygame.K_LEFT] or keys[pygame.K_RIGHT]  # pylint: disable=no-member
+        ):
             self.scroll_stop()
 
         # If an image goes off screen, reset its position to the right of the other image

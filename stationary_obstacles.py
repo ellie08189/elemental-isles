@@ -23,10 +23,16 @@ class Pillar:
 
     def update(self, keys, character):
         """updates pillar position based on character movement"""
-        if keys[pygame.K_RIGHT] and character.x == constants.SCREEN_WIDTH // 2:
+        if (
+            keys[pygame.K_RIGHT]  # pylint: disable=no-member
+            and character.x == constants.SCREEN_WIDTH // 2
+        ):
             if self.active:
                 self.x += self.speed
-        if keys[pygame.K_LEFT] and character.x == constants.SCREEN_WIDTH // 2:
+        if (
+            keys[pygame.K_LEFT]  # pylint: disable=no-member
+            and character.x == constants.SCREEN_WIDTH // 2
+        ):
             if self.active:
                 self.x -= self.speed
 
@@ -87,13 +93,19 @@ class Bush1:
 
     def update(self, keys, character):
         """updates bush position based on character movement"""
-        if keys[pygame.K_RIGHT] and character.x == constants.SCREEN_WIDTH // 2:
+        if (
+            keys[pygame.K_RIGHT]  # pylint: disable=no-member
+            and character.x == constants.SCREEN_WIDTH // 2
+        ):
             if self.active:
                 self.x += self.speed
                 # if self.x + self.width < 0:  # respawn on right
                 #     self.x = constants.SCREEN_WIDTH
                 #     self.active = True
-        if keys[pygame.K_LEFT] and character.x == constants.SCREEN_WIDTH // 2:
+        if (
+            keys[pygame.K_LEFT]  # pylint: disable=no-member
+            and character.x == constants.SCREEN_WIDTH // 2
+        ):
             if self.active:
                 self.x -= self.speed
 

@@ -25,10 +25,16 @@ class Key:
 
     def update(self, keys, character):
         """updates key position based on character movement"""
-        if keys[pygame.K_LEFT] and character.x == constants.SCREEN_WIDTH // 2:
+        if (
+            keys[pygame.K_LEFT]  # pylint: disable=no-member
+            and character.x == constants.SCREEN_WIDTH // 2
+        ):
             if self.active:
                 self.x -= self.speed
-        if keys[pygame.K_RIGHT] and character.x == constants.SCREEN_WIDTH // 2:
+        if (
+            keys[pygame.K_RIGHT]  # pylint: disable=no-member
+            and character.x == constants.SCREEN_WIDTH // 2
+        ):
             if self.active:
                 self.x += self.speed
         self.rect.topleft = (self.x, self.y)

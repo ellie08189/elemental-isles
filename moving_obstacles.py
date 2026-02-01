@@ -66,10 +66,13 @@ class Fireball:
             self.collision_detected = True
 
     def draw(self, screen):
+        """draw fireball to screen"""
         screen.blit(self.image[self.current_index], (self.x, self.y))
 
 
 class Log:
+    """a log that moves across the screen"""
+
     def __init__(self, x, y):
         self.image = constants.LOG_IMAGE
         self.x = x
@@ -140,4 +143,5 @@ class Log:
                 self.collision_detected = True
 
     def draw(self, screen):
+        """draw log to screen"""
         screen.blit(self.image[self.current_index], (self.x, self.y))
