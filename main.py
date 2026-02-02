@@ -380,6 +380,8 @@ while RUNNING:
                 SCORE_PRINTED = False
                 lives = Lives()
                 lives.lives = 3
+                score = Score()
+                score.score = 0
                 GAME_STATE = "game"
 
         # exits the game when no is clicked
