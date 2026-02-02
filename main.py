@@ -7,6 +7,7 @@ from character import Character
 from character import Powers
 from background import Background
 from screens import PauseScreen
+from screens import Score
 from screens import TitleScreen
 from screens import PlayButton
 from screens import GameOver
@@ -31,7 +32,7 @@ pygame.event.clear()  # Clear any events that happened during initialization
 # Create objects
 play = PlayButton()
 background = Background()
-# background.sound_play()  # Play background music once at the start
+background.sound_play()  # Play background music once at the start
 character = Character(100, constants.GROUND_Y - constants.CHARACTER_HEIGHT)
 power = Powers(character.x, character.y)
 
@@ -79,16 +80,16 @@ log = Log(3250, constants.GROUND_Y - constants.LOG_HEIGHT)
 log.active = True
 
 key = Key(constants.SCREEN_WIDTH + 150, 250)
-key2 = Key(4500, 250)
+key2 = Key(4510, 250)
 key.active = True
 key2.active = True
-key3 = Key(6000, 250)
+key3 = Key(6010, 250)
 key3.active = True
-key4 = Key(8500, 250)
+key4 = Key(8510, 250)
 key4.active = True
-key5 = Key(11500, 250)
+key5 = Key(11510, 250)
 key5.active = True
-key6 = Key(14000, 250)
+key6 = Key(14010, 250)
 key6.active = True
 
 title_screen = TitleScreen()
@@ -97,6 +98,7 @@ map_screen = MapScreen()
 pause_screen = PauseScreen()
 
 key_score = TotalKeys()
+score = Score()
 
 GAME_STATE = "title"
 SCORE_PRINTED = False
@@ -254,6 +256,8 @@ while RUNNING:
 
         background.update(keys, character)
 
+        score.increase(power, key)
+
         background.draw(screen)
         character.draw(screen)
         power.draw(screen)
@@ -283,6 +287,7 @@ while RUNNING:
         key6.draw(screen)
 
         lives.draw(screen)
+        score.draw(screen)
 
     elif GAME_STATE == "map":
         map_screen = MapScreen()
@@ -356,19 +361,19 @@ while RUNNING:
                 key = Key(constants.SCREEN_WIDTH + 150, 250)
                 key.active = True
                 key.amount = 0
-                key2 = Key(4500, 250)
+                key2 = Key(4510, 250)
                 key2.active = True
                 key2.amount = 0
-                key3 = Key(6000, 250)
+                key3 = Key(6010, 250)
                 key3.active = True
                 key3.amount = 0
-                key4 = Key(8500, 250)
+                key4 = Key(8510, 250)
                 key4.active = True
                 key4.amount = 0
-                key5 = Key(11500, 250)
+                key5 = Key(11510, 250)
                 key5.active = True
                 key5.amount = 0
-                key6 = Key(14000, 250)
+                key6 = Key(14010, 250)
                 key6.active = True
                 key6.amount = 0
                 key_score.total = 0

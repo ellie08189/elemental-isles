@@ -6,11 +6,14 @@ Obstacles
 Collisions
     log collide with player
     animation for when powers collide?
-    sound for collision
+    sound for collision/ when powers used
 
 Music
     music for when player uses powers
     find better background music
+    game over sound
+    victory sound
+    switch sounds based on screens. - proberly put in screen doc
 
 Powers
     players powers - make it work the opposite way as well
