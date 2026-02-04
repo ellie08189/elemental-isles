@@ -145,3 +145,52 @@ class Bush1:
     def draw(self, screen):
         """draws bush on screen"""
         screen.blit(self.image, (self.x, self.y))
+
+
+class Door:
+    """Door for end of game"""
+
+    def __init__(self, x, y):
+        original_image = pygame.image.load(constants.DOOR_IMAGE)
+        self.image = pygame.transform.scale(
+            original_image, (constants.DOOR_WIDTH, constants.DOOR_HEIGHT)
+        )
+        self.x = x
+        self.y = y
+        self.width = constants.DOOR_WIDTH
+        self.height = constants.DOOR_HEIGHT
+        self.active = True
+        self.speed = constants.PILLAR_SPEED
+        self.collision_detected = False
+
+    def update(self, keys, character):
+        """updates door position based on character movement"""
+        if (
+            keys[pygame.K_RIGHT]  # pylint: disable=no-member
+            and character.x == constants.SCREEN_WIDTH // 2
+        ):
+            if self.active:
+                self.x += self.speed
+        if (
+            keys[pygame.K_LEFT]  # pylint: disable=no-member
+            and character.x == constants.SCREEN_WIDTH // 2
+        ):
+            if self.active:
+                self.x -= self.speed
+
+    def collision(self, character):
+        """checks for collision between door and character"""
+        # Get character and door rectangles
+        char_rect = pygame.Rect(
+            character.x, character.y, character.width, character.height
+        )
+        door_rect = pygame.Rect(self.x, self.y, self.width, self.height)
+        if char_rect.colliderect(door_rect):
+            if character.x + character.width - character.speed <= self.x:
+                # Hitting left side
+                character.x = self.x - character.width
+            self.collision_detected = True
+
+    def draw(self, screen):
+        """draws door on screen"""
+        screen.blit(self.image, (self.x, self.y))

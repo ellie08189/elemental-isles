@@ -110,6 +110,11 @@ class Character:
         else:
             self.immune = False
 
+    def start_invincibility(self, duration=120):
+        """Start invincibility period (default 2 seconds at 60 fps)"""
+        self.invincible_timer = duration
+        self.flash_counter = 0
+
     def draw(self, screen):
         """draws character to screen"""
         # Flash during invincibility - only draw every 5 frames
@@ -118,11 +123,6 @@ class Character:
                 screen.blit(self.sprites[self.current_index], (self.x, self.y))
         else:
             screen.blit(self.sprites[self.current_index], (self.x, self.y))
-
-    def start_invincibility(self, duration=120):
-        """Start invincibility period (default 2 seconds at 60 fps)"""
-        self.invincible_timer = duration
-        self.flash_counter = 0
 
 
 class Powers:

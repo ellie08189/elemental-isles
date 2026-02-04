@@ -154,3 +154,8 @@ SCORE_FONT = pygame.font.get_default_font()
 SCORE_FONT_SIZE = 30
 SCORE_COLOR = (255, 255, 255)
 SCORE_POSITION = (800, 10)
+
+# door
+DOOR_IMAGE = "assets/door.png"
+DOOR_WIDTH = 200
+DOOR_HEIGHT = 325

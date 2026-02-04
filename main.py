@@ -12,8 +12,11 @@ from screens import TitleScreen
 from screens import PlayButton
 from screens import GameOver
 from screens import MapScreen
+from screens import Victory
+from screens import Buttons
 from stationary_obstacles import Pillar
 from stationary_obstacles import Bush1
+from stationary_obstacles import Door
 from platforms import PlatformManager
 from moving_obstacles import Fireball
 from moving_obstacles import Log
@@ -55,6 +58,8 @@ pillar5 = Pillar(11500, constants.GROUND_Y - constants.PILLAR_HEIGHT)
 pillar5.active = True
 pillar6 = Pillar(14000, constants.GROUND_Y - constants.PILLAR_HEIGHT)
 pillar6.active = True
+pillar7 = Pillar(17500, constants.GROUND_Y - constants.PILLAR_HEIGHT)
+pillar7.active = True
 
 bush1 = Bush1(
     constants.SCREEN_WIDTH + 600,
@@ -91,14 +96,17 @@ key5 = Key(11510, 250)
 key5.active = True
 key6 = Key(14010, 250)
 key6.active = True
+key7 = Key(17510, 250)
+key7.active = True
 
 title_screen = TitleScreen()
 game_over = GameOver()
 map_screen = MapScreen()
 pause_screen = PauseScreen()
-
+door = Door(20000, constants.GROUND_Y - constants.DOOR_HEIGHT)
 key_score = TotalKeys()
 score = Score()
+button = Buttons()
 
 GAME_STATE = "title"
 SCORE_PRINTED = False
@@ -131,6 +139,7 @@ while RUNNING:
                 or pillar4.collision_detected is True
                 or pillar5.collision_detected is True
                 or pillar6.collision_detected is True
+                or pillar7.collision_detected is True
             ):
                 lives.lose_life(character)
                 if lives.lives > 0:
@@ -140,6 +149,7 @@ while RUNNING:
                     pillar4.collision_detected = False
                     pillar5.collision_detected = False
                     pillar6.collision_detected = False
+                    pillar7.collision_detected = False
                 else:
                     GAME_STATE = "game_over"
             if (
@@ -176,6 +186,8 @@ while RUNNING:
                 GAME_STATE = "map"
             if keys[pygame.K_SPACE]:
                 GAME_STATE = "pause"
+            if door.collision_detected is True:
+                GAME_STATE = "victory"
         elif GAME_STATE == "game_over":
             game_over.draw(screen)
             mouse = pygame.mouse.get_pos()
@@ -253,12 +265,19 @@ while RUNNING:
         key5.collision(character, key_score)
         key6.update(keys, character)
         key6.collision(character, key_score)
+        key7.update(keys, character)
+        key7.collision(character, key_score)
+
+        door.update(keys, character)
+        door.collision(character)
+        button.update(keys, character)
 
         background.update(keys, character)
 
-        score.increase(power, key)
+        score.increase(power, key_score)
 
         background.draw(screen)
+        door.draw(screen)
         character.draw(screen)
         power.draw(screen)
         pillar.draw(screen)
@@ -267,6 +286,7 @@ while RUNNING:
         pillar4.draw(screen)
         pillar5.draw(screen)
         pillar6.draw(screen)
+        pillar7.draw(screen)
 
         bush1.draw(screen)
         bush2.draw(screen)
@@ -285,9 +305,11 @@ while RUNNING:
         key4.draw(screen)
         key5.draw(screen)
         key6.draw(screen)
+        key7.draw(screen)
 
         lives.draw(screen)
         score.draw(screen)
+        button.draw(screen)
 
     elif GAME_STATE == "map":
         map_screen = MapScreen()
@@ -296,6 +318,10 @@ while RUNNING:
     elif GAME_STATE == "pause":
         pause_screen = PauseScreen()
         pause_screen.draw(screen)
+
+    elif GAME_STATE == "victory":
+        victory_screen = Victory()
+        victory_screen.draw(screen)
 
     elif GAME_STATE == "game_over":
         mouse = pygame.mouse.get_pos()
@@ -336,6 +362,8 @@ while RUNNING:
                 pillar5.active = True
                 pillar6 = Pillar(14000, constants.GROUND_Y - constants.PILLAR_HEIGHT)
                 pillar6.active = True
+                pillar7 = Pillar(17500, constants.GROUND_Y - constants.PILLAR_HEIGHT)
+                pillar7.active = True
 
                 bush1 = Bush1(
                     constants.SCREEN_WIDTH + 600,
@@ -355,9 +383,12 @@ while RUNNING:
 
                 fireball = Fireball(constants.SCREEN_WIDTH + 1000, 650)
                 fireball.active = True
+
                 log = Log(3250, constants.GROUND_Y - constants.LOG_HEIGHT)
                 log.active = True
+
                 platform_manager = PlatformManager()
+
                 key = Key(constants.SCREEN_WIDTH + 150, 250)
                 key.active = True
                 key.amount = 0
@@ -376,6 +407,11 @@ while RUNNING:
                 key6 = Key(14010, 250)
                 key6.active = True
                 key6.amount = 0
+                key7 = Key(17510, 250)
+                key7.active = True
+                key7.amount = 0
+
+                door = Door(20000, constants.GROUND_Y - constants.DOOR_HEIGHT)
                 key_score.total = 0
                 SCORE_PRINTED = False
                 lives = Lives()
