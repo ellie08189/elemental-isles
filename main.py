@@ -103,7 +103,7 @@ title_screen = TitleScreen()
 game_over = GameOver()
 map_screen = MapScreen()
 pause_screen = PauseScreen()
-door = Door(20000, constants.GROUND_Y - constants.DOOR_HEIGHT)
+door = Door(2000, constants.GROUND_Y - constants.DOOR_HEIGHT)
 key_score = TotalKeys()
 score = Score()
 button = Buttons()
@@ -250,10 +250,10 @@ while RUNNING:
         platform_manager.collision(character)
 
         fireball.update(background, character)
-        fireball.collision(character)
+        # fireball.collision(character)
 
         log.update(background)
-        log.collision(character)
+        # log.collision(character)
 
         key.update(keys, character)
         key.collision(character, key_score)
