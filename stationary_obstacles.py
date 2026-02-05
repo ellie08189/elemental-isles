@@ -169,8 +169,12 @@ class Door:
             keys[pygame.K_RIGHT]  # pylint: disable=no-member
             and character.x == constants.SCREEN_WIDTH // 2
         ):
-            if self.active:
-                self.x += self.speed
+            if self.x + self.width > constants.SCREEN_WIDTH:
+                if self.active:
+                    self.x += self.speed
+            else:
+                self.x = constants.SCREEN_WIDTH - self.width
+
         if (
             keys[pygame.K_LEFT]  # pylint: disable=no-member
             and character.x == constants.SCREEN_WIDTH // 2

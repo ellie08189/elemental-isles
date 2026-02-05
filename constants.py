@@ -42,7 +42,7 @@ GAME_OVER_POSITION = (SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2)
 GAME_OVER_ACTIVE = True
 
 # map settings
-MAP_IMAGE = "assets/treasure_map.jpg"
+MAP_IMAGE = "assets/map.png"
 MAP_POSITION = (SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2)
 
 # pause settings
@@ -159,3 +159,6 @@ SCORE_POSITION = (800, 10)
 DOOR_IMAGE = "assets/door.png"
 DOOR_WIDTH = 200
 DOOR_HEIGHT = 325
+
+VICTORY_IMAGE = "assets/victory_screen.png"
+VICTORY_POSITION = (SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2)

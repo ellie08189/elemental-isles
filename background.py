@@ -49,6 +49,12 @@ class Background:
         elif self.x2 > constants.SCREEN_WIDTH:
             self.x2 = self.x1 - self.image.get_width()
 
+    def approach_door(self, door):
+        """door appears in screen"""
+        if door.x + door.width <= constants.SCREEN_WIDTH:
+            self.scroll = None
+            self.speed = 0
+
     def scroll_left(self):
         """makes background move right"""
         self.x1 += self.speed

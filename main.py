@@ -85,8 +85,8 @@ log = Log(3250, constants.GROUND_Y - constants.LOG_HEIGHT)
 log.active = True
 
 key = Key(constants.SCREEN_WIDTH + 150, 250)
-key2 = Key(4510, 250)
 key.active = True
+key2 = Key(4510, 250)
 key2.active = True
 key3 = Key(6010, 250)
 key3.active = True
@@ -210,7 +210,7 @@ while RUNNING:
     elif GAME_STATE == "game":
 
         keys = pygame.key.get_pressed()
-        character.handle_input(keys)
+        character.handle_input(keys, door)
         character.apply_gravity()
         character.update()
 
@@ -230,6 +230,8 @@ while RUNNING:
         pillar5.collision(character)
         pillar6.update(keys, character)
         pillar6.collision(character)
+        pillar7.update(keys, character)
+        pillar7.collision(character)
 
         bush1.update(keys, character)
         bush1.collision(character)
@@ -244,14 +246,14 @@ while RUNNING:
         bush6.update(keys, character)
         bush6.collision(character)
 
-        platform_manager.update(keys, character)
+        platform_manager.update(keys, character, door)
         platform_manager.collision(character)
 
         fireball.update(background, character)
-        fireball.collision(character)
+        # fireball.collision(character)
 
         log.update(background)
-        log.collision(character)
+        # log.collision(character)
 
         key.update(keys, character)
         key.collision(character, key_score)
@@ -273,6 +275,7 @@ while RUNNING:
         button.update(keys, character)
 
         background.update(keys, character)
+        background.approach_door(door)
 
         score.increase(power, key_score)
 

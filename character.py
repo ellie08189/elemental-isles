@@ -18,7 +18,6 @@ class Character:
         self.walking_sprites = constants.WALKING
         self.walkback_sprites = constants.WALKBACK
         self.power_sprites = constants.POWERSPRITE
-        # self.crouch_sprites = constants.CROUCH
         self.sprites = [self.idle_sprite]
         self.max_index = 0
         self.current_index = 0
@@ -30,13 +29,21 @@ class Character:
         self.flash_counter = 0  # Counter for flash effect
         self.immune = False
 
-    def handle_input(self, keys):
+    def handle_input(self, keys, door):
         """Switch between walking, jumping, and idle sprites based on key press."""
         if keys[pygame.K_RIGHT]:  # pylint: disable=no-member
             self.sprites = self.walking_sprites
             self.max_index = len(self.sprites) - 1
-            if self.x != constants.SCREEN_WIDTH // 2:
+            # Check if door is visible on screen (background has stopped)
+            door_visible = door.x + door.width <= constants.SCREEN_WIDTH
+
+            if door_visible:
+                # Door is visible, allow character to move across screen
                 self.x += self.speed
+            elif self.x != constants.SCREEN_WIDTH // 2:
+                # Normal gameplay, character moves until center
+                self.x += self.speed
+
             if self.x > constants.SCREEN_WIDTH - self.width:
                 self.x = constants.SCREEN_WIDTH - self.width
 

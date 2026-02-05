@@ -85,9 +85,11 @@ class PlatformManager:
         self.platforms.append(initial_platform)
         self.furthest_platform_x = initial_platform.x + initial_platform.width
 
-    def spawn_platform(self):
+    def spawn_platform(self, door):
         """spawns new platforms at random intervals"""
-        # Only spawn if the furthest platform is within the screen
+        # Stop spawning platforms when we're getting close to the door
+        if self.furthest_platform_x + 800 >= door.x:  # 800 pixels before door
+            return
         if self.furthest_platform_x < constants.SCREEN_WIDTH + 400:
             num = random.randint(3, 6)
             gap = random.randint(150, 300)
@@ -99,7 +101,7 @@ class PlatformManager:
             self.platforms.append(new_platform)
             self.furthest_platform_x = new_x + width
 
-    def update(self, keys, character):
+    def update(self, keys, character, door):
         """updates all platforms"""
         for platform in self.platforms:
             platform.update(keys, character)
@@ -109,7 +111,7 @@ class PlatformManager:
             self.furthest_platform_x = max(p.x + p.width for p in self.platforms)
         else:
             self.furthest_platform_x = 0
-        self.spawn_platform()
+        self.spawn_platform(door)
 
     def collision(self, character):
         """checks for collisions between character and platforms"""

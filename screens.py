@@ -167,7 +167,7 @@ class Victory:
     """displays victory screen"""
 
     def __init__(self):
-        original_image = pygame.image.load("assets/title_screen.png")
+        original_image = pygame.image.load(constants.VICTORY_IMAGE)
         self.image = pygame.transform.scale(
             original_image, (constants.SCREEN_WIDTH, constants.SCREEN_HEIGHT)
         )
