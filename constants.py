@@ -150,15 +150,19 @@ HEART_HEIGHT = 35
 LOST_LIFE_SOUND = "assets/sounds/lostlife.wav"
 
 # score settings
-SCORE_FONT = pygame.font.get_default_font()
+VICTORY_FONT = "assets/CloisterBlack.ttf"
+VICTORY_FONT_SIZE = 200
+VICTORY_FONT_COLOR = (181, 148, 16)
+SCORE_FONT = "assets/type_writer.ttf"
 SCORE_FONT_SIZE = 30
+SCORE_FONT_SIZE2 = 100
 SCORE_COLOR = (255, 255, 255)
-SCORE_POSITION = (800, 10)
+SCORE_POSITION = (770, 10)
 
 # door
 DOOR_IMAGE = "assets/door.png"
 DOOR_WIDTH = 200
 DOOR_HEIGHT = 325
 
-VICTORY_IMAGE = "assets/victory_screen.png"
+VICTORY_IMAGE = "assets/forest.png"
 VICTORY_POSITION = (SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2)

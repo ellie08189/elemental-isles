@@ -190,9 +190,9 @@ class Door:
         )
         door_rect = pygame.Rect(self.x, self.y, self.width, self.height)
         if char_rect.colliderect(door_rect):
-            if character.x + character.width - character.speed <= self.x:
+            if character.x + character.width - character.speed <= self.x + 100:
                 # Hitting left side
-                character.x = self.x - character.width
+                character.x = self.x + 100 - character.width
             self.collision_detected = True
 
     def draw(self, screen):

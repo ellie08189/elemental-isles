@@ -103,7 +103,7 @@ title_screen = TitleScreen()
 game_over = GameOver()
 map_screen = MapScreen()
 pause_screen = PauseScreen()
-door = Door(20000, constants.GROUND_Y - constants.DOOR_HEIGHT)
+door = Door(2000, constants.GROUND_Y - constants.DOOR_HEIGHT)
 key_score = TotalKeys()
 score = Score()
 button = Buttons()
@@ -324,6 +324,9 @@ while RUNNING:
 
     elif GAME_STATE == "victory":
         victory_screen = Victory()
+        victory_screen.score()
+        victory_screen.score2(score)
+        victory_screen.victory()
         victory_screen.draw(screen)
 
     elif GAME_STATE == "game_over":

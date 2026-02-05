@@ -134,8 +134,8 @@ class Buttons:
     def __init__(self):
         self.font = pygame.font.Font(constants.SCORE_FONT, 20)
         self.speed = -5
-        self.x = 300
-        self.y = 400
+        self.x = 600
+        self.y = 200
 
     def update(self, keys, character):
         """updates button instructions position based on character movement"""
@@ -169,15 +169,48 @@ class Victory:
     def __init__(self):
         original_image = pygame.image.load(constants.VICTORY_IMAGE)
         self.image = pygame.transform.scale(
-            original_image, (constants.SCREEN_WIDTH, constants.SCREEN_HEIGHT)
+            original_image, (original_image.get_width(), constants.SCREEN_HEIGHT)
+        )
+        self.font = pygame.font.Font(
+            constants.VICTORY_FONT, constants.VICTORY_FONT_SIZE
+        )
+        self.score_display = None
+        self.score_display2 = None
+
+    def score(self):
+        """displays final score on victory screen"""
+        self.score_display = pygame.font.Font(
+            constants.SCORE_FONT, constants.SCORE_FONT_SIZE
+        ).render("Final Score:", True, constants.SCORE_COLOR)
+        x_pos = constants.SCREEN_WIDTH // 2 - self.score_display.get_width() // 2
+        self.image.blit(
+            self.score_display,
+            (x_pos, 375),
+        )
+
+    def score2(self, score):
+        """displays final score on victory screen"""
+        self.score_display2 = pygame.font.Font(
+            constants.SCORE_FONT, constants.SCORE_FONT_SIZE2
+        ).render(f"{score.score}", True, constants.SCORE_COLOR)
+        self.image.blit(
+            self.score_display2,
+            (constants.SCREEN_WIDTH // 2 - self.score_display2.get_width() // 2, 450),
+        )
+
+    def victory(self):
+        """displays victory message on victory screen"""
+        victory_surface = self.font.render(
+            "Victory!", True, constants.VICTORY_FONT_COLOR
+        )
+        self.image.blit(
+            victory_surface,
+            (constants.SCREEN_WIDTH // 2 - victory_surface.get_width() // 2, 65),
         )
 
     def draw(self, screen):
         """draws victory screen image"""
         screen.blit(
             self.image,
-            (
-                constants.TITLE_POSITION[0] - self.image.get_width() // 2,
-                constants.TITLE_POSITION[1] - self.image.get_height() // 2,
-            ),
+            (0, 0),
         )
