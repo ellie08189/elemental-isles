@@ -208,6 +208,19 @@ class Victory:
             (constants.SCREEN_WIDTH // 2 - victory_surface.get_width() // 2, 65),
         )
 
+    def keys_collected(self, amount_collected):
+        """displays keys collected on victory screen"""
+        keys_collected_display = pygame.font.Font(
+            constants.SCORE_FONT, constants.SCORE_FONT_SIZE
+        ).render(
+            f"Keys Collected: {amount_collected.total}", True, constants.SCORE_COLOR
+        )
+        x_pos = constants.SCREEN_WIDTH // 2 - keys_collected_display.get_width() // 2
+        self.image.blit(
+            keys_collected_display,
+            (x_pos, 325),
+        )
+
     def draw(self, screen):
         """draws victory screen image"""
         screen.blit(

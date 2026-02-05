@@ -103,7 +103,7 @@ title_screen = TitleScreen()
 game_over = GameOver()
 map_screen = MapScreen()
 pause_screen = PauseScreen()
-door = Door(2000, constants.GROUND_Y - constants.DOOR_HEIGHT)
+door = Door(20000, constants.GROUND_Y - constants.DOOR_HEIGHT)
 key_score = TotalKeys()
 score = Score()
 button = Buttons()
@@ -250,10 +250,10 @@ while RUNNING:
         platform_manager.collision(character)
 
         fireball.update(background, character)
-        # fireball.collision(character)
+        fireball.collision(character)
 
         log.update(background)
-        # log.collision(character)
+        log.collision(character)
 
         key.update(keys, character)
         key.collision(character, key_score)
@@ -327,6 +327,7 @@ while RUNNING:
         victory_screen.score()
         victory_screen.score2(score)
         victory_screen.victory()
+        victory_screen.keys_collected(key_score)
         victory_screen.draw(screen)
 
     elif GAME_STATE == "game_over":
