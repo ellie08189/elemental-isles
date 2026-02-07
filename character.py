@@ -38,10 +38,10 @@ class Character:
             door_visible = door.x + door.width <= constants.SCREEN_WIDTH
 
             if door_visible:
-                # Door is visible, allow character to move across screen
+                # door is visible, character moves across screen
                 self.x += self.speed
             elif self.x != constants.SCREEN_WIDTH // 2:
-                # Normal gameplay, character moves until center
+                # character moves to centre
                 self.x += self.speed
 
             if self.x > constants.SCREEN_WIDTH - self.width:

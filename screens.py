@@ -37,7 +37,38 @@ class PlayButton:
             self.image,
             (
                 constants.SCREEN_WIDTH // 2 - self.image.get_width() // 2,
-                constants.SCREEN_HEIGHT // 2 - self.image.get_height() // 2,
+                constants.SCREEN_HEIGHT // 2 - self.image.get_height() // 2 + 50,
+            ),
+        )
+
+
+class Name:
+    """displays name on title screen"""
+
+    def __init__(self):
+        self.font1 = pygame.font.Font(constants.VICTORY_FONT, 75)
+        self.font2 = pygame.font.Font(constants.VICTORY_FONT, 150)
+
+    def draw(self, screen):
+        """draws name on title screen"""
+        name_surface = self.font1.render(
+            "Legends of the", True, constants.NAME_FONT_COLOUR
+        )
+        name_surface2 = self.font2.render(
+            "Elemental Isles", True, constants.NAME_FONT_COLOUR
+        )
+        screen.blit(
+            name_surface,
+            (
+                constants.SCREEN_WIDTH // 2 - name_surface.get_width() // 2,
+                40,
+            ),
+        )
+        screen.blit(
+            name_surface2,
+            (
+                constants.SCREEN_WIDTH // 2 - name_surface2.get_width() // 2,
+                100,
             ),
         )
 
@@ -208,13 +239,13 @@ class Victory:
             (constants.SCREEN_WIDTH // 2 - victory_surface.get_width() // 2, 65),
         )
 
-    def keys_collected(self, amount_collected):
+    def keys_collected(self, running_total):
         """displays keys collected on victory screen"""
         keys_collected_display = pygame.font.Font(
             constants.SCORE_FONT, constants.SCORE_FONT_SIZE
         ).render(
-            f"Keys Collected: {amount_collected.total}", True, constants.SCORE_COLOR
-        )
+            f"Keys Collected: {running_total}", True, constants.SCORE_COLOR
+        )  # error with running total
         x_pos = constants.SCREEN_WIDTH // 2 - keys_collected_display.get_width() // 2
         self.image.blit(
             keys_collected_display,

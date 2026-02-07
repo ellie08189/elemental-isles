@@ -10,6 +10,7 @@ from screens import PauseScreen
 from screens import Score
 from screens import TitleScreen
 from screens import PlayButton
+from screens import Name
 from screens import GameOver
 from screens import MapScreen
 from screens import Victory
@@ -34,6 +35,7 @@ pygame.event.clear()  # Clear any events that happened during initialization
 
 # Create objects
 play = PlayButton()
+name = Name()
 background = Background()
 background.sound_play()  # Play background music once at the start
 character = Character(100, constants.GROUND_Y - constants.CHARACTER_HEIGHT)
@@ -111,6 +113,7 @@ button = Buttons()
 GAME_STATE = "title"
 SCORE_PRINTED = False
 keys = pygame.key.get_pressed()
+running_total = 0
 EVENT = None
 
 clock = pygame.time.Clock()
@@ -128,7 +131,7 @@ while RUNNING:
         # switch between game states
         if GAME_STATE == "title":  # play button clicked changes screen to game screen
             mouse = pygame.mouse.get_pos()
-            if 350 <= mouse[0] <= 650 and 250 <= mouse[1] <= 550:
+            if 350 <= mouse[0] <= 650 and 260 <= mouse[1] <= 560:
                 if EVENT.type == pygame.MOUSEBUTTONDOWN:  # pylint: disable=no-member
                     GAME_STATE = "game"
         elif GAME_STATE == "game":
@@ -207,6 +210,7 @@ while RUNNING:
     if GAME_STATE == "title":
         title_screen.draw(screen)
         play.draw(screen)
+        name.draw(screen)
     elif GAME_STATE == "game":
 
         keys = pygame.key.get_pressed()
@@ -419,6 +423,7 @@ while RUNNING:
                 key7.amount = 0
 
                 door = Door(20000, constants.GROUND_Y - constants.DOOR_HEIGHT)
+                running_total = running_total + key_score.total
                 key_score.total = 0
                 SCORE_PRINTED = False
                 lives = Lives()
