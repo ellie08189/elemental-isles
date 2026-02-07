@@ -192,7 +192,10 @@ class Door:
         if char_rect.colliderect(door_rect):
             if character.x + character.width - character.speed <= self.x + 100:
                 # Hitting left side
-                character.x = self.x + 100 - character.width
+                character.speed = 5
+                character.x += character.speed
+                if character.x == self.x + 100:
+                    character.x = self.x + 100
             self.collision_detected = True
 
     def draw(self, screen):
