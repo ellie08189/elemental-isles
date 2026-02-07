@@ -418,7 +418,7 @@ while RUNNING:
                 key7.active = True
                 key7.amount = 0
 
-                door = Door(2000, constants.GROUND_Y - constants.DOOR_HEIGHT)
+                door = Door(20000, constants.GROUND_Y - constants.DOOR_HEIGHT)
                 SCORE_PRINTED = False
                 lives = Lives()
                 lives.lives = 3
