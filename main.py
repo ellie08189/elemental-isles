@@ -105,7 +105,7 @@ title_screen = TitleScreen()
 game_over = GameOver()
 map_screen = MapScreen()
 pause_screen = PauseScreen()
-door = Door(2000, constants.GROUND_Y - constants.DOOR_HEIGHT)
+door = Door(20000, constants.GROUND_Y - constants.DOOR_HEIGHT)
 key_score = TotalKeys()
 score = Score()
 button = Buttons()
@@ -113,7 +113,6 @@ button = Buttons()
 GAME_STATE = "title"
 SCORE_PRINTED = False
 keys = pygame.key.get_pressed()
-running_total = 0
 EVENT = None
 
 clock = pygame.time.Clock()
@@ -331,7 +330,7 @@ while RUNNING:
         victory_screen.score()
         victory_screen.score2(score)
         victory_screen.victory()
-        victory_screen.keys_collected(key_score)
+        victory_screen.keys_collected(key_score.cumulative_total)
         victory_screen.draw(screen)
 
     elif GAME_STATE == "game_over":
@@ -423,7 +422,6 @@ while RUNNING:
                 key7.amount = 0
 
                 door = Door(20000, constants.GROUND_Y - constants.DOOR_HEIGHT)
-                running_total = running_total + key_score.total
                 key_score.total = 0
                 SCORE_PRINTED = False
                 lives = Lives()

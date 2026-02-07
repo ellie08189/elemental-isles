@@ -64,9 +64,11 @@ class TotalKeys:
 
     def __init__(self):
         self.total = 0
+        self.cumulative_total = 0  # Never gets reset, tracks all keys collected
 
     def add_key(self, key):
         """adds key to total collected keys"""
         self.total += key.amount
-        print(f"Total keys collected: {self.total}")
+        self.cumulative_total += key.amount
+        print(f"Total keys collected: {self.cumulative_total}")
         return self.total
