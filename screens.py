@@ -81,14 +81,23 @@ class GameOver:
         self.image = pygame.transform.scale(
             original_image, (original_image.get_width(), constants.SCREEN_HEIGHT)
         )
+        self.font = pygame.font.Font(constants.GAME_OVER_FONT, 50)
 
-    def draw(self, screen):
+    def draw(self, screen, score):
         """draws game over screen image"""
         screen.blit(
             self.image,
             (
                 constants.GAME_OVER_POSITION[0] - self.image.get_width() // 2,
                 constants.GAME_OVER_POSITION[1] - self.image.get_height() // 2,
+            ),
+        )
+        surface = self.font.render(f"Score: {score.score}", True, constants.SCORE_COLOR)
+        screen.blit(
+            surface,
+            (
+                constants.GAME_OVER_POSITION[0] - surface.get_width() // 2 - 20,
+                constants.GAME_OVER_POSITION[1] - surface.get_height() // 2 + 250,
             ),
         )
 

@@ -191,7 +191,7 @@ while RUNNING:
             if door.collision_detected is True:
                 GAME_STATE = "victory"
         elif GAME_STATE == "game_over":
-            game_over.draw(screen)
+            game_over.draw(screen, score)
             mouse = pygame.mouse.get_pos()
         elif GAME_STATE == "pause":
             mouse = pygame.mouse.get_pos()
@@ -253,10 +253,10 @@ while RUNNING:
         platform_manager.collision(character)
 
         fireball.update(background, character)
-        # fireball.collision(character)
+        fireball.collision(character)
 
         log.update(background)
-        # log.collision(character)
+        log.collision(character)
 
         key.update(keys, character)
         key.collision(character, key_score)
@@ -337,13 +337,10 @@ while RUNNING:
         mouse = pygame.mouse.get_pos()
         if not SCORE_PRINTED:
             print("Fireballs destroyed " + str(power.collision_amount))
-            print("Total keys collected: " + str(key_score.total))
-            print(
-                "Score = "
-                + str(((key_score.total) * 100) + (power.collision_amount * 50))
-            )
+            print("Total keys collected: " + str(key_score.cumulative_total))
+            print("Score = " + str(score.score))
             SCORE_PRINTED = True
-        game_over.draw(screen)
+        game_over.draw(screen, score)
 
         # Check if the mouse is within the specified range
         if 225 <= mouse[0] <= 335 and 460 <= mouse[1] <= 505:
@@ -421,13 +418,13 @@ while RUNNING:
                 key7.active = True
                 key7.amount = 0
 
-                door = Door(20000, constants.GROUND_Y - constants.DOOR_HEIGHT)
-                key_score.total = 0
+                door = Door(2000, constants.GROUND_Y - constants.DOOR_HEIGHT)
                 SCORE_PRINTED = False
                 lives = Lives()
                 lives.lives = 3
                 score = Score()
                 score.score = 0
+                key_score.cumulative_total = 0
                 GAME_STATE = "game"
 
         # exits the game when no is clicked

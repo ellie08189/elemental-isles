@@ -159,6 +159,7 @@ SCORE_FONT_SIZE2 = 100
 SCORE_COLOR = (255, 255, 255)
 SCORE_POSITION = (770, 10)
 NAME_FONT_COLOUR = (0, 0, 0)
+GAME_OVER_FONT = "assets/Type Machine.ttf"
 
 # door
 DOOR_IMAGE = "assets/door.png"
