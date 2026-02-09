@@ -331,7 +331,13 @@ while RUNNING:
         victory_screen.score2(score)
         victory_screen.victory()
         victory_screen.keys_collected(key_score.cumulative_total)
+        victory_screen.nextlevel()
         victory_screen.draw(screen)
+        print(GAME_STATE)
+        mouse = pygame.mouse.get_pos()
+        if 380 <= mouse[0] <= 620 and 650 <= mouse[1] <= 680:
+            if EVENT.type == pygame.MOUSEBUTTONUP:  # pylint: disable=no-member
+                GAME_STATE = "title"
 
     elif GAME_STATE == "game_over":
         mouse = pygame.mouse.get_pos()

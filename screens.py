@@ -259,6 +259,17 @@ class Victory:
             (x_pos, 325),
         )
 
+    def nextlevel(self):
+        """displays next level message on victory screen"""
+        self.font = pygame.font.Font(constants.SCORE_FONT, 30)
+        next_level_surface = self.font.render(
+            "NEXT LEVEL", True, constants.VICTORY_FONT_COLOR
+        )
+        self.image.blit(
+            next_level_surface,
+            (constants.SCREEN_WIDTH // 2 - next_level_surface.get_width() // 2, 650),
+        )
+
     def draw(self, screen):
         """draws victory screen image"""
         screen.blit(
