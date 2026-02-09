@@ -286,6 +286,7 @@ while RUNNING:
         door.draw(screen)
         character.draw(screen)
         power.draw(screen)
+
         pillar.draw(screen)
         pillar2.draw(screen)
         pillar3.draw(screen)
