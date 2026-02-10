@@ -172,8 +172,6 @@ class Door:
             if self.x + self.width > constants.SCREEN_WIDTH:
                 if self.active:
                     self.x += self.speed
-            else:
-                self.x = constants.SCREEN_WIDTH - self.width
 
         if (
             keys[pygame.K_LEFT]  # pylint: disable=no-member
@@ -192,7 +190,7 @@ class Door:
         if char_rect.colliderect(door_rect):
             if character.x + character.width - character.speed <= self.x + 100:
                 # Hitting left side
-                character.speed = 5
+                # character.speed = 5
                 character.x += character.speed
                 if character.x == self.x + 100:
                     character.x = self.x + 100
