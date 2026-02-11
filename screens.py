@@ -284,6 +284,10 @@ class Victory:
         """plays victory music"""
         self.sound.play()
 
+    def sound_stop(self):
+        """stops victory music"""
+        self.sound.stop()
+
     def draw(self, screen):
         """draws victory screen image"""
         screen.blit(

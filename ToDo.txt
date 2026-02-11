@@ -6,7 +6,6 @@ Obstacles
 Collisions
     log collide with player
     animation for when powers collide?
-    sound for collision/ when powers used
 
 Music
     music for when player uses powers
@@ -23,10 +22,5 @@ Extra
     let player have a certain amount of shoots per second then recharge
     add text for buttons to press to play
 
-onto victory screen and next level button
-change sound when change to victory screen
-
 victory sound changed but replays when dont want it to
-background music is not stopping
 better game over sound
-collision sound for fireball

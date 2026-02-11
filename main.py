@@ -340,6 +340,8 @@ while RUNNING:
         if 380 <= mouse[0] <= 620 and 650 <= mouse[1] <= 680:
             if EVENT.type == pygame.MOUSEBUTTONUP:  # pylint: disable=no-member
                 GAME_STATE = "title"
+                victory_screen.sound_stop()
+                background.sound_play()  # not working sound wise?? for both stop and start
 
     elif GAME_STATE == "game_over":
         mouse = pygame.mouse.get_pos()
