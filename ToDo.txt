@@ -25,3 +25,8 @@ Extra
 
 onto victory screen and next level button
 change sound when change to victory screen
+
+victory sound changed but replays when dont want it to
+background music is not stopping
+better game over sound
+collision sound for fireball

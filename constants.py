@@ -141,6 +141,9 @@ PLATFORM_HEIGHT = 55
 # sound settings
 COLLECT_KEY_SOUND = "assets/sounds/coincollector1.wav"
 MAIN_THEME_MUSIC = "assets/sounds/maingamemusic.wav"
+VICTORY_MUSIC = "assets/sounds/victory.wav"
+GAME_OVER_MUSIC = "assets/sounds/gameover.wav"
+COLLISION_SOUND = "assets/sounds/collision.wav"
 
 # lives settings
 MAX_LIVES = 3

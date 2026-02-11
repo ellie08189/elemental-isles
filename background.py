@@ -78,6 +78,10 @@ class Background:
         self.sound.set_volume(0.5)
         self.sound.play(loops=-1)
 
+    def sound_stop(self):
+        """stops background music"""
+        self.sound.stop()
+
     def draw(self, screen):
         """draws background to screen"""
         screen.blit(self.image, (self.x1, self.y))

@@ -82,6 +82,15 @@ class GameOver:
             original_image, (original_image.get_width(), constants.SCREEN_HEIGHT)
         )
         self.font = pygame.font.Font(constants.GAME_OVER_FONT, 50)
+        self.sound = pygame.mixer.Sound(constants.GAME_OVER_MUSIC)
+
+    def sound_play(self):
+        """plays game over music"""
+        self.sound.play(loops=-1)
+
+    def stop_music(self):
+        """stops game over music"""
+        self.sound.stop()
 
     def draw(self, screen, score):
         """draws game over screen image"""
@@ -171,11 +180,11 @@ class Score:
 class Buttons:
     """tells user buttons to press"""
 
-    def __init__(self):
+    def __init__(self, x, y):
         self.font = pygame.font.Font(constants.SCORE_FONT, 20)
         self.speed = -5
-        self.x = 600
-        self.y = 200
+        self.x = x
+        self.y = y
 
     def update(self, keys, character):
         """updates button instructions position based on character movement"""
@@ -216,6 +225,7 @@ class Victory:
         )
         self.score_display = None
         self.score_display2 = None
+        self.sound = pygame.mixer.Sound(constants.VICTORY_MUSIC)
 
     def score(self):
         """displays final score on victory screen"""
@@ -269,6 +279,10 @@ class Victory:
             next_level_surface,
             (constants.SCREEN_WIDTH // 2 - next_level_surface.get_width() // 2, 650),
         )
+
+    def sound_play(self):
+        """plays victory music"""
+        self.sound.play()
 
     def draw(self, screen):
         """draws victory screen image"""
