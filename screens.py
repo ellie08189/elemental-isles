@@ -86,6 +86,7 @@ class GameOver:
 
     def sound_play(self):
         """plays game over music"""
+        self.sound.set_volume(0.5)
         self.sound.play(loops=-1)
 
     def stop_music(self):
