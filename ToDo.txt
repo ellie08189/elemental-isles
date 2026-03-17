@@ -6,7 +6,6 @@ Obstacles
 Collisions
     log collide with player
     animation for when powers collide?
-    sound for collision/ when powers used
 
 Music
     music for when player uses powers
@@ -19,17 +18,9 @@ Powers
     players powers - make it work the opposite way as well
     make more accurate shooting
 
-Ending
-    create an end point - add a final door that when touched goes elsewhere
-        door either victory or minigame
-
 Extra
     let player have a certain amount of shoots per second then recharge
     add text for buttons to press to play
 
-get platforms to stop spawning when door is reached
-create victory screen
-add text to victory screen
-add keys collected onto victory screen and next level button
-walk up to door dodge
-score display on game over screen??
+victory sound changed but replays when dont want it to
+better game over sound

@@ -87,7 +87,7 @@ class PlatformManager:
 
     def spawn_platform(self, door):
         """spawns new platforms at random intervals"""
-        # Stop spawning platforms when we're getting close to the door
+        # Stop spawning platforms when getting close to the door
         if self.furthest_platform_x + 800 >= door.x:  # 800 pixels before door
             return
         if self.furthest_platform_x < constants.SCREEN_WIDTH + 400:
@@ -95,7 +95,7 @@ class PlatformManager:
             gap = random.randint(150, 300)
             width = num * 31
             height = num * 11
-            y = random.randint(300, 575)
+            y = random.randint(300, 530)
             new_x = self.furthest_platform_x + gap
             new_platform = Platform(new_x, y, width, height)
             self.platforms.append(new_platform)

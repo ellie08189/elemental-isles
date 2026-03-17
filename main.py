@@ -108,7 +108,7 @@ pause_screen = PauseScreen()
 door = Door(20000, constants.GROUND_Y - constants.DOOR_HEIGHT)
 key_score = TotalKeys()
 score = Score()
-button = Buttons()
+button = Buttons(600, 200)
 
 GAME_STATE = "title"
 SCORE_PRINTED = False
@@ -286,6 +286,7 @@ while RUNNING:
         door.draw(screen)
         character.draw(screen)
         power.draw(screen)
+
         pillar.draw(screen)
         pillar2.draw(screen)
         pillar3.draw(screen)
@@ -331,7 +332,16 @@ while RUNNING:
         victory_screen.score2(score)
         victory_screen.victory()
         victory_screen.keys_collected(key_score.cumulative_total)
+        victory_screen.nextlevel()
+        victory_screen.sound_play()
         victory_screen.draw(screen)
+        background.sound_stop()
+        mouse = pygame.mouse.get_pos()
+        if 380 <= mouse[0] <= 620 and 650 <= mouse[1] <= 680:
+            if EVENT.type == pygame.MOUSEBUTTONUP:  # pylint: disable=no-member
+                GAME_STATE = "title"
+                victory_screen.sound_stop()
+                background.sound_play()  # not working sound wise?? for both stop and start
 
     elif GAME_STATE == "game_over":
         mouse = pygame.mouse.get_pos()
@@ -340,6 +350,8 @@ while RUNNING:
             print("Total keys collected: " + str(key_score.cumulative_total))
             print("Score = " + str(score.score))
             SCORE_PRINTED = True
+        background.sound_stop()
+        game_over.sound_play()
         game_over.draw(screen, score)
 
         # Check if the mouse is within the specified range
@@ -425,6 +437,9 @@ while RUNNING:
                 score = Score()
                 score.score = 0
                 key_score.cumulative_total = 0
+                button = Buttons(-100, -100)
+                game_over.stop_music()
+                background.sound_play()
                 GAME_STATE = "game"
 
         # exits the game when no is clicked

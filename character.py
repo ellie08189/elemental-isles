@@ -147,6 +147,7 @@ class Powers:
         self.active = False
         self.collision_detected = False
         self.collision_amount = 0
+        self.sound = pygame.mixer.Sound(constants.COLLISION_SOUND)
 
     def update(self):
         """updates power sprite animation"""
@@ -186,6 +187,8 @@ class Powers:
             )  # Move fireball off-screen
             self.collision_detected = True
             self.collision_amount = self.collision_amount + 1
+            self.sound.set_volume(0.1)
+            self.sound.play()
 
     def draw(self, screen):
         """draws power to screen"""
